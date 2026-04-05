@@ -1,9 +1,11 @@
-import type { BookSummary, Catalog, ChapterMeta, ContentSourceConfig } from '../types/content';
+﻿import type { BookSummary, Catalog, ChapterMeta, ContentSourceConfig } from '../types/content';
 
 const REMOTE_SOURCES = [
   'https://raw.githubusercontent.com/zbs-reader/translate-catalog-free/main',
   'https://cdn.jsdelivr.net/gh/zbs-reader/translate-catalog-free@main'
 ] as const;
+
+const APP_BASE = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 
 interface ParsedBundledChapter {
   chapter: ChapterMeta;
@@ -16,7 +18,7 @@ export class GitHubService {
   constructor(private readonly config: ContentSourceConfig) {}
 
   async getCatalog(): Promise<Catalog> {
-    const localSources = ['/catalog.json'];
+    const localSources = [this.resolveLocalUrl('/catalog.json')];
     const remoteSources = this.getRemoteBases().map((baseUrl) => this.withCacheBust(`${baseUrl}/catalog.json`));
     const sources = this.config.mode === 'local' ? [...localSources, ...remoteSources] : [...remoteSources, ...localSources];
 
@@ -61,7 +63,7 @@ export class GitHubService {
 
     for (const url of this.getContentCandidates(chapter.contentPath)) {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, { cache: 'no-store' });
         if (response.ok) {
           return response.text();
         }
@@ -119,9 +121,7 @@ export class GitHubService {
       return url;
     }
 
-    const normalized = url.startsWith('/') ? url : `/${url}`;
-    const remoteBase = this.getRemoteBases()[0];
-    return remoteBase ? `${remoteBase}${normalized}` : normalized;
+    return this.resolveLocalUrl(url);
   }
 
   private normalizeContentPath(path: string) {
@@ -129,7 +129,12 @@ export class GitHubService {
       return path;
     }
 
-    return path.startsWith('/') ? path : `/${path}`;
+    return this.resolveLocalUrl(path);
+  }
+
+  private resolveLocalUrl(path: string) {
+    const normalized = path.startsWith('/') ? path : `/${path}`;
+    return APP_BASE ? `${APP_BASE}${normalized}` : normalized;
   }
 
   private async getBundledChapters(contentPath: string): Promise<ParsedBundledChapter[]> {
@@ -161,7 +166,7 @@ export class GitHubService {
 
   private parseBundledChapters(text: string, contentPath: string): ParsedBundledChapter[] {
     const normalized = text.replace(/^\uFEFF/, '');
-    const headingPattern = /^Глава\s+(\d+)\.[^\r\n]*$/gm;
+    const headingPattern = /^(?:#\s*)?Глава\s+(\d+)\.[^\r\n]*$/gmu;
     const matches = Array.from(normalized.matchAll(headingPattern));
 
     if (!matches.length) {
@@ -169,7 +174,7 @@ export class GitHubService {
     }
 
     return matches.map((match, index) => {
-      const title = match[0].trim();
+      const title = match[0].replace(/^#\s*/, '').trim();
       const order = Number(match[1]);
       const start = match.index ?? 0;
       const end = index + 1 < matches.length ? matches[index + 1].index ?? normalized.length : normalized.length;
@@ -213,7 +218,8 @@ export class GitHubService {
     }
 
     const normalizedPath = this.normalizeContentPath(contentPath);
-    return [normalizedPath, ...this.getRemoteBases().map((baseUrl) => `${baseUrl}${normalizedPath}`)];
+    const remotePath = normalizedPath.replace(new RegExp(`^${APP_BASE}`), '');
+    return [normalizedPath, ...this.getRemoteBases().map((baseUrl) => `${baseUrl}${remotePath}`)];
   }
 
   private withCacheBust(url: string) {

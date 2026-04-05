@@ -11,12 +11,14 @@ import { BookDetailsPage } from './pages/BookDetailsPage';
 import { ReaderPage } from './pages/ReaderPage';
 import { AuthPage } from './pages/AuthPage';
 
+const routerBase = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 function App() {
   return (
     <LanguageProvider>
       <ThemeProvider>
         <IonApp>
-          <IonReactRouter>
+          <IonReactRouter basename={routerBase}>
             <IonRouterOutlet>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/favorites" component={FavoritesPage} />

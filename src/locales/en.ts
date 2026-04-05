@@ -1,4 +1,4 @@
-import type { Messages } from './messages';
+﻿import type { Messages } from './messages';
 
 export const en: Messages = {
   common: {
@@ -30,18 +30,18 @@ export const en: Messages = {
   },
   header: {
     libraryTitle: 'Library',
-    librarySubtitle: 'Read online and keep progress locally'
+    librarySubtitle: 'Book catalog, platform links, and Boosty tiers'
   },
   home: {
     loadingTitle: 'Preparing your library',
-    loadingMessage: 'Fetching the catalog and lining up your next story.',
+    loadingMessage: 'Loading the book catalog and platform details.',
     unavailableTitle: 'Library unavailable',
     noBooksTitle: 'No books yet',
     noBooksMessage: 'Add titles to the catalog and they will appear here.',
     welcomeCopy: 'Russian web novel library',
     welcomeTitle: 'Pick your next story',
-    welcomeSubtitle: 'Catalog, authors, and chapters with a richer editorial-style layout.',
-    searchPlaceholder: 'Search books, authors, chapters...',
+    welcomeSubtitle: 'Catalog, authors, descriptions, and direct platform links.',
+    searchPlaceholder: 'Search books and authors...',
     searchResults: 'Search results',
     booksFilter: 'Books',
     chaptersFilter: 'Chapters',
@@ -92,7 +92,7 @@ export const en: Messages = {
   book: {
     loadingTitle: 'Loading book',
     loadingSubtitle: 'Loading details',
-    loadingMessage: 'Gathering details and chapter list.',
+    loadingMessage: 'Gathering the description, links, and Boosty tiers.',
     unavailableTitle: 'Book unavailable',
     unavailableMessage: 'The requested book could not be found.',
     backHome: 'Back home',

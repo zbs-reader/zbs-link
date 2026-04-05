@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react';
-import { IonCheckbox, IonContent, IonIcon, IonPage } from '@ionic/react';
-import { closeCircleOutline, documentTextOutline, personOutline, searchOutline } from 'ionicons/icons';
+﻿import { useMemo, useState } from 'react';
+import { IonContent, IonIcon, IonPage } from '@ionic/react';
+import { documentTextOutline, personOutline, searchOutline } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import { AppHeader } from '../components/AppHeader';
 import { BookCard } from '../components/BookCard';
@@ -12,23 +12,11 @@ import { getAuthorRoute } from '../utils/author';
 
 interface SearchResult {
   id: string;
-  type: 'book' | 'chapter' | 'author';
+  type: 'book' | 'author';
   title: string;
   subtitle: string;
   route: string;
 }
-
-interface SearchFilters {
-  books: boolean;
-  chapters: boolean;
-  authors: boolean;
-}
-
-const initialFilters: SearchFilters = {
-  books: true,
-  chapters: true,
-  authors: true
-};
 
 const ALL_CATEGORY = '__all__';
 
@@ -38,7 +26,6 @@ export function HomePage() {
   const { t } = useLanguage();
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>(ALL_CATEGORY);
-  const [searchFilters, setSearchFilters] = useState<SearchFilters>(initialFilters);
 
   const normalizedQuery = query.trim().toLowerCase();
   const isSearching = normalizedQuery.length > 0;
@@ -52,7 +39,7 @@ export function HomePage() {
   const filteredBooks = useMemo(() => {
     return (catalog?.books ?? []).filter((book) => {
       const matchesCategory = activeCategory === ALL_CATEGORY || book.tags?.includes(activeCategory);
-      const haystack = `${book.title} ${book.author} ${(book.tags ?? []).join(' ')}`.toLowerCase();
+      const haystack = `${book.title} ${book.author} ${book.description} ${(book.tags ?? []).join(' ')}`.toLowerCase();
       const matchesQuery = !normalizedQuery || haystack.includes(normalizedQuery);
       return matchesCategory && matchesQuery;
     });
@@ -69,17 +56,17 @@ export function HomePage() {
       const bookHaystack = `${book.title} ${book.description} ${(book.tags ?? []).join(' ')}`.toLowerCase();
       const authorHaystack = book.author.toLowerCase();
 
-      if (searchFilters.books && bookHaystack.includes(normalizedQuery)) {
+      if (bookHaystack.includes(normalizedQuery)) {
         results.push({
           id: `book-${book.id}`,
           type: 'book',
           title: book.title,
-          subtitle: `${book.author} | ${book.chapters.length} ${t('common.chapters')}`,
+          subtitle: `${book.author} | ${(book.tags ?? []).slice(0, 2).join(' • ')}`,
           route: `/book/${book.id}`
         });
       }
 
-      if (searchFilters.authors && authorHaystack.includes(normalizedQuery)) {
+      if (authorHaystack.includes(normalizedQuery)) {
         results.push({
           id: `author-${book.id}`,
           type: 'author',
@@ -88,32 +75,10 @@ export function HomePage() {
           route: getAuthorRoute(book.author)
         });
       }
-
-      if (searchFilters.chapters) {
-        for (const chapter of book.chapters) {
-          const chapterHaystack = `${chapter.title} ${chapter.excerpt ?? ''} ${book.title}`.toLowerCase();
-          if (chapterHaystack.includes(normalizedQuery)) {
-            results.push({
-              id: `chapter-${book.id}-${chapter.id}`,
-              type: 'chapter',
-              title: chapter.title,
-              subtitle: `${book.title} | ${chapter.excerpt ?? t('home.openChapter')}`,
-              route: `/reader/${book.id}/${chapter.id}`
-            });
-          }
-        }
-      }
     }
 
     return results.slice(0, 12);
-  }, [catalog, normalizedQuery, searchFilters, t]);
-
-  const updateFilter = (key: keyof SearchFilters, checked?: boolean) => {
-    setSearchFilters((current) => ({
-      ...current,
-      [key]: checked ?? false
-    }));
-  };
+  }, [catalog, normalizedQuery, t]);
 
   return (
     <IonPage>
@@ -133,9 +98,6 @@ export function HomePage() {
                 <h1 className="welcome-title">{t('home.welcomeTitle')}</h1>
                 <p className="welcome-subtitle">{t('home.welcomeSubtitle')}</p>
               </div>
-              <button type="button" className="icon-circle-button" onClick={() => history.push('/auth')} aria-label={t('common.account')}>
-                <IonIcon icon={personOutline} />
-              </button>
             </section>
 
             <section className="search-shell">
@@ -149,11 +111,6 @@ export function HomePage() {
                   className="search-input"
                   placeholder={t('home.searchPlaceholder')}
                 />
-                {isSearching ? (
-                  <button type="button" className="search-clear-button" onClick={() => setQuery('')} aria-label={t('common.clearSearch')}>
-                    <IonIcon icon={closeCircleOutline} />
-                  </button>
-                ) : null}
               </div>
               <button type="button" className="search-action-button" aria-label={t('common.search')}>
                 <IonIcon icon={searchOutline} />
@@ -167,21 +124,6 @@ export function HomePage() {
                   <span className="section-caption">{searchResults.length} {t('common.found')}</span>
                 </div>
 
-                <div className="search-filter-row">
-                  <label className="search-filter-chip">
-                    <IonCheckbox checked={searchFilters.books} onIonChange={(event) => updateFilter('books', event.detail.checked)} />
-                    <span>{t('home.booksFilter')}</span>
-                  </label>
-                  <label className="search-filter-chip">
-                    <IonCheckbox checked={searchFilters.chapters} onIonChange={(event) => updateFilter('chapters', event.detail.checked)} />
-                    <span>{t('home.chaptersFilter')}</span>
-                  </label>
-                  <label className="search-filter-chip">
-                    <IonCheckbox checked={searchFilters.authors} onIonChange={(event) => updateFilter('authors', event.detail.checked)} />
-                    <span>{t('home.authorsFilter')}</span>
-                  </label>
-                </div>
-
                 {searchResults.length ? (
                   <div className="search-results-list">
                     {searchResults.map((result) => (
@@ -191,8 +133,8 @@ export function HomePage() {
                         className="search-result-card"
                         onClick={() => history.push(result.route)}
                       >
-                        <div className={`search-result-icon ${result.type === 'chapter' ? 'chapter' : result.type === 'author' ? 'author' : ''}`}>
-                          <IonIcon icon={result.type === 'chapter' ? documentTextOutline : searchOutline} />
+                        <div className={`search-result-icon ${result.type === 'author' ? 'author' : ''}`}>
+                          <IonIcon icon={result.type === 'author' ? personOutline : documentTextOutline} />
                         </div>
                         <div className="search-result-copy">
                           <p className="search-result-title">{result.title}</p>

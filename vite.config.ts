@@ -3,10 +3,8 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-const repoBase = '/zbs-link/';
-
 export default defineConfig({
-  base: repoBase,
+  base: './',
   plugins: [
     react(),
     {

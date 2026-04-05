@@ -134,16 +134,32 @@ export class GitHubService {
 
   private resolveLocalUrl(path: string) {
     const normalized = path.startsWith('/') ? path : `/${path}`;
-    return APP_BASE ? `${APP_BASE}${normalized}` : normalized;
+
+    if (!APP_BASE) {
+      return normalized;
+    }
+
+    if (normalized === APP_BASE || normalized.startsWith(`${APP_BASE}/`)) {
+      return normalized;
+    }
+
+    return `${APP_BASE}${normalized}`;
+  }
+
+  private stripAppBase(path: string) {
+    if (!APP_BASE) {
+      return path;
+    }
+
+    return path === APP_BASE ? '/' : path.replace(new RegExp(`^${APP_BASE}`), '');
   }
 
   private async getBundledChapters(contentPath: string): Promise<ParsedBundledChapter[]> {
-    const cached = bundledChapterCache.get(contentPath);
+    const normalizedPath = this.normalizeContentPath(contentPath);
+    const cached = bundledChapterCache.get(normalizedPath);
     if (cached) {
       return cached;
     }
-
-    const normalizedPath = this.normalizeContentPath(contentPath);
 
     for (const url of this.getContentCandidates(normalizedPath)) {
       try {
@@ -154,7 +170,7 @@ export class GitHubService {
 
         const text = await response.text();
         const parsed = this.parseBundledChapters(text, normalizedPath);
-        bundledChapterCache.set(contentPath, parsed);
+        bundledChapterCache.set(normalizedPath, parsed);
         return parsed;
       } catch {
         // Try the next candidate.
@@ -218,7 +234,7 @@ export class GitHubService {
     }
 
     const normalizedPath = this.normalizeContentPath(contentPath);
-    const remotePath = normalizedPath.replace(new RegExp(`^${APP_BASE}`), '');
+    const remotePath = this.stripAppBase(normalizedPath);
     return [normalizedPath, ...this.getRemoteBases().map((baseUrl) => `${baseUrl}${remotePath}`)];
   }
 

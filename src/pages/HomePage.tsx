@@ -1,6 +1,6 @@
 ﻿import { useMemo, useState } from 'react';
 import { IonContent, IonIcon, IonPage } from '@ionic/react';
-import { documentTextOutline, personOutline, searchOutline } from 'ionicons/icons';
+import { documentTextOutline, openOutline, personOutline, searchOutline } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import { AppHeader } from '../components/AppHeader';
 import { BookCard } from '../components/BookCard';
@@ -19,6 +19,21 @@ interface SearchResult {
 }
 
 const ALL_CATEGORY = '__all__';
+
+const TEAM_LINKS = [
+  {
+    id: 'rulate-team',
+    label: 'Rulate',
+    caption: 'Профиль команды',
+    url: 'https://tl.rulate.ru/users/170114'
+  },
+  {
+    id: 'ranobelib-team',
+    label: 'RanobeLIB',
+    caption: 'Профиль команды',
+    url: 'https://ranobelib.me/ru/team/64830--zabaichen-bank-selector'
+  }
+] as const;
 
 export function HomePage() {
   const { catalog, loading, error } = useCatalog();
@@ -97,6 +112,24 @@ export function HomePage() {
                 <p className="welcome-copy">{t('home.welcomeCopy')}</p>
                 <h1 className="welcome-title">{t('home.welcomeTitle')}</h1>
                 <p className="welcome-subtitle">{t('home.welcomeSubtitle')}</p>
+              </div>
+            </section>
+
+            <section className="platforms-panel sleek-card">
+              <div className="section-header compact-header">
+                <h2 className="section-title">Профили команды</h2>
+                <span className="section-caption">{TEAM_LINKS.length} {t('common.links')}</span>
+              </div>
+              <div className="platform-links-grid">
+                {TEAM_LINKS.map((platform) => (
+                  <a key={platform.id} className="platform-link-card" href={platform.url} target="_blank" rel="noreferrer">
+                    <div>
+                      <span className="platform-link-label">{platform.label}</span>
+                      <p className="section-caption">{platform.caption}</p>
+                    </div>
+                    <IonIcon icon={openOutline} />
+                  </a>
+                ))}
               </div>
             </section>
 

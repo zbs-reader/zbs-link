@@ -1,109 +1,190 @@
 {
   "books": [
     {
-      "id": "waste-land-border-inspector",
-      "title": "Waste Land Border Inspector",
-      "author": "斤斤斤, Jin Jin Jin",
-      "description": "2025 • Продолжается • 436 глав.",
-      "coverUrl": "https://cdn.jsdelivr.net/gh/zbs-reader/translate-catalog-free@main/covers/waste-land-border-inspector.jpg",
-      "tags": ["боевик", "мистика", "постапокалиптика"],
-      "accessTiers": [
-        {
-          "id": "free",
-          "title": "FREE",
-          "price": "0 ₽",
-          "description": "Базовый доступ к книге и открытым главам.",
-          "isFree": true
-        },
-        {
-          "id": "qi-condensation",
-          "title": "Конденсация Ци",
-          "price": "400 ₽ per month",
-          "description": "Доступ к 25% глав с ранним доступом."
-        },
-        {
-          "id": "foundation-establishment",
-          "title": "Заложение Основ",
-          "price": "700 ₽ per month",
-          "description": "Доступ к 50% глав с ранним доступом."
-        },
-        {
-          "id": "core-formation",
-          "title": "Формирование Ядра",
-          "price": "1 000 ₽ per month",
-          "description": "Доступ к 75% глав с ранним доступом. Если завершённая книга содержит меньше 500 глав, открывается полный доступ."
-        },
-        {
-          "id": "nascent-soul",
-          "title": "Зарождающаяся Душа",
-          "price": "2 000 ₽ per month",
-          "description": "Доступ к 100% глав с ранним доступом и к файлам со всеми главами."
-        }
-      ],
-      "chapters": [
-        {
-          "id": "chapter-1",
-          "title": "Глава 1. Город Счастья — ваше лучшее убежище в пустоши! (1)",
-          "order": 1,
-          "contentPath": "/books/waste-land-border-inspector/chapter-1.md",
-          "excerpt": "Стоял душный июль..."
-        }
-      ]
-    },
-    {
       "id": "gentleman-at-the-abyss",
       "title": "Джентльмен у бездны",
-      "author": "Не указан",
-      "description": "Главный герой — И Чэнь, аспирант, замученный бесконечной правкой диплома и бессонными ночами в лаборатории. Его прежняя жизнь обрывается не героической смертью, а банальным переутомлением. Но вместо вечного покоя он получает второй шанс в мрачном и враждебном мире, до жути напоминающем викторианскую эпоху, пораженную чумой... только эта чума — не болезнь, а сама реальность. Этот мир болен. Неизвестная «Патология» искажает всё живое и неживое, порождая кошмарных существ и аномальные зоны, где не действуют привычные законы физики. Выживание здесь подчинено странным и неумолимым «Правилам». Несоблюдение даже одного пункта из старого руководства смотрителя кладбища, найденного в запертой хижине, грозит последствиями страшнее смерти. Единственный оплот порядка в этом хаосе — таинственная организация Д&Д (Джентльмен и Доктор). Чтобы выжить и найти ответы, И Чэню предстоит стать одним из её агентов — «Джентльменом». Путь к этому лежит через смертельно опасные испытания, где его единственными союзниками поначалу будут лишь посеребренный топорик, старая керосиновая лампа и собственный острый ум, привыкший к анализу и решению нетривиальных задач.",
-      "coverUrl": "https://tl.rulate.ru/i/book/26/3/10580.jpg",
+      "author": "Команда ZBS Link",
+      "description": "Главный герой — И Чэнь, аспирант, замученный бесконечной правкой диплома и бессонными ночами в лаборатории. Его прежняя жизнь обрывается не героической смертью, а банальным переутомлением. Но вместо вечного покоя он получает второй шанс в мрачном и враждебном мире, до жути напоминающем викторианскую эпоху, пораженную чумой, где сама реальность стала болезнью.",
+      "coverUrl": "https://images.boosty.to/image/0f32fc42-a2c0-4edd-8a3e-06ab092c2f96?change_time=1774937050&mw=575",
       "tags": ["мистика", "ужасы", "викторианская эпоха"],
-      "bundledChaptersPath": "/books/gentleman-at-the-abyss/entleman-at-the-abyss-1-315.md",
       "externalLinks": [
-        {
-          "id": "ranobelib",
-          "label": "RanobeLIB",
-          "url": "https://ranobelib.me/ru/book/228236--the-last-gentleman"
-        },
         {
           "id": "rulate",
           "label": "Rulate",
-          "url": "https://tl.rulate.ru/book/140365"
+          "url": "https://tl.rulate.ru/book/140365?Chapter_page=12"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/03995bd1-13ca-400d-888b-ad2374671edc?share=post_link"
         }
       ],
       "accessTiers": [
         {
-          "id": "free",
+          "id": "free-1-315",
           "title": "FREE",
           "price": "0 ₽",
-          "description": "Базовый доступ к книге и открытым главам.",
-          "chaptersLabel": "Доступно 1-315 глав",
+          "description": "Главы 1-315",
+          "chaptersLabel": "1-315",
           "linkUrl": "https://boosty.to/langllax/posts/03995bd1-13ca-400d-888b-ad2374671edc?share=post_link",
-          "linkLabel": "Открыть FREE уровень",
+          "linkLabel": "Открыть на Boosty",
           "isFree": true
         },
         {
-          "id": "qi-condensation",
-          "title": "Конденсация Ци",
-          "price": "400 ₽ per month",
-          "description": "Доступ к 25% глав с ранним доступом."
+          "id": "part-316-474",
+          "title": "Часть 316-474",
+          "price": "Boosty",
+          "description": "Главы 316-474",
+          "chaptersLabel": "316-474",
+          "linkUrl": "https://boosty.to/langllax/posts/a01f1b36-70c0-4138-a92c-e6b0e6d56f7c",
+          "linkLabel": "Открыть на Boosty"
         },
         {
-          "id": "foundation-establishment",
-          "title": "Заложение Основ",
-          "price": "700 ₽ per month",
-          "description": "Доступ к 50% глав с ранним доступом."
+          "id": "part-475-674",
+          "title": "Часть 475-674",
+          "price": "Boosty",
+          "description": "Главы 475-674",
+          "chaptersLabel": "475-674",
+          "linkUrl": "https://boosty.to/langllax/posts/079be268-9fbc-44fe-ba54-b8832ee56f78",
+          "linkLabel": "Открыть на Boosty"
         },
         {
-          "id": "core-formation",
-          "title": "Формирование Ядра",
-          "price": "1 000 ₽ per month",
-          "description": "Доступ к 75% глав с ранним доступом. Если завершённая книга содержит меньше 500 глав, открывается полный доступ."
+          "id": "part-675-873",
+          "title": "Часть 675-873",
+          "price": "Boosty",
+          "description": "Главы 675-873",
+          "chaptersLabel": "675-873",
+          "linkUrl": "https://boosty.to/langllax/posts/ee5efaa1-b844-4ca0-b33a-3ac457a8b286",
+          "linkLabel": "Открыть на Boosty"
         },
         {
-          "id": "nascent-soul",
-          "title": "Зарождающаяся Душа",
-          "price": "2 000 ₽ per month",
-          "description": "Доступ к 100% глав с ранним доступом и к файлам со всеми главами."
+          "id": "part-874-1112",
+          "title": "Часть 874-1112",
+          "price": "Boosty",
+          "description": "Главы 874-1112",
+          "chaptersLabel": "874-1112",
+          "linkUrl": "https://boosty.to/langllax/posts/ce99fb81-9468-4703-adad-8a6bc021dc00",
+          "linkLabel": "Открыть на Boosty"
+        },
+        {
+          "id": "full-1-1112",
+          "title": "Полная версия",
+          "price": "Boosty",
+          "description": "Главы 1-1112",
+          "chaptersLabel": "1-1112",
+          "linkUrl": "https://boosty.to/langllax/posts/0375e081-1fb6-401d-b5d1-02f534cbf486",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": []
+    },
+    {
+      "id": "path-of-cultivation-skin-creation",
+      "title": "Путь Культивации. Создание кожи",
+      "author": "Команда ZBS Link",
+      "description": "Переродившись в мире бессмертных и демонов, Сун Янь оказывается похищен Демонической Сектой Марионеток, где его назначают слугой, создающим кожу. Во время работы в нём пробуждается система, позволяющая увеличивать продолжительность жизни и понимание, пока он занимается созданием кожи.",
+      "coverUrl": "https://images.boosty.to/image/9bbcda0f-d557-4e04-a9bd-db7a4388d256?change_time=1774266400&mw=575",
+      "tags": ["сянся", "сюаньхуань", "культивация"],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/145072?Chapter_page=4"
+        },
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/255320--zhi-pi-bainian-wo-cheng-le-mogmen-jiutou"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free-1-122",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Главы 1-122",
+          "chaptersLabel": "1-122",
+          "linkUrl": "https://boosty.to/langllax/posts/b9301fff-69f3-4829-928a-9a08dcb6c16a",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
+        },
+        {
+          "id": "part-123-199",
+          "title": "Часть 123-199",
+          "price": "Boosty",
+          "description": "Главы 123-199",
+          "chaptersLabel": "123-199",
+          "linkUrl": "https://boosty.to/langllax/posts/c0727dba-a46e-4f5e-9acf-ba8006cc811c?share=post_link",
+          "linkLabel": "Открыть на Boosty"
+        },
+        {
+          "id": "part-200-299",
+          "title": "Часть 200-299",
+          "price": "Boosty",
+          "description": "Главы 200-299",
+          "chaptersLabel": "200-299",
+          "linkUrl": "https://boosty.to/langllax/posts/ad844816-2b1e-4553-801b-330c95be6dda",
+          "linkLabel": "Открыть на Boosty"
+        },
+        {
+          "id": "part-300-351",
+          "title": "Часть 300-351",
+          "price": "Boosty",
+          "description": "Главы 300-351",
+          "chaptersLabel": "300-351",
+          "linkUrl": "https://boosty.to/langllax/posts/3599313f-a792-4fe5-a61c-c2d3449ce161",
+          "linkLabel": "Открыть на Boosty"
+        },
+        {
+          "id": "full",
+          "title": "Полная версия",
+          "price": "Boosty",
+          "description": "Полный файл",
+          "chaptersLabel": "полностью",
+          "linkUrl": "https://boosty.to/langllax/posts/b37e1ccc-c610-48fb-82e7-d2d473b07b43",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": []
+    },
+    {
+      "id": "plants-and-zombies-stronger",
+      "title": "Ну и что, что мои растения и зомби чуточку сильнее?",
+      "author": "Команда ZBS Link",
+      "description": "Линь Юй случайно попадает в параллельный мир, кишащий зомби. Уничтожить их могут только те, кто стал Мастером Растений. Он пробуждает талант ранга SSS — Глаз Прозрения, который показывает скрытые награды, опасности и вероятность успеха любого события.",
+      "coverUrl": "https://images.boosty.to/image/88acc17b-3a24-4a3b-a37c-c1aca7367587?change_time=1775296791&mw=575",
+      "tags": ["зомби", "фанфик", "параллельный мир"],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/166048?Chapter_page=4"
+        },
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/255823--wo-de-zhiwu-he-jiangshi-qiang-yi-dian-zenme-le?section=info&ui=1954317"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free-1-220",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Главы 1-220",
+          "chaptersLabel": "1-220",
+          "linkUrl": "https://boosty.to/langllax/posts/60c071f6-2ac7-4e49-9ad8-720a981cd459",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
+        },
+        {
+          "id": "part-220-400",
+          "title": "Часть 220-400",
+          "price": "Boosty",
+          "description": "Главы 220-400",
+          "chaptersLabel": "220-400",
+          "linkUrl": "https://boosty.to/langllax/posts/1e2eca73-e808-4ebb-9414-cbc4fbf9dab3",
+          "linkLabel": "Открыть на Boosty"
         }
       ],
       "chapters": []

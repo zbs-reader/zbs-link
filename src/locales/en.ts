@@ -50,7 +50,7 @@ export const en: Messages = {
     searchHint: 'Try another query or change the filters above.',
     categories: 'Categories',
     seeAll: 'See all',
-    topNovels: 'Top novels',
+    topNovels: 'Team works',
     authorOf: 'Author of {{title}}',
     openChapter: 'Open chapter'
   },
@@ -145,3 +145,4 @@ export const en: Messages = {
     coverAlt: '{{title}} cover'
   }
 };
+

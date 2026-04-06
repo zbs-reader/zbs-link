@@ -49,7 +49,7 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
               <p className="hero-eyebrow">{t('book.featuredStory')}</p>
               <div className="title-with-status hero">
                 <h1 className="hero-title">{book.title}</h1>
-                {book.isCompleted ? <span className="status-badge completed">{t('common.completed')}</span> : null}
+                {book.isCompleted ? <span className="status-badge completed hero-status">{t('common.completed')}</span> : null}
               </div>
               <p className="hero-subtitle">{book.description}</p>
               <div className="meta-pills-row">

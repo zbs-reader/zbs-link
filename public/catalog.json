@@ -234,12 +234,22 @@
                                         ],
                       "accessTiers":  [
                                           {
-                                              "id":  "full-1-225",
-                                              "title":  "Полная версия",
-                                              "price":  "Boosty",
+                                              "id":  "free-1-225",
+                                              "title":  "FREE",
+                                              "price":  "0 ₽",
                                               "description":  "Главы 1-225",
                                               "chaptersLabel":  "1-225",
-                                              "linkUrl":  "https://boosty.to/langllax/posts/8f19e06f-c09e-46fc-a591-1aa94b603b1a",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/8f19e06f-c09e-46fc-a591-1aa94b603b1a?share=post_link",
+                                              "linkLabel":  "Открыть на Boosty",
+                                              "isFree":  true
+                                          },
+                                          {
+                                              "id":  "qi-condensation-225-400",
+                                              "title":  "Конденсация Ци",
+                                              "price":  "Boosty",
+                                              "description":  "Главы 225-400",
+                                              "chaptersLabel":  "225-400",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/02113061-b557-41e9-9468-dd2c34d0ba2f",
                                               "linkLabel":  "Открыть на Boosty",
                                               "isFree":  false
                                           }

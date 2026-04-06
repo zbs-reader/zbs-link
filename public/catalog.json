@@ -1,193 +1,250 @@
 {
-  "books": [
-    {
-      "id": "gentleman-at-the-abyss",
-      "title": "Джентльмен у бездны",
-      "author": "Команда ZBS Link",
-      "description": "Главный герой — И Чэнь, аспирант, замученный бесконечной правкой диплома и бессонными ночами в лаборатории. Его прежняя жизнь обрывается не героической смертью, а банальным переутомлением. Но вместо вечного покоя он получает второй шанс в мрачном и враждебном мире, до жути напоминающем викторианскую эпоху, пораженную чумой, где сама реальность стала болезнью.",
-      "coverUrl": "https://tl.rulate.ru/i/book/26/3/10580.jpg",
-      "tags": ["мистика", "ужасы", "викторианская эпоха"],
-      "externalLinks": [
-        {
-          "id": "rulate",
-          "label": "Rulate",
-          "url": "https://tl.rulate.ru/book/140365?Chapter_page=12"
-        },
-        {
-          "id": "boosty",
-          "label": "Boosty",
-          "url": "https://boosty.to/langllax/posts/03995bd1-13ca-400d-888b-ad2374671edc?share=post_link"
-        }
-      ],
-      "accessTiers": [
-        {
-          "id": "free-1-315",
-          "title": "FREE",
-          "price": "0 ₽",
-          "description": "Главы 1-315",
-          "chaptersLabel": "1-315",
-          "linkUrl": "https://boosty.to/langllax/posts/03995bd1-13ca-400d-888b-ad2374671edc?share=post_link",
-          "linkLabel": "Открыть на Boosty",
-          "isFree": true
-        },
-        {
-          "id": "part-316-474",
-          "title": "Часть 316-474",
-          "price": "Boosty",
-          "description": "Главы 316-474",
-          "chaptersLabel": "316-474",
-          "linkUrl": "https://boosty.to/langllax/posts/a01f1b36-70c0-4138-a92c-e6b0e6d56f7c",
-          "linkLabel": "Открыть на Boosty"
-        },
-        {
-          "id": "part-475-674",
-          "title": "Часть 475-674",
-          "price": "Boosty",
-          "description": "Главы 475-674",
-          "chaptersLabel": "475-674",
-          "linkUrl": "https://boosty.to/langllax/posts/079be268-9fbc-44fe-ba54-b8832ee56f78",
-          "linkLabel": "Открыть на Boosty"
-        },
-        {
-          "id": "part-675-873",
-          "title": "Часть 675-873",
-          "price": "Boosty",
-          "description": "Главы 675-873",
-          "chaptersLabel": "675-873",
-          "linkUrl": "https://boosty.to/langllax/posts/ee5efaa1-b844-4ca0-b33a-3ac457a8b286",
-          "linkLabel": "Открыть на Boosty"
-        },
-        {
-          "id": "part-874-1112",
-          "title": "Часть 874-1112",
-          "price": "Boosty",
-          "description": "Главы 874-1112",
-          "chaptersLabel": "874-1112",
-          "linkUrl": "https://boosty.to/langllax/posts/ce99fb81-9468-4703-adad-8a6bc021dc00",
-          "linkLabel": "Открыть на Boosty"
-        },
-        {
-          "id": "full-1-1112",
-          "title": "Полная версия",
-          "price": "Boosty",
-          "description": "Главы 1-1112",
-          "chaptersLabel": "1-1112",
-          "linkUrl": "https://boosty.to/langllax/posts/0375e081-1fb6-401d-b5d1-02f534cbf486",
-          "linkLabel": "Открыть на Boosty"
-        }
-      ],
-      "chapters": []
-    },
-    {
-      "id": "path-of-cultivation-skin-creation",
-      "title": "Путь Культивации. Создание кожи",
-      "author": "Команда ZBS Link",
-      "description": "Переродившись в мире бессмертных и демонов, Сун Янь оказывается похищен Демонической Сектой Марионеток, где его назначают слугой, создающим кожу. Во время работы в нём пробуждается система, позволяющая увеличивать продолжительность жизни и понимание, пока он занимается созданием кожи.",
-      "coverUrl": "https://tl.rulate.ru/i/book/25/12/11456.jpg",
-      "tags": ["сянся", "сюаньхуань", "культивация"],
-      "externalLinks": [
-        {
-          "id": "rulate",
-          "label": "Rulate",
-          "url": "https://tl.rulate.ru/book/145072?Chapter_page=4"
-        },
-        {
-          "id": "ranobelib",
-          "label": "RanobeLIB",
-          "url": "https://ranobelib.me/ru/book/255320--zhi-pi-bainian-wo-cheng-le-mogmen-jiutou"
-        }
-      ],
-      "accessTiers": [
-        {
-          "id": "free-1-122",
-          "title": "FREE",
-          "price": "0 ₽",
-          "description": "Главы 1-122",
-          "chaptersLabel": "1-122",
-          "linkUrl": "https://boosty.to/langllax/posts/b9301fff-69f3-4829-928a-9a08dcb6c16a",
-          "linkLabel": "Открыть на Boosty",
-          "isFree": true
-        },
-        {
-          "id": "part-123-199",
-          "title": "Часть 123-199",
-          "price": "Boosty",
-          "description": "Главы 123-199",
-          "chaptersLabel": "123-199",
-          "linkUrl": "https://boosty.to/langllax/posts/c0727dba-a46e-4f5e-9acf-ba8006cc811c?share=post_link",
-          "linkLabel": "Открыть на Boosty"
-        },
-        {
-          "id": "part-200-299",
-          "title": "Часть 200-299",
-          "price": "Boosty",
-          "description": "Главы 200-299",
-          "chaptersLabel": "200-299",
-          "linkUrl": "https://boosty.to/langllax/posts/ad844816-2b1e-4553-801b-330c95be6dda",
-          "linkLabel": "Открыть на Boosty"
-        },
-        {
-          "id": "part-300-351",
-          "title": "Часть 300-351",
-          "price": "Boosty",
-          "description": "Главы 300-351",
-          "chaptersLabel": "300-351",
-          "linkUrl": "https://boosty.to/langllax/posts/3599313f-a792-4fe5-a61c-c2d3449ce161",
-          "linkLabel": "Открыть на Boosty"
-        },
-        {
-          "id": "full",
-          "title": "Полная версия",
-          "price": "Boosty",
-          "description": "Полный файл",
-          "chaptersLabel": "полностью",
-          "linkUrl": "https://boosty.to/langllax/posts/b37e1ccc-c610-48fb-82e7-d2d473b07b43",
-          "linkLabel": "Открыть на Boosty"
-        }
-      ],
-      "chapters": []
-    },
-    {
-      "id": "plants-and-zombies-stronger",
-      "title": "Ну и что, что мои растения и зомби чуточку сильнее?",
-      "author": "Команда ZBS Link",
-      "description": "Линь Юй случайно попадает в параллельный мир, кишащий зомби. Уничтожить их могут только те, кто стал Мастером Растений. Он пробуждает талант ранга SSS — Глаз Прозрения, который показывает скрытые награды, опасности и вероятность успеха любого события.",
-      "coverUrl": "https://tl.rulate.ru/i/book/26/1/4191.jpg",
-      "tags": ["зомби", "фанфик", "параллельный мир"],
-      "externalLinks": [
-        {
-          "id": "rulate",
-          "label": "Rulate",
-          "url": "https://tl.rulate.ru/book/166048?Chapter_page=4"
-        },
-        {
-          "id": "ranobelib",
-          "label": "RanobeLIB",
-          "url": "https://ranobelib.me/ru/book/255823--wo-de-zhiwu-he-jiangshi-qiang-yi-dian-zenme-le?section=info&ui=1954317"
-        }
-      ],
-      "accessTiers": [
-        {
-          "id": "free-1-220",
-          "title": "FREE",
-          "price": "0 ₽",
-          "description": "Главы 1-220",
-          "chaptersLabel": "1-220",
-          "linkUrl": "https://boosty.to/langllax/posts/60c071f6-2ac7-4e49-9ad8-720a981cd459",
-          "linkLabel": "Открыть на Boosty",
-          "isFree": true
-        },
-        {
-          "id": "part-220-400",
-          "title": "Часть 220-400",
-          "price": "Boosty",
-          "description": "Главы 220-400",
-          "chaptersLabel": "220-400",
-          "linkUrl": "https://boosty.to/langllax/posts/1e2eca73-e808-4ebb-9414-cbc4fbf9dab3",
-          "linkLabel": "Открыть на Boosty"
-        }
-      ],
-      "chapters": []
-    }
-  ]
+    "books":  [
+                  {
+                      "id":  "gentleman-at-the-abyss",
+                      "title":  "Джентльмен у бездны",
+                      "author":  "Команда ZBS Link",
+                      "description":  "Главный герой — И Чэнь, аспирант, замученный бесконечной правкой диплома и бессонными ночами в лаборатории. Его прежняя жизнь обрывается не героической смертью, а банальным переутомлением. Но вместо вечного покоя он получает второй шанс в мрачном и враждебном мире, до жути напоминающем викторианскую эпоху, пораженную чумой, где сама реальность стала болезнью.",
+                      "coverUrl":  "https://tl.rulate.ru/i/book/26/3/10580.jpg",
+                      "tags":  [
+                                   "мистика",
+                                   "ужасы",
+                                   "викторианская эпоха"
+                               ],
+                      "externalLinks":  [
+                                            {
+                                                "id":  "rulate",
+                                                "label":  "Rulate",
+                                                "url":  "https://tl.rulate.ru/book/140365?Chapter_page=12"
+                                            },
+                                            {
+                                                "id":  "boosty",
+                                                "label":  "Boosty",
+                                                "url":  "https://boosty.to/langllax/posts/03995bd1-13ca-400d-888b-ad2374671edc?share=post_link"
+                                            }
+                                        ],
+                      "accessTiers":  [
+                                          {
+                                              "id":  "free-1-315",
+                                              "title":  "FREE",
+                                              "price":  "0 ₽",
+                                              "description":  "Главы 1-315",
+                                              "chaptersLabel":  "1-315",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/03995bd1-13ca-400d-888b-ad2374671edc?share=post_link",
+                                              "linkLabel":  "Открыть на Boosty",
+                                              "isFree":  true
+                                          },
+                                          {
+                                              "id":  "part-316-474",
+                                              "title":  "Часть 316-474",
+                                              "price":  "Boosty",
+                                              "description":  "Главы 316-474",
+                                              "chaptersLabel":  "316-474",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/a01f1b36-70c0-4138-a92c-e6b0e6d56f7c",
+                                              "linkLabel":  "Открыть на Boosty"
+                                          },
+                                          {
+                                              "id":  "part-475-674",
+                                              "title":  "Часть 475-674",
+                                              "price":  "Boosty",
+                                              "description":  "Главы 475-674",
+                                              "chaptersLabel":  "475-674",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/079be268-9fbc-44fe-ba54-b8832ee56f78",
+                                              "linkLabel":  "Открыть на Boosty"
+                                          },
+                                          {
+                                              "id":  "part-675-873",
+                                              "title":  "Часть 675-873",
+                                              "price":  "Boosty",
+                                              "description":  "Главы 675-873",
+                                              "chaptersLabel":  "675-873",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/ee5efaa1-b844-4ca0-b33a-3ac457a8b286",
+                                              "linkLabel":  "Открыть на Boosty"
+                                          },
+                                          {
+                                              "id":  "part-874-1112",
+                                              "title":  "Часть 874-1112",
+                                              "price":  "Boosty",
+                                              "description":  "Главы 874-1112",
+                                              "chaptersLabel":  "874-1112",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/ce99fb81-9468-4703-adad-8a6bc021dc00",
+                                              "linkLabel":  "Открыть на Boosty"
+                                          },
+                                          {
+                                              "id":  "full-1-1112",
+                                              "title":  "Полная версия",
+                                              "price":  "Boosty",
+                                              "description":  "Главы 1-1112",
+                                              "chaptersLabel":  "1-1112",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/0375e081-1fb6-401d-b5d1-02f534cbf486",
+                                              "linkLabel":  "Открыть на Boosty"
+                                          }
+                                      ],
+                      "chapters":  [
+
+                                   ]
+                  },
+                  {
+                      "id":  "path-of-cultivation-skin-creation",
+                      "title":  "Путь Культивации. Создание кожи",
+                      "author":  "Команда ZBS Link",
+                      "description":  "Переродившись в мире бессмертных и демонов, Сун Янь оказывается похищен Демонической Сектой Марионеток, где его назначают слугой, создающим кожу. Во время работы в нём пробуждается система, позволяющая увеличивать продолжительность жизни и понимание, пока он занимается созданием кожи.",
+                      "coverUrl":  "https://tl.rulate.ru/i/book/25/12/11456.jpg",
+                      "tags":  [
+                                   "сянся",
+                                   "сюаньхуань",
+                                   "культивация"
+                               ],
+                      "externalLinks":  [
+                                            {
+                                                "id":  "rulate",
+                                                "label":  "Rulate",
+                                                "url":  "https://tl.rulate.ru/book/145072?Chapter_page=4"
+                                            },
+                                            {
+                                                "id":  "ranobelib",
+                                                "label":  "RanobeLIB",
+                                                "url":  "https://ranobelib.me/ru/book/255320--zhi-pi-bainian-wo-cheng-le-mogmen-jiutou"
+                                            }
+                                        ],
+                      "accessTiers":  [
+                                          {
+                                              "id":  "free-1-122",
+                                              "title":  "FREE",
+                                              "price":  "0 ₽",
+                                              "description":  "Главы 1-122",
+                                              "chaptersLabel":  "1-122",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/b9301fff-69f3-4829-928a-9a08dcb6c16a",
+                                              "linkLabel":  "Открыть на Boosty",
+                                              "isFree":  true
+                                          },
+                                          {
+                                              "id":  "part-123-199",
+                                              "title":  "Часть 123-199",
+                                              "price":  "Boosty",
+                                              "description":  "Главы 123-199",
+                                              "chaptersLabel":  "123-199",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/c0727dba-a46e-4f5e-9acf-ba8006cc811c?share=post_link",
+                                              "linkLabel":  "Открыть на Boosty"
+                                          },
+                                          {
+                                              "id":  "part-200-299",
+                                              "title":  "Часть 200-299",
+                                              "price":  "Boosty",
+                                              "description":  "Главы 200-299",
+                                              "chaptersLabel":  "200-299",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/ad844816-2b1e-4553-801b-330c95be6dda",
+                                              "linkLabel":  "Открыть на Boosty"
+                                          },
+                                          {
+                                              "id":  "part-300-351",
+                                              "title":  "Часть 300-351",
+                                              "price":  "Boosty",
+                                              "description":  "Главы 300-351",
+                                              "chaptersLabel":  "300-351",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/3599313f-a792-4fe5-a61c-c2d3449ce161",
+                                              "linkLabel":  "Открыть на Boosty"
+                                          },
+                                          {
+                                              "id":  "full",
+                                              "title":  "Полная версия",
+                                              "price":  "Boosty",
+                                              "description":  "Полный файл",
+                                              "chaptersLabel":  "полностью",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/b37e1ccc-c610-48fb-82e7-d2d473b07b43",
+                                              "linkLabel":  "Открыть на Boosty"
+                                          }
+                                      ],
+                      "chapters":  [
+
+                                   ]
+                  },
+                  {
+                      "id":  "plants-and-zombies-stronger",
+                      "title":  "Ну и что, что мои растения и зомби чуточку сильнее?",
+                      "author":  "Команда ZBS Link",
+                      "description":  "Линь Юй случайно попадает в параллельный мир, кишащий зомби. Уничтожить их могут только те, кто стал Мастером Растений. Он пробуждает талант ранга SSS — Глаз Прозрения, который показывает скрытые награды, опасности и вероятность успеха любого события.",
+                      "coverUrl":  "https://tl.rulate.ru/i/book/26/1/4191.jpg",
+                      "tags":  [
+                                   "зомби",
+                                   "фанфик",
+                                   "параллельный мир"
+                               ],
+                      "externalLinks":  [
+                                            {
+                                                "id":  "rulate",
+                                                "label":  "Rulate",
+                                                "url":  "https://tl.rulate.ru/book/166048?Chapter_page=4"
+                                            },
+                                            {
+                                                "id":  "ranobelib",
+                                                "label":  "RanobeLIB",
+                                                "url":  "https://ranobelib.me/ru/book/255823--wo-de-zhiwu-he-jiangshi-qiang-yi-dian-zenme-le?section=info\u0026ui=1954317"
+                                            }
+                                        ],
+                      "accessTiers":  [
+                                          {
+                                              "id":  "free-1-220",
+                                              "title":  "FREE",
+                                              "price":  "0 ₽",
+                                              "description":  "Главы 1-220",
+                                              "chaptersLabel":  "1-220",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/60c071f6-2ac7-4e49-9ad8-720a981cd459",
+                                              "linkLabel":  "Открыть на Boosty",
+                                              "isFree":  true
+                                          },
+                                          {
+                                              "id":  "part-220-400",
+                                              "title":  "Часть 220-400",
+                                              "price":  "Boosty",
+                                              "description":  "Главы 220-400",
+                                              "chaptersLabel":  "220-400",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/1e2eca73-e808-4ebb-9414-cbc4fbf9dab3",
+                                              "linkLabel":  "Открыть на Boosty"
+                                          }
+                                      ],
+                      "chapters":  [
+
+                                   ]
+                  },
+                  {
+                      "id":  "the-abnormal-supernatural-world",
+                      "title":  "Ненормальный сверхъестественный мир",
+                      "author":  "Команда ZBS Link",
+                      "description":  "Переместившись в фэнтезийный мир, Бай Ло с ужасом обнаружил свою первую проблему — у него нет удостоверения личности! Здесь царит полное безумие: великий маг заработал грыжу позвоночника из-за слишком долгих медитаций, некромант одержим нарисованными 2D-девушками, экзорцист сходит с ума из-за линяющего кота, а вампир уже год не выходит из онлайн-игры. Пока сверхъестественные существа погрязли в интернет-зависимости, Бай Ло, вооружившись фантастическими технологиями, становится Железным Человеком этого иного мира. Так начинается эта легкая и веселая история.",
+                      "coverUrl":  "https://tl.rulate.ru/i/book/26/1/822.jpg",
+                      "tags":  [
+                                   "комедия",
+                                   "сверхъестественное",
+                                   "фэнтези"
+                               ],
+                      "externalLinks":  [
+                                            {
+                                                "id":  "rulate",
+                                                "label":  "Rulate",
+                                                "url":  "https://tl.rulate.ru/book/156900"
+                                            },
+                                            {
+                                                "id":  "ranobelib",
+                                                "label":  "RanobeLIB",
+                                                "url":  "https://ranobelib.me/ru/book/256413--bu-zheng-chang-de-chao-fan-shi-jie"
+                                            }
+                                        ],
+                      "accessTiers":  [
+                                          {
+                                              "id":  "full-1-225",
+                                              "title":  "Полная версия",
+                                              "price":  "Boosty",
+                                              "description":  "Главы 1-225",
+                                              "chaptersLabel":  "1-225",
+                                              "linkUrl":  "https://boosty.to/langllax/posts/8f19e06f-c09e-46fc-a591-1aa94b603b1a",
+                                              "linkLabel":  "Открыть на Boosty",
+                                              "isFree":  false
+                                          }
+                                      ],
+                      "chapters":  [
+
+                                   ]
+                  }
+              ]
 }

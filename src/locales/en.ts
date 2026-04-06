@@ -1,4 +1,4 @@
-﻿import type { Messages } from './messages';
+import type { Messages } from './messages';
 
 export const en: Messages = {
   common: {
@@ -19,7 +19,8 @@ export const en: Messages = {
     soon: 'Soon',
     all: 'All',
     loading: 'Loading',
-    tryAgain: 'Try again'
+    tryAgain: 'Try again',
+    completed: 'Completed'
   },
   nav: {
     mainNavigation: 'Main navigation',

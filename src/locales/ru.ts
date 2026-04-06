@@ -1,4 +1,4 @@
-﻿import type { Messages } from './messages';
+import type { Messages } from './messages';
 
 export const ru: Messages = {
   common: {
@@ -19,7 +19,8 @@ export const ru: Messages = {
     soon: '\u0421\u043a\u043e\u0440\u043e',
     all: '\u0412\u0441\u0435',
     loading: '\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430',
-    tryAgain: '\u041f\u043e\u0432\u0442\u043e\u0440\u0438\u0442\u044c'
+    tryAgain: '\u041f\u043e\u0432\u0442\u043e\u0440\u0438\u0442\u044c',
+    completed: '\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u0430'
   },
   nav: {
     mainNavigation: '\u041e\u0441\u043d\u043e\u0432\u043d\u0430\u044f \u043d\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u044f',

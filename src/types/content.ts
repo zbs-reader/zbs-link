@@ -34,6 +34,7 @@ export interface BookSummary {
   accessTiers?: AccessTier[];
   externalLinks?: ExternalPlatformLink[];
   bundledChaptersPath?: string;
+  isCompleted?: boolean;
 }
 
 export interface Catalog {

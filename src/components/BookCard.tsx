@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import type { BookSummary } from '../types/content';
 
@@ -18,7 +18,10 @@ export function BookCard({ book }: BookCardProps) {
       </div>
       <div className="book-tile-meta">
         <p className="book-tile-kicker">{meta}</p>
-        <h3 className="book-tile-title">{book.title}</h3>
+        <div className="title-with-status compact">
+          <h3 className="book-tile-title">{book.title}</h3>
+          {book.isCompleted ? <span className="status-badge completed">{t('common.completed')}</span> : null}
+        </div>
       </div>
     </Link>
   );

@@ -20,6 +20,7 @@ export interface Messages {
     all: string;
     loading: string;
     tryAgain: string;
+    completed: string;
   };
   nav: {
     mainNavigation: string;

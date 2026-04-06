@@ -82,7 +82,8 @@
                                       ],
                       "chapters":  [
 
-                                   ]
+                                   ],
+                      "isCompleted":  true
                   },
                   {
                       "id":  "path-of-cultivation-skin-creation",
@@ -157,7 +158,8 @@
                                       ],
                       "chapters":  [
 
-                                   ]
+                                   ],
+                      "isCompleted":  true
                   },
                   {
                       "id":  "plants-and-zombies-stronger",

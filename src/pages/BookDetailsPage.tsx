@@ -47,7 +47,10 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
             <img className="detail-cover-large" src={book.coverUrl} alt={`${book.title} cover`} />
             <div className="detail-copy">
               <p className="hero-eyebrow">{t('book.featuredStory')}</p>
-              <h1 className="hero-title">{book.title}</h1>
+              <div className="title-with-status hero">
+                <h1 className="hero-title">{book.title}</h1>
+                {book.isCompleted ? <span className="status-badge completed">{t('common.completed')}</span> : null}
+              </div>
               <p className="hero-subtitle">{book.description}</p>
               <div className="meta-pills-row">
                 <span className="meta-pill">{book.author}</span>

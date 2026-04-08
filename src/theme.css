@@ -1879,3 +1879,100 @@ ion-button {
   background: rgba(255, 180, 72, 0.08);
   border: 1px solid rgba(255, 180, 72, 0.18);
 }
+.admin-panel-card {
+  padding: 16px;
+  border-radius: 24px;
+}
+
+.admin-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-grid.two-col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-grid.three-col {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.admin-list {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-tier-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-field {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-field span {
+  color: var(--reader-copy-soft);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.admin-field input,
+.admin-field textarea {
+  width: 100%;
+  border: 1px solid var(--app-border);
+  border-radius: 14px;
+  background: var(--app-card-strong);
+  color: var(--app-text-main);
+  padding: 12px 14px;
+  font: inherit;
+}
+
+.admin-field textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.checkbox-field {
+  align-self: end;
+}
+
+.admin-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 4px;
+}
+
+.admin-actions-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-action-button {
+  border: none;
+}
+
+.admin-json-preview {
+  margin: 0;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--app-text-main);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  overflow: auto;
+}
+
+@media (max-width: 900px) {
+  .admin-grid.two-col,
+  .admin-grid.three-col {
+    grid-template-columns: 1fr;
+  }
+}

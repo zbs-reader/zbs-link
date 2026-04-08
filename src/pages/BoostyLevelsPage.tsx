@@ -5,6 +5,7 @@ import { AppHeader } from '../components/AppHeader';
 import { BottomDock } from '../components/BottomDock';
 import { StateView } from '../components/StateView';
 import { useCatalog } from '../hooks/useCatalog';
+import type { AccessTier, BookSummary } from '../types/content';
 
 const BOOSTY_LEVELS = [
   {
@@ -35,56 +36,35 @@ const BOOSTY_LEVELS = [
 
 type LevelKey = (typeof BOOSTY_LEVELS)[number]['id'];
 
-interface AccessMap {
-  free: string;
-  qi: string;
-  core: string;
-  soul: string;
-  note?: string;
+function getTierForLevel(book: BookSummary, levelId: LevelKey, levelTitle: string): AccessTier | undefined {
+  const accessTiers = book.accessTiers ?? [];
+
+  if (levelId === 'free') {
+    return accessTiers.find((tier) => tier.isFree || tier.title.trim().toUpperCase() === 'FREE');
+  }
+
+  return accessTiers.find((tier) => tier.title.trim() === levelTitle);
 }
 
-function getAccessMap(bookId: string): AccessMap {
-  switch (bookId) {
-    case 'gentleman-at-the-abyss':
-      return {
-        free: '1-315',
-        qi: '1-674',
-        core: '1-873',
-        soul: '1-1112',
-        note: 'Завершённая книга больше 500 глав, поэтому полный доступ только на высшем уровне.'
-      };
-    case 'path-of-cultivation-skin-creation':
-      return {
-        free: '1-122',
-        qi: '1-199',
-        core: '1-351',
-        soul: '1-351',
-        note: 'Книга завершена и меньше 500 глав, поэтому Формирование Ядра уже даёт полный доступ.'
-      };
-    case 'plants-and-zombies-stronger':
-      return {
-        free: '1-220',
-        qi: '1-400',
-        core: '1-400',
-        soul: '1-400',
-        note: 'Сейчас на Boosty доступен один расширенный блок глав поверх FREE.'
-      };
-    case 'the-abnormal-supernatural-world':
-      return {
-        free: '1-225',
-        qi: '1-400',
-        core: '1-400',
-        soul: '1-400',
-        note: 'Сейчас на Boosty доступен один расширенный блок глав поверх FREE.'
-      };
-    default:
-      return {
-        free: 'Скоро',
-        qi: 'Скоро',
-        core: 'Скоро',
-        soul: 'Скоро'
-      };
+function getAccessValue(tier?: AccessTier): string {
+  if (!tier) {
+    return 'Скоро';
   }
+
+  return tier.chaptersLabel?.trim() || tier.description?.trim() || tier.price?.trim() || 'Доступно';
+}
+
+function getAccessNote(tier?: AccessTier): string | undefined {
+  if (!tier) {
+    return undefined;
+  }
+
+  const description = tier.description?.trim();
+  if (description && description !== tier.chaptersLabel?.trim()) {
+    return description;
+  }
+
+  return undefined;
 }
 
 export function BoostyLevelsPage() {
@@ -157,8 +137,9 @@ export function BoostyLevelsPage() {
 
             <div className="boosty-book-list">
               {catalog.books.map((book) => {
-                const access = getAccessMap(book.id);
-                const accessValue = access[selectedLevel];
+                const tier = getTierForLevel(book, selectedLevel, activeLevel.title);
+                const accessValue = getAccessValue(tier);
+                const accessNote = getAccessNote(tier);
 
                 return (
                   <article key={book.id} className="boosty-book-card">
@@ -182,7 +163,7 @@ export function BoostyLevelsPage() {
                       </div>
                     </div>
 
-                    {access.note ? <p className="boosty-access-note">{access.note}</p> : null}
+                    {accessNote ? <p className="boosty-access-note">{accessNote}</p> : null}
                   </article>
                 );
               })}

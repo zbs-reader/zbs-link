@@ -1741,3 +1741,109 @@ ion-button {
 .hero-status {
   margin-top: 4px;
 }
+.bottom-dock-triple {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 420px;
+}
+
+.boosty-level-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.boosty-level-card {
+  padding: 18px;
+  border-radius: 24px;
+}
+
+.boosty-level-price {
+  margin: 10px 0 8px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--app-text-main);
+}
+
+.boosty-matrix-card {
+  padding: 14px;
+  border-radius: 24px;
+}
+
+.boosty-book-list {
+  display: grid;
+  gap: 14px;
+}
+
+.boosty-book-card {
+  padding: 16px;
+  border-radius: 20px;
+  background: var(--app-card-strong);
+}
+
+.boosty-book-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.boosty-book-title {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+.boosty-book-link {
+  text-decoration: none;
+}
+
+.boosty-access-grid {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.boosty-access-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.boosty-access-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--reader-copy-soft);
+}
+
+.boosty-access-value {
+  font-weight: 700;
+  color: var(--app-text-main);
+}
+
+.boosty-access-note {
+  margin: 12px 0 0;
+  color: var(--reader-copy-soft);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .boosty-book-head {
+    flex-direction: column;
+  }
+
+  .boosty-book-link {
+    width: 100%;
+  }
+
+  .boosty-access-row {
+    grid-template-columns: 1fr;
+  }
+}

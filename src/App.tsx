@@ -7,6 +7,7 @@ import { HomePage } from './pages/HomePage';
 import { AuthorsPage } from './pages/AuthorsPage';
 import { AuthorPage } from './pages/AuthorPage';
 import { BookDetailsPage } from './pages/BookDetailsPage';
+import { BoostyLevelsPage } from './pages/BoostyLevelsPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <IonRouterOutlet>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/authors" component={AuthorsPage} />
+              <Route exact path="/levels" component={BoostyLevelsPage} />
               <Route exact path="/author/:authorId" component={AuthorPage} />
               <Route exact path="/book/:bookId" component={BookDetailsPage} />
             </IonRouterOutlet>

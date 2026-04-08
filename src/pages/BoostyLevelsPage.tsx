@@ -1,4 +1,5 @@
 ﻿import { IonContent, IonPage } from '@ionic/react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppHeader } from '../components/AppHeader';
 import { BottomDock } from '../components/BottomDock';
@@ -88,6 +89,12 @@ function getAccessMap(bookId: string): AccessMap {
 
 export function BoostyLevelsPage() {
   const { catalog, loading, error } = useCatalog();
+  const [selectedLevel, setSelectedLevel] = useState<LevelKey>('free');
+
+  const activeLevel = useMemo(
+    () => BOOSTY_LEVELS.find((level) => level.id === selectedLevel) ?? BOOSTY_LEVELS[0],
+    [selectedLevel]
+  );
 
   if (loading) {
     return (
@@ -120,18 +127,23 @@ export function BoostyLevelsPage() {
             <div className="home-hero-copy">
               <p className="welcome-copy">Подписка и доступ</p>
               <h1 className="welcome-title">Сводка по уровням Boosty</h1>
-              <p className="welcome-subtitle">На одной странице видно, какие главы по каждой книге открываются на FREE, Конденсации Ци, Формировании Ядра и Зарождающейся Душе.</p>
+              <p className="welcome-subtitle">Нажмите на уровень сверху, и ниже останется только доступ для этого уровня по всем книгам.</p>
             </div>
           </section>
 
           <section className="boosty-level-grid">
             {BOOSTY_LEVELS.map((level) => (
-              <article key={level.id} className="sleek-card boosty-level-card">
+              <button
+                key={level.id}
+                type="button"
+                className={`sleek-card boosty-level-card ${selectedLevel === level.id ? 'active' : ''}`}
+                onClick={() => setSelectedLevel(level.id)}
+              >
                 <p className="hero-eyebrow">Уровень</p>
                 <h2 className="section-title">{level.title}</h2>
                 <p className="boosty-level-price">{level.price}</p>
                 <p className="muted-text">{level.description}</p>
-              </article>
+              </button>
             ))}
           </section>
 
@@ -139,13 +151,14 @@ export function BoostyLevelsPage() {
             <div className="section-header compact-header">
               <div>
                 <h2 className="section-title">Доступ по книгам</h2>
-                <p className="section-caption">Текущая сводка по опубликованным главам</p>
+                <p className="section-caption">Сейчас выбран уровень: {activeLevel.title}</p>
               </div>
             </div>
 
             <div className="boosty-book-list">
               {catalog.books.map((book) => {
                 const access = getAccessMap(book.id);
+                const accessValue = access[selectedLevel];
 
                 return (
                   <article key={book.id} className="boosty-book-card">
@@ -162,13 +175,11 @@ export function BoostyLevelsPage() {
                       </Link>
                     </div>
 
-                    <div className="boosty-access-grid">
-                      {BOOSTY_LEVELS.map((level) => (
-                        <div key={level.id} className="boosty-access-row">
-                          <span className="boosty-access-label">{level.title}</span>
-                          <span className="boosty-access-value">{access[level.id as LevelKey]}</span>
-                        </div>
-                      ))}
+                    <div className="boosty-access-grid single-level">
+                      <div className="boosty-access-row active-row">
+                        <span className="boosty-access-label">{activeLevel.title}</span>
+                        <span className="boosty-access-value">{accessValue}</span>
+                      </div>
                     </div>
 
                     {access.note ? <p className="boosty-access-note">{access.note}</p> : null}

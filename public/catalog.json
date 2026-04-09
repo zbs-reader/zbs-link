@@ -177,7 +177,7 @@
                 {
                     "id": "ranobelib",
                     "label": "RanobeLIB",
-                    "url": "https://ranobelib.me/ru/book/255823--wo-de-zhiwu-he-jiangshi-qiang-yi-dian-zenme-le?section=info\u0026ui=1954317"
+                    "url": "https://ranobelib.me/ru/book/255823--wo-de-zhiwu-he-jiangshi-qiang-yi-dian-zenme-le?section=info&ui=1954317"
                 }
             ],
             "accessTiers": [
@@ -292,6 +292,37 @@
                     "linkUrl": "https://boosty.to/langllax/posts/7cd3e653-3c3a-4b8f-b662-8f856a5bc7dd?share=post_link",
                     "linkLabel": "Открыть на Boosty",
                     "isFree": false
+                }
+            ],
+            "isCompleted": false
+        },
+        {
+            "id": "твои-импланты-вообще-легальны",
+            "title": "Твои импланты вообще легальны?",
+            "author": "Zhai Nan",
+            "description": "Я уже стал попаданцем, а за использование кибер-имплантов Великой Янь с меня всё ещё дерут пошлину в две тысячи процентов?!\nА если я использую импланты Колумбийского Союза, то лишаюсь медицинской страховки?!\nЗа беспроводной интернет тоже, мать его, нужно платить патентный сбор?!\nПолучается, я так и останусь нищим, просящим милостыню на коленях?\nСпрашиваете, легальны ли они? Я скрафтил их своим собственным читом! Какое вам вообще дело?!",
+            "coverUrl": "https://tl.rulate.ru/i/book/26/3/379.jpg",
+            "chapters": [],
+            "tags": [
+                "научная фантастика"
+            ],
+            "externalLinks": [
+                {
+                    "id": "rulate",
+                    "label": "Rulate",
+                    "url": "https://tl.rulate.ru/book/173563"
+                }
+            ],
+            "accessTiers": [
+                {
+                    "id": "free",
+                    "title": "FREE",
+                    "price": "0 ₽",
+                    "description": "Открытые главы без подписки.",
+                    "chaptersLabel": "1-100",
+                    "linkUrl": "https://boosty.to/langllax/posts/0ad714a7-0efb-4aa5-80f7-00d77b02348a?share=post_link",
+                    "linkLabel": "Открыть на Boosty",
+                    "isFree": true
                 }
             ],
             "isCompleted": false

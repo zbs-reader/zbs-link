@@ -127,7 +127,7 @@ export function BoostyLevelsPage() {
             ))}
           </section>
 
-          <section className="sleek-card boosty-matrix-card">
+          <section className="sleek-card boosty-matrix-card compact-matrix">
             <div className="section-header compact-header">
               <div>
                 <h2 className="section-title">Доступ по книгам</h2>
@@ -135,35 +135,38 @@ export function BoostyLevelsPage() {
               </div>
             </div>
 
-            <div className="boosty-book-list">
+            <div className="boosty-book-list compact-grid">
               {catalog.books.map((book) => {
                 const tier = getTierForLevel(book, selectedLevel, activeLevel.title);
                 const accessValue = getAccessValue(tier);
                 const accessNote = getAccessNote(tier);
 
                 return (
-                  <article key={book.id} className="boosty-book-card">
-                    <div className="boosty-book-head">
-                      <div>
+                  <article key={book.id} className="boosty-book-card compact-card">
+                    <div className="boosty-book-compact-top">
+                      <div className="boosty-book-cover-wrap">
+                        <img className="boosty-book-cover" src={book.coverUrl} alt={book.title} />
+                        {book.isCompleted ? <span className="status-badge completed cover-status small">Завершена</span> : null}
+                      </div>
+
+                      <div className="boosty-book-copy">
                         <p className="book-tile-kicker">{book.author}</p>
-                        <div className="title-with-status hero">
-                          <h3 className="boosty-book-title">{book.title}</h3>
-                          {book.isCompleted ? <span className="status-badge completed hero-status">Завершена</span> : null}
+                        <h3 className="boosty-book-title compact">{book.title}</h3>
+
+                        <div className="boosty-access-grid single-level compact">
+                          <div className="boosty-access-row active-row compact-row">
+                            <span className="boosty-access-label">{activeLevel.title}</span>
+                            <span className="boosty-access-value">{accessValue}</span>
+                          </div>
                         </div>
-                      </div>
-                      <Link to={`/book/${book.id}`} className="tier-link-button boosty-book-link">
-                        <span>Открыть книгу</span>
-                      </Link>
-                    </div>
 
-                    <div className="boosty-access-grid single-level">
-                      <div className="boosty-access-row active-row">
-                        <span className="boosty-access-label">{activeLevel.title}</span>
-                        <span className="boosty-access-value">{accessValue}</span>
+                        {accessNote ? <p className="boosty-access-note compact-note">{accessNote}</p> : null}
                       </div>
                     </div>
 
-                    {accessNote ? <p className="boosty-access-note">{accessNote}</p> : null}
+                    <Link to={`/book/${book.id}`} className="tier-link-button boosty-book-link compact-link">
+                      <span>Открыть книгу</span>
+                    </Link>
                   </article>
                 );
               })}

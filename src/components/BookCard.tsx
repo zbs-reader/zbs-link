@@ -15,10 +15,10 @@ export function BookCard({ book }: BookCardProps) {
     <Link to={`/book/${book.id}`} className="book-tile-card">
       <div className="book-tile-cover-wrap">
         <img className="book-tile-cover" src={book.coverUrl} alt={t('bookCard.coverAlt', { title: book.title })} />
+        {book.isCompleted ? <span className="status-badge completed cover-status">{t('common.completed')}</span> : null}
       </div>
       <div className="book-tile-meta">
         <p className="book-tile-kicker">{meta}</p>
-        {book.isCompleted ? <span className="status-badge completed card-status">{t('common.completed')}</span> : null}
         <h3 className="book-tile-title">{book.title}</h3>
       </div>
     </Link>

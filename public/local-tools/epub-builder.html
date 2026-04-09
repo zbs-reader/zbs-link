@@ -1,0 +1,609 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local EPUB Builder</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #171717;
+      --panel: #232323;
+      --panel-strong: #2b2b2b;
+      --border: rgba(255,255,255,.08);
+      --text: #f3efe7;
+      --muted: #b0a999;
+      --accent: #ffb448;
+      --accent-soft: rgba(255,180,72,.14);
+      --good: #57c77c;
+      --bad: #ff7a7a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px;
+      background: radial-gradient(circle at top, #2c2416, var(--bg) 36%);
+      color: var(--text);
+      font: 16px/1.5 Segoe UI, Arial, sans-serif;
+    }
+    .shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      gap: 16px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.18);
+    }
+    h1, h2, h3, p { margin: 0; }
+    .hero { display: grid; gap: 8px; }
+    .eyebrow { color: var(--accent); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .muted { color: var(--muted); }
+    .good { color: var(--good); }
+    .bad { color: var(--bad); }
+    .grid { display: grid; gap: 12px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    label { display: grid; gap: 8px; }
+    label span { color: var(--muted); font-size: 13px; font-weight: 700; }
+    input, textarea, select {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--panel-strong);
+      color: var(--text);
+      padding: 12px 14px;
+      font: inherit;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 16px;
+      background: var(--accent-soft);
+      color: var(--text);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease;
+    }
+    button:hover { transform: translateY(-1px); background: rgba(255,180,72,.22); }
+    button:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: var(--accent-soft);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .nav a:hover { transform: translateY(-1px); background: rgba(255,180,72,.22); }
+    .nav a.active {
+      background: rgba(255,180,72,.28);
+      box-shadow: inset 0 0 0 1px rgba(255,180,72,.35);
+    }
+    .preview-cover {
+      width: 180px;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+    }
+    .subcard {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+    }
+    pre {
+      margin: 0;
+      overflow: auto;
+      padding: 16px;
+      border-radius: 16px;
+      background: #141414;
+      border: 1px solid var(--border);
+      color: #ded8ca;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    code {
+      font-family: Consolas, monospace;
+      color: #ffe0a6;
+    }
+    @media (max-width: 900px) {
+      .grid.two, .grid.three { grid-template-columns: 1fr; }
+      body { padding: 14px; }
+      .preview-cover { width: 100%; max-width: 240px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="panel hero">
+      <p class="eyebrow">Local only</p>
+      <h1>EPUB из Markdown</h1>
+      <p class="muted">Локальный инструмент для сборки <code>.epub</code> из <code>.md</code> с обложкой, метаданными книги и общим блоком <code>META_DATA</code> для вашей читалки.</p>
+      <div class="nav">
+        <a href="./catalog-admin.html">Каталог книг</a>
+        <a class="active" href="./epub-builder.html">EPUB конвертер</a>
+      </div>
+    </section>
+
+    <section class="panel grid">
+      <div class="grid two">
+        <label>
+          <span>Markdown файл</span>
+          <input id="markdownFile" type="file" accept=".md,.markdown,text/markdown,text/plain" />
+        </label>
+        <label>
+          <span>Ссылка на обложку</span>
+          <input id="coverUrl" placeholder="https://.../cover.jpg" />
+        </label>
+      </div>
+      <div class="grid two">
+        <label>
+          <span>Файл обложки</span>
+          <input id="coverFile" type="file" accept="image/*" />
+        </label>
+        <div class="subcard">
+          <strong>Как лучше</strong>
+          <p class="muted">Если сайт с обложкой не даёт скачать картинку по ссылке, просто загрузите её файлом сюда. Для EPUB это самый надёжный вариант.</p>
+        </div>
+      </div>
+      <div class="grid three">
+        <label>
+          <span>Название книги</span>
+          <input id="title" placeholder="Ненормальный сверхъестественный мир" />
+        </label>
+        <label>
+          <span>Автор книги</span>
+          <input id="author" placeholder="Имя автора книги" />
+        </label>
+        <label>
+          <span>Имя epub-файла</span>
+          <input id="fileName" placeholder="abnormal-world.epub" />
+        </label>
+      </div>
+      <label>
+        <span>Описание книги</span>
+        <textarea id="description" placeholder="Краткое описание книги для EPUB. Оно попадёт и в метаданные, и в начало текста."></textarea>
+      </label>
+    </section>
+
+    <section class="panel grid">
+      <h2>META_DATA блок</h2>
+      <p class="muted">Блок будет вставлен в описание в общем формате метаданных: <code>&lt;!-- META_DATA_START --&gt;</code>, потом строки вида <code>team: ...</code> и <code>boosty: ...</code>, затем <code>&lt;!-- META_DATA_END --&gt;</code>.</p>
+      <div class="grid two">
+        <label>
+          <span>Команда</span>
+          <select id="team">
+            <option value="">Без команды</option>
+            <option value="Zabaichen Bank Selector" selected>Zabaichen Bank Selector</option>
+          </select>
+        </label>
+        <label>
+          <span>Ссылка на бандл книги в Boosty</span>
+          <input id="boostyBundleUrl" placeholder="https://boosty.to/langllax/bundle/..." />
+        </label>
+      </div>
+      <label>
+        <span>Название бандла</span>
+        <input id="boostyBundleTitle" placeholder="Полный комплект книги" />
+      </label>
+    </section>
+
+    <section class="panel grid two">
+      <div class="grid">
+        <h2>Обложка</h2>
+        <div class="row">
+          <img id="coverPreview" class="preview-cover" alt="Предпросмотр обложки" />
+        </div>
+        <p id="status" class="muted">Загрузите markdown и заполните поля.</p>
+        <div class="row">
+          <button id="previewCoverButton" type="button">Подгрузить обложку</button>
+          <button id="buildButton" type="button">Собрать EPUB</button>
+        </div>
+      </div>
+      <div class="grid">
+        <h2>Превью META_DATA</h2>
+        <pre id="bundlePreview"></pre>
+      </div>
+    </section>
+
+    <section class="panel grid">
+      <h2>Как читалке распознать блок</h2>
+      <pre id="specPreview"></pre>
+    </section>
+  </div>
+
+  <script type="module">
+    import JSZip from 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/+esm';
+    import { marked } from 'https://cdn.jsdelivr.net/npm/marked@12.0.2/+esm';
+
+    const els = {
+      markdownFile: document.getElementById('markdownFile'),
+      coverUrl: document.getElementById('coverUrl'),
+      coverFile: document.getElementById('coverFile'),
+      title: document.getElementById('title'),
+      author: document.getElementById('author'),
+      fileName: document.getElementById('fileName'),
+      description: document.getElementById('description'),
+      team: document.getElementById('team'),
+      boostyBundleUrl: document.getElementById('boostyBundleUrl'),
+      boostyBundleTitle: document.getElementById('boostyBundleTitle'),
+      coverPreview: document.getElementById('coverPreview'),
+      status: document.getElementById('status'),
+      previewCoverButton: document.getElementById('previewCoverButton'),
+      buildButton: document.getElementById('buildButton'),
+      bundlePreview: document.getElementById('bundlePreview'),
+      specPreview: document.getElementById('specPreview')
+    };
+
+    const state = {
+      markdownText: '',
+      coverBlob: null,
+      coverMime: '',
+      coverExt: 'jpg'
+    };
+
+    const metaMarkers = {
+      start: 'META_DATA_START',
+      end: 'META_DATA_END'
+    };
+
+    function slugify(value) {
+      return value
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9а-яё\s-]/gi, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
+    }
+
+    function escapeXml(value = '') {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;');
+    }
+
+    function guessExtension(mime) {
+      if (mime.includes('png')) return 'png';
+      if (mime.includes('webp')) return 'webp';
+      if (mime.includes('gif')) return 'gif';
+      return 'jpg';
+    }
+
+    function buildMetaBlock() {
+      const lines = [];
+      const team = els.team.value.trim();
+      const bundleUrl = els.boostyBundleUrl.value.trim();
+
+      if (team) {
+        lines.push(`team: ${team}`);
+      }
+
+      if (bundleUrl) {
+        lines.push(`boosty: ${bundleUrl}`);
+      }
+
+      if (!lines.length) {
+        return '';
+      }
+
+      return [
+        '',
+        `<!-- ${metaMarkers.start} -->`,
+        ...lines,
+        `<!-- ${metaMarkers.end} -->`
+      ].join('\n');
+    }
+
+    function updatePreviews() {
+      els.bundlePreview.textContent = buildMetaBlock() || '<пусто>';
+      els.specPreview.textContent = [
+        'Парсинг для читалки:',
+        `1. Найти комментарий <!-- ${metaMarkers.start} -->`,
+        '2. Прочитать строки метаданных между маркерами',
+        '3. Разобрать пары key: value, например team: ... и boosty: ...',
+        `4. Остановиться на <!-- ${metaMarkers.end} -->`
+      ].join('\n');
+    }
+
+    function setStatus(message, tone = 'muted') {
+      els.status.className = tone;
+      els.status.textContent = message;
+    }
+
+    async function loadMarkdownFile() {
+      const file = els.markdownFile.files?.[0];
+      if (!file) return;
+      state.markdownText = await file.text();
+      if (!els.title.value.trim()) {
+        const fileStem = file.name.replace(/\.md$/i, '').trim();
+        els.title.value = fileStem;
+      }
+      if (!els.fileName.value.trim()) {
+        els.fileName.value = `${slugify(els.title.value || file.name.replace(/\.md$/i, ''))}.epub`;
+      }
+      updatePreviews();
+      setStatus('Markdown загружен.', 'good');
+    }
+
+    async function loadCoverFromFile() {
+      const file = els.coverFile.files?.[0];
+      if (!file) {
+        throw new Error('Файл обложки не выбран.');
+      }
+      state.coverBlob = file;
+      state.coverMime = file.type || 'image/jpeg';
+      state.coverExt = guessExtension(state.coverMime);
+      els.coverPreview.src = URL.createObjectURL(file);
+      return file;
+    }
+
+    async function loadCoverFromUrl() {
+      const url = els.coverUrl.value.trim();
+      if (!url) {
+        throw new Error('Укажите ссылку на обложку.');
+      }
+      const response = await fetch(url, { mode: 'cors' });
+      if (!response.ok) {
+        throw new Error(`Не удалось скачать обложку: HTTP ${response.status}`);
+      }
+      const blob = await response.blob();
+      state.coverBlob = blob;
+      state.coverMime = blob.type || 'image/jpeg';
+      state.coverExt = guessExtension(state.coverMime);
+      els.coverPreview.src = URL.createObjectURL(blob);
+      return blob;
+    }
+
+    async function loadCover() {
+      if (els.coverFile.files?.[0]) {
+        return loadCoverFromFile();
+      }
+
+      try {
+        return await loadCoverFromUrl();
+      } catch (error) {
+        throw new Error('Не удалось скачать обложку по ссылке. Скорее всего, сайт режет CORS. Скачайте картинку и загрузите её через поле "Файл обложки".');
+      }
+    }
+
+    function sanitizeHtml(html) {
+      return html
+        .replace(/<hr\s*\/?>(?![\s\S]*<hr\s*\/?>)/g, '<hr />')
+        .replace(/<img([^>]*?)(?<!\/)>(?!<\/img>)/g, '<img$1 />');
+    }
+
+    function buildFullMarkdown() {
+      const parts = [];
+      if (els.description.value.trim()) {
+        parts.push(els.description.value.trim());
+      }
+      const metaBlock = buildMetaBlock();
+      if (metaBlock) {
+        parts.push(metaBlock);
+      }
+      if (state.markdownText.trim()) {
+        parts.push(state.markdownText.trim());
+      }
+      return parts.join('\n\n');
+    }
+
+    function buildXhtmlDocument(title, bodyHtml) {
+      return `<?xml version="1.0" encoding="utf-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+  <head>
+    <title>${escapeXml(title)}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      body { font-family: serif; line-height: 1.6; padding: 0 1rem; }
+      img { max-width: 100%; }
+      pre { white-space: pre-wrap; }
+    </style>
+  </head>
+  <body>
+    ${bodyHtml}
+  </body>
+</html>`;
+    }
+
+    function buildOpf(meta) {
+      return `<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="BookId">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:title>${escapeXml(meta.title)}</dc:title>
+    <dc:creator>${escapeXml(meta.author)}</dc:creator>
+    <dc:language>ru</dc:language>
+    <dc:identifier id="BookId">urn:uuid:${escapeXml(meta.uuid)}</dc:identifier>
+    <dc:description>${escapeXml(meta.description)}</dc:description>
+    <meta name="cover" content="cover-image" />
+  </metadata>
+  <manifest>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
+    <item id="content" href="content.xhtml" media-type="application/xhtml+xml" />
+    <item id="cover" href="cover.xhtml" media-type="application/xhtml+xml" />
+    <item id="cover-image" href="images/cover.${meta.coverExt}" media-type="${meta.coverMime}" />
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="cover" />
+    <itemref idref="content" />
+  </spine>
+  <guide>
+    <reference type="cover" title="Cover" href="cover.xhtml" />
+  </guide>
+</package>`;
+    }
+
+    function buildToc(meta) {
+      return `<?xml version="1.0" encoding="UTF-8"?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:${escapeXml(meta.uuid)}" />
+    <meta name="dtb:depth" content="1" />
+    <meta name="dtb:totalPageCount" content="0" />
+    <meta name="dtb:maxPageNumber" content="0" />
+  </head>
+  <docTitle>
+    <text>${escapeXml(meta.title)}</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="cover" playOrder="1">
+      <navLabel><text>Обложка</text></navLabel>
+      <content src="cover.xhtml" />
+    </navPoint>
+    <navPoint id="content" playOrder="2">
+      <navLabel><text>${escapeXml(meta.title)}</text></navLabel>
+      <content src="content.xhtml" />
+    </navPoint>
+  </navMap>
+</ncx>`;
+    }
+
+    function buildCoverPage(meta) {
+      return `<?xml version="1.0" encoding="utf-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+  <head>
+    <title>Обложка</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      body { margin: 0; text-align: center; }
+      img { max-width: 100%; max-height: 100vh; }
+    </style>
+  </head>
+  <body>
+    <img src="images/cover.${meta.coverExt}" alt="${escapeXml(meta.title)}" />
+  </body>
+</html>`;
+    }
+
+    async function buildEpub() {
+      if (!state.markdownText.trim()) {
+        throw new Error('Сначала загрузите markdown файл.');
+      }
+
+      if (!state.coverBlob) {
+        await loadCover();
+      }
+
+      const title = els.title.value.trim();
+      if (!title) {
+        throw new Error('Укажите название книги.');
+      }
+
+      const author = els.author.value.trim() || 'Неизвестный автор';
+      const fullMarkdown = buildFullMarkdown();
+      const bodyHtml = sanitizeHtml(marked.parse(fullMarkdown));
+      const zip = new JSZip();
+      const uuid = crypto.randomUUID();
+      const fileName = (els.fileName.value.trim() || `${slugify(title)}.epub`).replace(/\.epub$/i, '') + '.epub';
+      const meta = {
+        title,
+        author,
+        description: els.description.value.trim() || title,
+        uuid,
+        coverMime: state.coverMime || 'image/jpeg',
+        coverExt: state.coverExt || 'jpg'
+      };
+
+      zip.file('mimetype', 'application/epub+zip', { compression: 'STORE' });
+      zip.folder('META-INF').file('container.xml', `<?xml version="1.0" encoding="UTF-8"?>
+<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+  <rootfiles>
+    <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>
+  </rootfiles>
+</container>`);
+
+      const oebps = zip.folder('OEBPS');
+      oebps.file('content.opf', buildOpf(meta));
+      oebps.file('toc.ncx', buildToc(meta));
+      oebps.file('cover.xhtml', buildCoverPage(meta));
+      oebps.file('content.xhtml', buildXhtmlDocument(title, bodyHtml));
+      oebps.folder('images').file(`cover.${meta.coverExt}`, state.coverBlob);
+
+      const blob = await zip.generateAsync({ type: 'blob', mimeType: 'application/epub+zip' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName;
+      link.click();
+      URL.revokeObjectURL(url);
+      setStatus(`EPUB собран: ${fileName}`, 'good');
+    }
+
+    els.markdownFile.addEventListener('change', async () => {
+      try {
+        await loadMarkdownFile();
+      } catch (error) {
+        setStatus(error.message, 'bad');
+      }
+    });
+
+    [
+      els.coverUrl,
+      els.title,
+      els.author,
+      els.fileName,
+      els.description,
+      els.team,
+      els.boostyBundleUrl,
+      els.boostyBundleTitle
+    ].forEach((input) => input.addEventListener('input', updatePreviews));
+
+    els.coverFile.addEventListener('change', async () => {
+      if (!els.coverFile.files?.[0]) return;
+      try {
+        await loadCoverFromFile();
+        setStatus('Обложка загружена из файла.', 'good');
+      } catch (error) {
+        setStatus(error.message, 'bad');
+      }
+    });
+
+    els.previewCoverButton.addEventListener('click', async () => {
+      try {
+        await loadCover();
+        setStatus(els.coverFile.files?.[0] ? 'Обложка загружена из файла.' : 'Обложка загружена по ссылке.', 'good');
+      } catch (error) {
+        setStatus(error.message, 'bad');
+      }
+    });
+
+    els.buildButton.addEventListener('click', async () => {
+      els.buildButton.disabled = true;
+      try {
+        await buildEpub();
+      } catch (error) {
+        setStatus(error.message, 'bad');
+      } finally {
+        els.buildButton.disabled = false;
+      }
+    });
+
+    updatePreviews();
+  </script>
+</body>
+</html>

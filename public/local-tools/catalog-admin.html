@@ -1,0 +1,555 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalog Admin</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #171717;
+      --panel: #232323;
+      --panel-strong: #2b2b2b;
+      --border: rgba(255,255,255,.08);
+      --text: #f3efe7;
+      --muted: #b0a999;
+      --accent: #ffb448;
+      --accent-soft: rgba(255,180,72,.14);
+      --good: #57c77c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px;
+      background: radial-gradient(circle at top, #2c2416, var(--bg) 36%);
+      color: var(--text);
+      font: 16px/1.5 Segoe UI, Arial, sans-serif;
+    }
+    .shell {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      gap: 16px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.18);
+    }
+    h1, h2, h3, p { margin: 0; }
+    .hero { display: grid; gap: 8px; }
+    .eyebrow { color: var(--accent); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .muted { color: var(--muted); }
+    .grid { display: grid; gap: 12px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    label { display: grid; gap: 8px; }
+    label span { color: var(--muted); font-size: 13px; font-weight: 700; }
+    input, textarea, select {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--panel-strong);
+      color: var(--text);
+      padding: 12px 14px;
+      font: inherit;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    .output-textarea {
+      min-height: 320px;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 16px;
+      background: var(--accent-soft);
+      color: var(--text);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease;
+    }
+    button:hover { transform: translateY(-1px); background: rgba(255,180,72,.22); }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: var(--accent-soft);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .nav a:hover { transform: translateY(-1px); background: rgba(255,180,72,.22); }
+    .nav a.active {
+      background: rgba(255,180,72,.28);
+      box-shadow: inset 0 0 0 1px rgba(255,180,72,.35);
+    }
+    .subcard {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+    }
+    .checkbox { display: flex; align-items: center; gap: 10px; min-height: 48px; }
+    .checkbox input { width: 18px; height: 18px; }
+    .notice { color: var(--good); font-weight: 700; }
+    pre {
+      margin: 0;
+      overflow: auto;
+      padding: 16px;
+      border-radius: 16px;
+      background: #141414;
+      border: 1px solid var(--border);
+      color: #ded8ca;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    @media (max-width: 900px) {
+      .grid.two, .grid.three { grid-template-columns: 1fr; }
+      body { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="panel hero">
+      <p class="eyebrow">Shared tool</p>
+      <h1>Каталог книг</h1>
+      <p class="muted">Сценарий работы простой: загружаете текущий <code>catalog.json</code>, редактируете или добавляете книгу, затем копируете полный обновлённый текст каталога и локально заменяете им файл.</p>
+      <div class="nav">
+        <a class="active" href="./catalog-admin.html">Каталог книг</a>
+        <a href="./epub-builder.html">EPUB конвертер</a>
+      </div>
+    </section>
+
+    <section class="panel grid">
+      <div class="row">
+        <input id="catalogFile" type="file" accept=".json,application/json" />
+        <button id="copyCatalogButton" type="button">Скопировать весь catalog.json</button>
+      </div>
+      <p class="muted">Автоподхвата файла больше нет. Сначала загрузите актуальный <code>catalog.json</code> вручную.</p>
+      <div class="grid two">
+        <label>
+          <span>Существующая книга</span>
+          <select id="bookSelect">
+            <option value="">Выберите книгу для редактирования</option>
+          </select>
+        </label>
+        <div class="row" style="align-items:end;">
+          <button id="loadBookButton" type="button">Загрузить в форму</button>
+          <button id="resetFormButton" type="button">Очистить форму</button>
+        </div>
+      </div>
+      <p id="notice" class="notice"></p>
+    </section>
+
+    <section class="panel grid">
+      <h2>Книга</h2>
+      <div class="grid two">
+        <label><span>Название</span><input id="title" /></label>
+        <label><span>ID</span><input id="bookId" /></label>
+        <label><span>Автор</span><input id="author" value="Команда ZBS Link" /></label>
+        <label><span>Обложка</span><input id="coverUrl" /></label>
+      </div>
+      <label><span>Описание</span><textarea id="description"></textarea></label>
+      <div class="grid two">
+        <label><span>Теги через запятую</span><input id="tags" placeholder="мистика, ужасы" /></label>
+        <label><span>Статус</span><div class="checkbox"><input id="isCompleted" type="checkbox" /><span>Книга завершена</span></div></label>
+      </div>
+    </section>
+
+    <section class="panel grid">
+      <div class="row" style="justify-content: space-between; align-items:center;">
+        <h2>Платформы</h2>
+        <button id="addLink" type="button">Добавить ссылку</button>
+      </div>
+      <div id="links"></div>
+    </section>
+
+    <section class="panel grid">
+      <div class="row" style="justify-content: space-between; align-items:center;">
+        <h2>Уровни доступа</h2>
+        <button id="addTier" type="button">Добавить уровень</button>
+      </div>
+      <div id="tiers"></div>
+    </section>
+
+    <section class="panel grid">
+      <div class="row">
+        <button id="applyButton" type="button">Добавить или обновить книгу</button>
+      </div>
+    </section>
+
+    <section class="panel grid two">
+      <div class="grid">
+        <h2>Предпросмотр книги</h2>
+        <pre id="preview">{}</pre>
+      </div>
+      <div class="grid">
+        <h2>Готовый catalog.json</h2>
+        <textarea id="catalogOutput" class="output-textarea" readonly></textarea>
+      </div>
+    </section>
+  </div>
+
+  <template id="linkTemplate">
+    <div class="subcard grid three">
+      <label><span>Label</span><input data-key="label" placeholder="Rulate" /></label>
+      <label><span>ID</span><input data-key="id" placeholder="rulate" /></label>
+      <label><span>URL</span><input data-key="url" placeholder="https://..." /></label>
+    </div>
+  </template>
+
+  <template id="tierTemplate">
+    <div class="subcard grid">
+      <div class="row" style="justify-content:space-between; align-items:center;">
+        <strong>Уровень доступа</strong>
+        <button type="button" data-action="remove-tier">Удалить уровень</button>
+      </div>
+      <div class="grid three">
+        <label><span>Название</span><input data-key="title" placeholder="FREE" /></label>
+        <label><span>ID</span><input data-key="id" placeholder="free-1-225" /></label>
+        <label><span>Цена</span><input data-key="price" placeholder="0 ₽" /></label>
+      </div>
+      <div class="grid three">
+        <label><span>Главы</span><input data-key="chaptersLabel" placeholder="1-225" /></label>
+        <label><span>Ссылка</span><input data-key="linkUrl" placeholder="https://boosty.to/..." /></label>
+        <label><span>Кнопка</span><input data-key="linkLabel" value="Открыть на Boosty" /></label>
+      </div>
+      <label><span>Описание</span><textarea data-key="description"></textarea></label>
+      <label><span>Тип</span><div class="checkbox"><input type="checkbox" data-key="isFree" /><span>FREE уровень</span></div></label>
+    </div>
+  </template>
+
+  <script>
+    const defaultLinks = () => ([
+      { id: 'rulate', label: 'Rulate', url: '' },
+      { id: 'ranobelib', label: 'RanobeLIB', url: '' }
+    ]);
+
+    const defaultTiers = () => ([
+      { id: 'free', title: 'FREE', price: '0 ₽', description: 'Открытые главы без подписки.', chaptersLabel: '', linkUrl: '', linkLabel: 'Открыть на Boosty', isFree: true }
+    ]);
+
+    const state = {
+      catalog: { books: [] },
+      links: defaultLinks(),
+      tiers: defaultTiers()
+    };
+
+    const els = {
+      catalogFile: document.getElementById('catalogFile'),
+      copyCatalogButton: document.getElementById('copyCatalogButton'),
+      loadBookButton: document.getElementById('loadBookButton'),
+      resetFormButton: document.getElementById('resetFormButton'),
+      bookSelect: document.getElementById('bookSelect'),
+      addLink: document.getElementById('addLink'),
+      addTier: document.getElementById('addTier'),
+      applyButton: document.getElementById('applyButton'),
+      links: document.getElementById('links'),
+      tiers: document.getElementById('tiers'),
+      preview: document.getElementById('preview'),
+      catalogOutput: document.getElementById('catalogOutput'),
+      notice: document.getElementById('notice'),
+      title: document.getElementById('title'),
+      bookId: document.getElementById('bookId'),
+      author: document.getElementById('author'),
+      description: document.getElementById('description'),
+      coverUrl: document.getElementById('coverUrl'),
+      tags: document.getElementById('tags'),
+      isCompleted: document.getElementById('isCompleted')
+    };
+
+    function slugify(value) {
+      return value
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9а-яё\s-]/gi, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
+    }
+
+    function normalizeCatalog(payload) {
+      if (Array.isArray(payload)) {
+        return { books: payload };
+      }
+
+      if (payload && Array.isArray(payload.books)) {
+        return { ...payload, books: payload.books };
+      }
+
+      throw new Error('Файл не похож на catalog.json');
+    }
+
+    function buildBook() {
+      return {
+        id: els.bookId.value.trim(),
+        title: els.title.value.trim(),
+        author: els.author.value.trim() || 'Команда ZBS Link',
+        description: els.description.value.trim(),
+        coverUrl: els.coverUrl.value.trim(),
+        chapters: [],
+        tags: els.tags.value.split(',').map((tag) => tag.trim()).filter(Boolean),
+        externalLinks: state.links.filter((item) => item.label.trim() && item.url.trim()),
+        accessTiers: state.tiers.filter((item) => item.title.trim()).map((item) => ({
+          ...item,
+          id: item.id.trim() || slugify(item.title),
+          title: item.title.trim(),
+          price: item.price.trim(),
+          description: item.description.trim(),
+          chaptersLabel: (item.chaptersLabel || '').trim() || undefined,
+          linkUrl: (item.linkUrl || '').trim() || undefined,
+          linkLabel: (item.linkLabel || '').trim() || undefined,
+          isFree: Boolean(item.isFree)
+        })),
+        isCompleted: els.isCompleted.checked
+      };
+    }
+
+    function renderCatalogOutput() {
+      els.catalogOutput.value = JSON.stringify(state.catalog, null, 2);
+    }
+
+    function renderPreview() {
+      if (!els.bookId.value.trim() && els.title.value.trim()) {
+        els.bookId.value = slugify(els.title.value);
+      }
+      els.preview.textContent = JSON.stringify(buildBook(), null, 2);
+    }
+
+    function resetForm() {
+      els.title.value = '';
+      els.bookId.value = '';
+      els.author.value = 'Команда ZBS Link';
+      els.description.value = '';
+      els.coverUrl.value = '';
+      els.tags.value = '';
+      els.isCompleted.checked = false;
+      state.links = defaultLinks();
+      state.tiers = defaultTiers();
+      els.bookSelect.value = '';
+      renderLinks();
+      renderTiers();
+      renderPreview();
+    }
+
+    function fillForm(book) {
+      els.title.value = book.title || '';
+      els.bookId.value = book.id || '';
+      els.author.value = book.author || 'Команда ZBS Link';
+      els.description.value = book.description || '';
+      els.coverUrl.value = book.coverUrl || '';
+      els.tags.value = (book.tags || []).join(', ');
+      els.isCompleted.checked = Boolean(book.isCompleted);
+      state.links = (book.externalLinks && book.externalLinks.length ? book.externalLinks : defaultLinks()).map((item) => ({
+        id: item.id || '',
+        label: item.label || '',
+        url: item.url || ''
+      }));
+      state.tiers = (book.accessTiers && book.accessTiers.length ? book.accessTiers : defaultTiers()).map((item) => ({
+        id: item.id || '',
+        title: item.title || '',
+        price: item.price || '',
+        description: item.description || '',
+        chaptersLabel: item.chaptersLabel || '',
+        linkUrl: item.linkUrl || '',
+        linkLabel: item.linkLabel || 'Открыть на Boosty',
+        isFree: Boolean(item.isFree)
+      }));
+      renderLinks();
+      renderTiers();
+      renderPreview();
+    }
+
+    function populateBookSelect() {
+      const selected = els.bookSelect.value;
+      els.bookSelect.innerHTML = '<option value="">Выберите книгу для редактирования</option>';
+      state.catalog.books
+        .slice()
+        .sort((a, b) => a.title.localeCompare(b.title, 'ru'))
+        .forEach((book) => {
+          const option = document.createElement('option');
+          option.value = book.id;
+          option.textContent = book.title;
+          els.bookSelect.appendChild(option);
+        });
+      if (state.catalog.books.some((book) => book.id === selected)) {
+        els.bookSelect.value = selected;
+      }
+    }
+
+    function renderLinks() {
+      els.links.innerHTML = '';
+      const template = document.getElementById('linkTemplate');
+      state.links.forEach((item, index) => {
+        const fragment = template.content.cloneNode(true);
+        fragment.querySelectorAll('[data-key]').forEach((input) => {
+          const key = input.dataset.key;
+          input.value = item[key] || '';
+          input.addEventListener('input', (event) => {
+            state.links[index][key] = event.target.value;
+            renderPreview();
+          });
+        });
+        els.links.appendChild(fragment);
+      });
+    }
+
+    function renderTiers() {
+      els.tiers.innerHTML = '';
+      const template = document.getElementById('tierTemplate');
+      state.tiers.forEach((item, index) => {
+        const fragment = template.content.cloneNode(true);
+        fragment.querySelectorAll('[data-key]').forEach((input) => {
+          const key = input.dataset.key;
+          if (input.type === 'checkbox') {
+            input.checked = Boolean(item[key]);
+            input.addEventListener('change', (event) => {
+              state.tiers[index][key] = event.target.checked;
+              renderPreview();
+            });
+          } else {
+            input.value = item[key] || '';
+            input.addEventListener('input', (event) => {
+              state.tiers[index][key] = event.target.value;
+              renderPreview();
+            });
+          }
+        });
+        const removeButton = fragment.querySelector('[data-action="remove-tier"]');
+        removeButton.addEventListener('click', () => {
+          if (state.tiers.length === 1) {
+            setNotice('Нельзя удалить последний уровень. Оставьте хотя бы один.');
+            return;
+          }
+          state.tiers.splice(index, 1);
+          renderTiers();
+          renderPreview();
+          setNotice('Уровень удалён.');
+        });
+        els.tiers.appendChild(fragment);
+      });
+    }
+
+    function setNotice(message) {
+      els.notice.textContent = message;
+    }
+
+    function applyCatalog(payload, message) {
+      state.catalog = normalizeCatalog(payload);
+      populateBookSelect();
+      renderCatalogOutput();
+      setNotice(message || `Загружен каталог: ${state.catalog.books.length} книг.`);
+    }
+
+    els.catalogFile.addEventListener('change', async (event) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      try {
+        const text = await file.text();
+        applyCatalog(JSON.parse(text));
+      } catch (error) {
+        state.catalog = { books: [] };
+        populateBookSelect();
+        renderCatalogOutput();
+        setNotice(`Не удалось загрузить файл: ${error.message}`);
+      }
+    });
+
+    els.loadBookButton.addEventListener('click', () => {
+      const bookId = els.bookSelect.value;
+      if (!bookId) {
+        setNotice('Сначала выберите книгу из списка.');
+        return;
+      }
+      const book = state.catalog.books.find((item) => item.id === bookId);
+      if (!book) {
+        setNotice('Не удалось найти книгу в загруженном каталоге.');
+        return;
+      }
+      fillForm(book);
+      setNotice(`Книга "${book.title}" загружена в форму.`);
+    });
+
+    els.resetFormButton.addEventListener('click', () => {
+      resetForm();
+      setNotice('Форма очищена.');
+    });
+
+    els.addLink.addEventListener('click', () => {
+      state.links.push({ id: `link-${state.links.length + 1}`, label: '', url: '' });
+      renderLinks();
+      renderPreview();
+    });
+
+    els.addTier.addEventListener('click', () => {
+      state.tiers.push({ id: `tier-${state.tiers.length + 1}`, title: '', price: '', description: '', chaptersLabel: '', linkUrl: '', linkLabel: 'Открыть на Boosty', isFree: false });
+      renderTiers();
+      renderPreview();
+    });
+
+    [els.title, els.bookId, els.author, els.description, els.coverUrl, els.tags, els.isCompleted].forEach((el) => {
+      const eventName = el.type === 'checkbox' ? 'change' : 'input';
+      el.addEventListener(eventName, renderPreview);
+    });
+
+    els.applyButton.addEventListener('click', () => {
+      if (!state.catalog.books.length) {
+        setNotice('Сначала загрузите исходный catalog.json.');
+        return;
+      }
+
+      const book = buildBook();
+      if (!book.id || !book.title || !book.description || !book.coverUrl) {
+        setNotice('Заполните id, название, описание и обложку.');
+        return;
+      }
+      const index = state.catalog.books.findIndex((item) => item.id === book.id);
+      if (index >= 0) state.catalog.books[index] = book;
+      else state.catalog.books.push(book);
+      populateBookSelect();
+      els.bookSelect.value = book.id;
+      renderCatalogOutput();
+      setNotice(`Книга "${book.title}" добавлена или обновлена в рабочем каталоге.`);
+    });
+
+    els.copyCatalogButton.addEventListener('click', async () => {
+      if (!els.catalogOutput.value.trim()) {
+        setNotice('Сначала загрузите и подготовьте catalog.json.');
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(els.catalogOutput.value);
+        setNotice('Полный catalog.json скопирован в буфер обмена.');
+      } catch (error) {
+        els.catalogOutput.focus();
+        els.catalogOutput.select();
+        setNotice('Не удалось скопировать автоматически. Текст выделен, скопируйте вручную.');
+      }
+    });
+
+    renderLinks();
+    renderTiers();
+    renderPreview();
+    renderCatalogOutput();
+  </script>
+</body>
+</html>

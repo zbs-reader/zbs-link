@@ -18,19 +18,19 @@ const BOOSTY_LEVELS = [
     id: 'qi',
     title: 'Конденсация Ци',
     price: '300 ₽ per month',
-    description: 'Доступ к 50% глав с ранним доступом.'
+    description: 'Дополнительно 300 глав.'
   },
   {
     id: 'core',
     title: 'Формирование Ядра',
-    price: '900 ₽ per month',
-    description: 'Доступ к 75% глав с ранним доступом (+ если завершённая книга содержит меньше 500 глав, полный доступ).'
+    price: '700 ₽ per month',
+    description: 'Дополнительно 700 глав.'
   },
   {
     id: 'soul',
     title: 'Зарождающаяся Душа',
-    price: '1 500 ₽ per month',
-    description: 'Доступ к 100% глав с ранним доступом.'
+    price: '1 200 ₽ per month',
+    description: 'Доступ к 100% глав.'
   }
 ] as const;
 

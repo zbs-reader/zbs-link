@@ -36,14 +36,47 @@ const BOOSTY_LEVELS = [
 
 type LevelKey = (typeof BOOSTY_LEVELS)[number]['id'];
 
+function isFreeTier(tier: AccessTier): boolean {
+  return Boolean(tier.isFree) || tier.title.trim().toUpperCase() === 'FREE';
+}
+
+function isFullTier(tier: AccessTier): boolean {
+  const title = tier.title.trim().toLowerCase();
+  const chaptersLabel = tier.chaptersLabel?.trim().toLowerCase() ?? '';
+  return title.includes('полная версия') || chaptersLabel.includes('полностью');
+}
+
 function getTierForLevel(book: BookSummary, levelId: LevelKey, levelTitle: string): AccessTier | undefined {
   const accessTiers = book.accessTiers ?? [];
 
   if (levelId === 'free') {
-    return accessTiers.find((tier) => tier.isFree || tier.title.trim().toUpperCase() === 'FREE');
+    return accessTiers.find((tier) => isFreeTier(tier));
   }
 
-  return accessTiers.find((tier) => tier.title.trim() === levelTitle);
+  const exactMatch = accessTiers.find((tier) => tier.title.trim() === levelTitle);
+  if (exactMatch) {
+    return exactMatch;
+  }
+
+  const paidTiers = accessTiers.filter((tier) => !isFreeTier(tier));
+  if (!paidTiers.length) {
+    return undefined;
+  }
+
+  if (levelId === 'qi') {
+    return paidTiers[0];
+  }
+
+  if (levelId === 'core') {
+    return paidTiers[Math.min(1, paidTiers.length - 1)];
+  }
+
+  const fullTier = paidTiers.find((tier) => isFullTier(tier));
+  if (fullTier) {
+    return fullTier;
+  }
+
+  return paidTiers[Math.min(2, paidTiers.length - 1)];
 }
 
 function getAccessValue(tier?: AccessTier): string {

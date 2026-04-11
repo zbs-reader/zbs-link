@@ -23,8 +23,8 @@ const BOOSTY_LEVELS = [
   {
     id: 'core',
     title: 'Формирование Ядра',
-    price: '700 ₽ per month',
-    description: 'Дополнительно 700 глав.'
+    price: '600 ₽ per month',
+    description: 'Дополнительно 600 глав.'
   },
   {
     id: 'soul',

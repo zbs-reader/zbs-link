@@ -140,8 +140,8 @@
   <div class="shell">
     <section class="panel hero">
       <p class="eyebrow">Local only</p>
-      <h1>EPUB из Markdown</h1>
-      <p class="muted">Локальный инструмент для сборки <code>.epub</code> из <code>.md</code> с обложкой, метаданными книги и общим блоком <code>META_DATA</code> для вашей читалки.</p>
+      <h1>EPUB из контента книги</h1>
+      <p class="muted">Локальный инструмент для сборки <code>.epub</code> из <code>.md</code>, <code>.docx</code> или <code>.zip</code> с обложкой, метаданными книги и общим блоком <code>META_DATA</code> для вашей читалки.</p>
       <div class="nav">
         <a href="./catalog-admin.html">Каталог книг</a>
         <a class="active" href="./epub-builder.html">EPUB конвертер</a>
@@ -151,8 +151,8 @@
     <section class="panel grid">
       <div class="grid two">
         <label>
-          <span>Markdown файл</span>
-          <input id="markdownFile" type="file" accept=".md,.markdown,text/markdown,text/plain" />
+          <span>Файл глав (.md, .docx или .zip)</span>
+          <input id="markdownFile" type="file" accept=".md,.markdown,.docx,.zip,text/markdown,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/zip,application/x-zip-compressed" />
         </label>
         <label>
           <span>Ссылка на обложку</span>
@@ -237,6 +237,7 @@
 
   <script type="module">
     import JSZip from 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/+esm';
+    import mammoth from 'https://cdn.jsdelivr.net/npm/mammoth@1.8.0/+esm';
     import { marked } from 'https://cdn.jsdelivr.net/npm/marked@12.0.2/+esm';
 
     const els = {
@@ -260,6 +261,7 @@
 
     const state = {
       markdownText: '',
+      sourceLabel: '',
       coverBlob: null,
       coverMime: '',
       coverExt: 'jpg'
@@ -336,19 +338,90 @@
       els.status.textContent = message;
     }
 
+    async function extractSourceFromDocxFile(file) {
+      const arrayBuffer = await file.arrayBuffer();
+      const result = await mammoth.convertToHtml({ arrayBuffer });
+      return {
+        text: result.value.trim(),
+        kind: 'docx',
+        name: file.name
+      };
+    }
+
+    async function extractSourceFromMdFile(file) {
+      return {
+        text: (await file.text()).trim(),
+        kind: 'markdown',
+        name: file.name
+      };
+    }
+
+    async function extractSourceFromZipFile(file) {
+      const archive = await JSZip.loadAsync(file);
+      const candidates = Object.values(archive.files)
+        .filter((entry) => !entry.dir)
+        .filter((entry) => /\.(docx|md|markdown)$/i.test(entry.name))
+        .sort((a, b) => {
+          const score = (name) => {
+            if (/\.docx$/i.test(name)) return 0;
+            if (/\.md$/i.test(name)) return 1;
+            return 2;
+          };
+          return score(a.name) - score(b.name) || a.name.localeCompare(b.name, 'ru');
+        });
+
+      if (!candidates.length) {
+        throw new Error('Внутри ZIP не найдено ни одного .docx или .md файла.');
+      }
+
+      const entry = candidates[0];
+
+      if (/\.docx$/i.test(entry.name)) {
+        const blob = await entry.async('blob');
+        return extractSourceFromDocxFile(new File([blob], entry.name, { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }));
+      }
+
+      const text = await entry.async('string');
+      return {
+        text: text.trim(),
+        kind: 'markdown',
+        name: entry.name
+      };
+    }
+
     async function loadMarkdownFile() {
       const file = els.markdownFile.files?.[0];
       if (!file) return;
-      state.markdownText = await file.text();
+      const isZip = /\.zip$/i.test(file.name) || file.type === 'application/zip' || file.type === 'application/x-zip-compressed';
+      const isDocx = /\.docx$/i.test(file.name) || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+      let source;
+
+      if (isZip) {
+        source = await extractSourceFromZipFile(file);
+      } else if (isDocx) {
+        source = await extractSourceFromDocxFile(file);
+      } else {
+        source = await extractSourceFromMdFile(file);
+      }
+
+      state.markdownText = source.text;
+      state.sourceLabel = source.name;
+
       if (!els.title.value.trim()) {
-        const fileStem = file.name.replace(/\.md$/i, '').trim();
+        const fileStem = source.name.replace(/\.(md|markdown|docx|zip)$/i, '').split('/').pop().trim();
         els.title.value = fileStem;
       }
       if (!els.fileName.value.trim()) {
-        els.fileName.value = `${slugify(els.title.value || file.name.replace(/\.md$/i, ''))}.epub`;
+        els.fileName.value = `${slugify(els.title.value || source.name.replace(/\.(md|markdown|docx|zip)$/i, '').split('/').pop())}.epub`;
       }
       updatePreviews();
-      setStatus('Markdown загружен.', 'good');
+      if (isZip) {
+        setStatus(`ZIP обработан. Использован файл: ${source.name}`, 'good');
+      } else if (source.kind === 'docx') {
+        setStatus('DOCX загружен и преобразован.', 'good');
+      } else {
+        setStatus('Markdown загружен.', 'good');
+      }
     }
 
     async function loadCoverFromFile() {
@@ -420,7 +493,23 @@
     <title>${escapeXml(title)}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
-      body { font-family: serif; line-height: 1.6; padding: 0 1rem; }
+      body { font-family: serif; line-height: 1.6; padding: 0 1rem; margin: 0; }
+      p {
+        margin: 0;
+        white-space: pre-wrap;
+        text-indent: 1.5em;
+      }
+      p + p {
+        margin-top: 0.15em;
+      }
+      h1, h2, h3, h4, h5, h6,
+      li p,
+      blockquote p {
+        text-indent: 0;
+      }
+      ul, ol, blockquote {
+        margin: 0.75em 0;
+      }
       img { max-width: 100%; }
       pre { white-space: pre-wrap; }
     </style>
@@ -502,7 +591,7 @@
 
     async function buildEpub() {
       if (!state.markdownText.trim()) {
-        throw new Error('Сначала загрузите markdown файл.');
+        throw new Error('Сначала загрузите .md, .docx или .zip файл.');
       }
 
       if (!state.coverBlob) {

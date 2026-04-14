@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { IonButton, IonHeader, IonIcon, IonToolbar } from '@ionic/react';
 import { moonOutline, sunnyOutline } from 'ionicons/icons';
+import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { BrandLogo } from '../components/BrandLogo';
 import { useLanguage } from '../context/LanguageContext';
@@ -30,7 +31,12 @@ export function AppHeader({
   return (
     <IonHeader className={`app-header-shell${className ? ` ${className}` : ''}`}>
       <IonToolbar>
-        <div className="app-header-inner">
+        <motion.div
+          className="app-header-inner"
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.24 }}
+        >
           <div className="app-header-start">
             <Link to="/" className="header-brand-link" aria-label={t('common.brandHomeAria')}>
               <BrandLogo className="header-brand-logo-img" />
@@ -54,7 +60,7 @@ export function AppHeader({
               <IonIcon icon={theme === 'dark' ? sunnyOutline : moonOutline} />
             </IonButton>
           </div>
-        </div>
+        </motion.div>
       </IonToolbar>
     </IonHeader>
   );

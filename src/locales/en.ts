@@ -57,7 +57,10 @@ export const en: Messages = {
     openChapter: 'Open chapter',
     bannerTitle: 'Collections',
     bannerSubtitle: 'Curated banner shelves by genre, author, and setting.',
-    openLibrary: 'Open library'
+    openLibrary: 'Open library',
+    completedShelfEyebrow: 'Finished stories',
+    completedShelfTitle: 'Completed releases',
+    completedShelfSubtitle: 'Finished books you can jump into right now without waiting for future chapters.'
   },
   library: {
     pageTitle: 'Library',
@@ -162,7 +165,33 @@ export const en: Messages = {
     descriptionSectionTitle: 'Description',
     downloadChapters: 'Download {{count}} chapters',
     bookLabel: 'Book',
-    loadingDetails: 'Loading details'
+    loadingDetails: 'Loading details',
+    paidTiersLabel: 'Paid tiers',
+    openProfile: 'Open profile',
+    openBundle: 'Open bundle',
+    tierBadgeLevel: 'Level',
+    tierBadgeFull: 'Full',
+    tierBadgePaid: 'Paid',
+    tierPriceLabel: 'Price',
+    tierChaptersLabel: 'Chapters'
+  },
+  levels: {
+    pageTitle: 'Boosty levels',
+    pageSubtitle: 'Which chapters are available on each tier',
+    loadingTitle: 'Loading levels',
+    loadingMessage: 'Building the shared access matrix for all books.',
+    unavailableTitle: 'Levels unavailable',
+    unavailableMessage: 'Could not build the Boosty tier overview.',
+    heroEyebrow: 'Subscription and access',
+    heroTitle: 'Boosty as a working dashboard',
+    heroSubtitle: 'Switch the tier and instantly see which chapter range actually opens for each book.',
+    totalBooksLabel: 'Books',
+    availableBooksLabel: 'Available',
+    fullTiersLabel: 'Full tiers',
+    tierEyebrow: 'Tier',
+    matrixTitle: 'Access by book',
+    selectedLevel: 'Current tier: {{title}}',
+    availableLabel: 'Available'
   },
   reader: {
     openingChapter: 'Opening chapter',

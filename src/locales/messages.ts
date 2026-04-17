@@ -58,6 +58,9 @@ export interface Messages {
     bannerTitle: string;
     bannerSubtitle: string;
     openLibrary: string;
+    completedShelfEyebrow: string;
+    completedShelfTitle: string;
+    completedShelfSubtitle: string;
   };
   library: {
     pageTitle: string;
@@ -163,6 +166,32 @@ export interface Messages {
     downloadChapters: string;
     bookLabel: string;
     loadingDetails: string;
+    paidTiersLabel: string;
+    openProfile: string;
+    openBundle: string;
+    tierBadgeLevel: string;
+    tierBadgeFull: string;
+    tierBadgePaid: string;
+    tierPriceLabel: string;
+    tierChaptersLabel: string;
+  };
+  levels: {
+    pageTitle: string;
+    pageSubtitle: string;
+    loadingTitle: string;
+    loadingMessage: string;
+    unavailableTitle: string;
+    unavailableMessage: string;
+    heroEyebrow: string;
+    heroTitle: string;
+    heroSubtitle: string;
+    totalBooksLabel: string;
+    availableBooksLabel: string;
+    fullTiersLabel: string;
+    tierEyebrow: string;
+    matrixTitle: string;
+    selectedLevel: string;
+    availableLabel: string;
   };
   reader: {
     openingChapter: string;

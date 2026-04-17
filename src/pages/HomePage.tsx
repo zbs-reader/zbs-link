@@ -1,11 +1,12 @@
 import { IonContent, IonIcon, IonPage } from '@ionic/react';
 import { arrowForwardOutline, openOutline, peopleOutline, pricetagsOutline } from 'ionicons/icons';
-import { AnimatePresence, motion, type Variants } from 'motion/react';
-import { useEffect, useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AppHeader } from '../components/AppHeader';
 import { BottomDock } from '../components/BottomDock';
 import { CollectionBanner } from '../components/CollectionBanner';
+import { CompletedShelf } from '../components/CompletedShelf';
 import { StateView } from '../components/StateView';
 import { useLanguage } from '../context/LanguageContext';
 import { useCatalog } from '../hooks/useCatalog';
@@ -25,58 +26,22 @@ const TEAM_LINKS = [
   }
 ] as const;
 
-const bannerVariants: Variants = {
-  enter: (direction: number) => ({
-    opacity: 0,
-    x: direction > 0 ? 120 : -120,
-    y: 10,
-    rotateY: direction > 0 ? 16 : -16,
-    rotateZ: direction > 0 ? 1.2 : -1.2,
-    scale: 0.95
-  }),
-  center: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    rotateY: 0,
-    rotateZ: 0,
-    scale: 1
-  },
-  exit: (direction: number) => ({
-    opacity: 0,
-    x: direction > 0 ? -150 : 150,
-    y: -8,
-    rotateY: direction > 0 ? -18 : 18,
-    rotateZ: direction > 0 ? -1 : 1,
-    scale: 0.92
-  })
-};
-
 export function HomePage() {
   const { catalog, loading, error } = useCatalog();
   const history = useHistory();
   const { t } = useLanguage();
   const [activeBannerIndex, setActiveBannerIndex] = useState(0);
-  const [bannerDirection, setBannerDirection] = useState(1);
 
   const books = catalog?.books ?? [];
   const banners = catalog?.banners ?? [];
+  const completedBooks = books.filter((book) => book.isCompleted);
   const featuredBanner = banners[activeBannerIndex] ?? banners[0];
-  const previousBanner = useMemo(() => {
-    if (banners.length <= 1) {
-      return undefined;
-    }
-
-    const previousIndex = (activeBannerIndex - 1 + banners.length) % banners.length;
-    return banners[previousIndex];
-  }, [activeBannerIndex, banners]);
   const authorCount = new Set(books.map((book) => book.author)).size;
   const genreCount = new Set(books.flatMap((book) => book.tags ?? [])).size;
   const completedCount = books.filter((book) => book.isCompleted).length;
 
   useEffect(() => {
     setActiveBannerIndex(0);
-    setBannerDirection(1);
   }, [banners.length]);
 
   useEffect(() => {
@@ -85,7 +50,6 @@ export function HomePage() {
     }
 
     const intervalId = window.setInterval(() => {
-      setBannerDirection(1);
       setActiveBannerIndex((current) => (current + 1) % banners.length);
     }, 5000);
 
@@ -97,11 +61,6 @@ export function HomePage() {
       return;
     }
 
-    const isForward =
-      nextIndex > activeBannerIndex ||
-      (activeBannerIndex === banners.length - 1 && nextIndex === 0);
-
-    setBannerDirection(isForward ? 1 : -1);
     setActiveBannerIndex(nextIndex);
   };
 
@@ -176,29 +135,15 @@ export function HomePage() {
                 </div>
 
                 {featuredBanner ? (
-                  <div className="home-banner-rotator">
-                    {previousBanner ? (
-                      <div className="home-banner-shadow-stack" aria-hidden="true">
-                        <CollectionBanner banner={previousBanner} books={books} />
-                      </div>
-                    ) : null}
-
-                    <AnimatePresence mode="wait">
+                  <div className="home-banner-grid">
+                    <AnimatePresence mode="wait" initial={false}>
                       <motion.div
                         key={featuredBanner.id}
-                        className="home-banner-stage"
-                        custom={bannerDirection}
-                        variants={bannerVariants}
-                        initial="enter"
-                        animate="center"
-                        exit="exit"
-                        transition={{
-                          type: 'spring',
-                          stiffness: 180,
-                          damping: 24,
-                          mass: 0.9
-                        }}
-                        style={{ transformStyle: 'preserve-3d' }}
+                        className="home-banner-primary"
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
                       >
                         <CollectionBanner banner={featuredBanner} books={books} />
                       </motion.div>
@@ -240,6 +185,8 @@ export function HomePage() {
                   </a>
                 ))}
               </section>
+
+              <CompletedShelf books={completedBooks} />
             </div>
           </>
         )}

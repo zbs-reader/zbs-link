@@ -25,6 +25,7 @@ export interface Messages {
   nav: {
     mainNavigation: string;
     home: string;
+    library: string;
     browse: string;
     favorites: string;
     account: string;
@@ -54,6 +55,49 @@ export interface Messages {
     topNovels: string;
     authorOf: string;
     openChapter: string;
+    bannerTitle: string;
+    bannerSubtitle: string;
+    openLibrary: string;
+  };
+  library: {
+    pageTitle: string;
+    pageSubtitle: string;
+    loadingTitle: string;
+    loadingMessage: string;
+    unavailableTitle: string;
+    searchPlaceholder: string;
+    searchHint: string;
+    authorsLabel: string;
+    genresLabel: string;
+    chaptersLabel: string;
+    allAuthors: string;
+    allGenres: string;
+    allLengths: string;
+    shortLength: string;
+    mediumLength: string;
+    longLength: string;
+    matchesTitle: string;
+    matchesSubtitle: string;
+    noMatchesTitle: string;
+    noMatchesMessage: string;
+    resetFilters: string;
+  };
+  collections: {
+    pageTitle: string;
+    pageSubtitle: string;
+    detailTitle: string;
+    loadingTitle: string;
+    loadingMessage: string;
+    unavailableTitle: string;
+    emptyTitle: string;
+    emptyMessage: string;
+    notFoundTitle: string;
+    notFoundMessage: string;
+    defaultLabel: string;
+    defaultSubtitle: string;
+    openCollection: string;
+    viewAll: string;
+    booksCount: string;
   };
   authors: {
     pageTitle: string;

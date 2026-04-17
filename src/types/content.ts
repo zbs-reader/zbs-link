@@ -33,12 +33,24 @@ export interface BookSummary {
   tags?: string[];
   accessTiers?: AccessTier[];
   externalLinks?: ExternalPlatformLink[];
+  boostyBundleUrl?: string;
   bundledChaptersPath?: string;
   isCompleted?: boolean;
 }
 
+export interface CollectionBanner {
+  id: string;
+  title: string;
+  subtitle?: string;
+  description?: string;
+  label?: string;
+  backgroundUrl?: string;
+  bookIds: string[];
+}
+
 export interface Catalog {
   books: BookSummary[];
+  banners?: CollectionBanner[];
 }
 
 export interface ReadingProgress {

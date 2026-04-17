@@ -31,6 +31,30 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
     return `${book.description.slice(0, 320).trimEnd()}…`;
   }, [book?.description]);
 
+  const platformLinks = useMemo(() => {
+    if (!book) {
+      return [];
+    }
+
+    const links = [...(book.externalLinks ?? [])];
+    if (
+      book.boostyBundleUrl &&
+      !links.some(
+        (platform) =>
+          platform.url === book.boostyBundleUrl ||
+          platform.id === 'boosty-bundle'
+      )
+    ) {
+      links.unshift({
+        id: 'boosty-bundle',
+        label: 'Boosty bundle',
+        url: book.boostyBundleUrl
+      });
+    }
+
+    return links;
+  }, [book]);
+
   if (loading) {
     return (
       <IonPage>
@@ -96,7 +120,7 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
                     <span className="book-hero-metric-label">Paid tiers</span>
                   </div>
                   <div className="book-hero-metric">
-                    <span className="book-hero-metric-value">{book.externalLinks?.length ?? 0}</span>
+                    <span className="book-hero-metric-value">{platformLinks.length}</span>
                     <span className="book-hero-metric-label">{t('common.links')}</span>
                   </div>
                 </div>
@@ -131,7 +155,7 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
             </div>
           </motion.section>
 
-          {book.externalLinks?.length ? (
+          {platformLinks.length ? (
             <motion.section
               className="platforms-panel sleek-card product"
               initial={{ opacity: 0, y: 20 }}
@@ -141,14 +165,14 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
             >
               <div className="section-header compact-header">
                 <h2 className="section-title">{t('book.platforms')}</h2>
-                <span className="section-caption">{book.externalLinks.length} {t('common.links')}</span>
+                <span className="section-caption">{platformLinks.length} {t('common.links')}</span>
               </div>
               <div className="platform-links-grid compact-row-grid">
-                {book.externalLinks.map((platform) => (
+                {platformLinks.map((platform) => (
                   <a key={platform.id} className="platform-link-card compact" href={platform.url} target="_blank" rel="noreferrer">
                     <div>
                       <span className="platform-link-label">{platform.label}</span>
-                      <p className="section-caption">Open profile</p>
+                      <p className="section-caption">{platform.id === 'boosty-bundle' ? 'Open bundle' : 'Open profile'}</p>
                     </div>
                     <IonIcon icon={openOutline} />
                   </a>

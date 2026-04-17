@@ -166,8 +166,16 @@
       <div class="grid two">
         <label><span>Название</span><input id="title" /></label>
         <label><span>ID</span><input id="bookId" /></label>
-        <label><span>Автор</span><input id="author" value="Команда ZBS Link" /></label>
+        <label><span>Автор</span><input id="author" placeholder="Автор книги" /></label>
+        <label>
+          <span>Команда</span>
+          <select id="team">
+            <option value="">Без команды</option>
+            <option value="Zabaichen Bank Selector">Zabaichen Bank Selector</option>
+          </select>
+        </label>
         <label><span>Обложка</span><input id="coverUrl" /></label>
+        <label><span>Boosty bundle</span><input id="boostyBundleUrl" placeholder="https://boosty.to/.../bundle/..." /></label>
       </div>
       <label><span>Описание</span><textarea id="description"></textarea></label>
       <div class="grid two">
@@ -272,8 +280,10 @@
       title: document.getElementById('title'),
       bookId: document.getElementById('bookId'),
       author: document.getElementById('author'),
+      team: document.getElementById('team'),
       description: document.getElementById('description'),
       coverUrl: document.getElementById('coverUrl'),
+      boostyBundleUrl: document.getElementById('boostyBundleUrl'),
       tags: document.getElementById('tags'),
       isCompleted: document.getElementById('isCompleted')
     };
@@ -300,12 +310,13 @@
     }
 
     function buildBook() {
-      return {
+      const book = {
         id: els.bookId.value.trim(),
         title: els.title.value.trim(),
-        author: els.author.value.trim() || 'Команда ZBS Link',
+        author: els.author.value.trim(),
         description: els.description.value.trim(),
         coverUrl: els.coverUrl.value.trim(),
+        boostyBundleUrl: els.boostyBundleUrl.value.trim() || undefined,
         chapters: [],
         tags: els.tags.value.split(',').map((tag) => tag.trim()).filter(Boolean),
         externalLinks: state.links.filter((item) => item.label.trim() && item.url.trim()),
@@ -322,6 +333,13 @@
         })),
         isCompleted: els.isCompleted.checked
       };
+
+      const team = els.team.value.trim();
+      if (team) {
+        book.team = team;
+      }
+
+      return book;
     }
 
     function renderCatalogOutput() {
@@ -338,9 +356,11 @@
     function resetForm() {
       els.title.value = '';
       els.bookId.value = '';
-      els.author.value = 'Команда ZBS Link';
+      els.author.value = '';
+      els.team.value = '';
       els.description.value = '';
       els.coverUrl.value = '';
+      els.boostyBundleUrl.value = '';
       els.tags.value = '';
       els.isCompleted.checked = false;
       state.links = defaultLinks();
@@ -354,9 +374,14 @@
     function fillForm(book) {
       els.title.value = book.title || '';
       els.bookId.value = book.id || '';
-      els.author.value = book.author || 'Команда ZBS Link';
+      els.author.value = book.author || '';
+      els.team.value = book.team || '';
       els.description.value = book.description || '';
       els.coverUrl.value = book.coverUrl || '';
+      els.boostyBundleUrl.value =
+        book.boostyBundleUrl ||
+        (book.externalLinks || []).find((item) => item.id === 'boosty-bundle')?.url ||
+        '';
       els.tags.value = (book.tags || []).join(', ');
       els.isCompleted.checked = Boolean(book.isCompleted);
       state.links = (book.externalLinks && book.externalLinks.length ? book.externalLinks : defaultLinks()).map((item) => ({
@@ -506,7 +531,7 @@
       renderPreview();
     });
 
-    [els.title, els.bookId, els.author, els.description, els.coverUrl, els.tags, els.isCompleted].forEach((el) => {
+    [els.title, els.bookId, els.author, els.team, els.description, els.coverUrl, els.boostyBundleUrl, els.tags, els.isCompleted].forEach((el) => {
       const eventName = el.type === 'checkbox' ? 'change' : 'input';
       el.addEventListener(eventName, renderPreview);
     });

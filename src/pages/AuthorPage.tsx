@@ -33,34 +33,35 @@ export function AuthorPage({ match }: RouteComponentProps<AuthorRouteParams>) {
         ) : !author ? (
           <StateView title={t('authors.authorNotFound')} message={t('authors.authorNotFoundMessage')} actionLabel={t('authors.backToAuthors')} onAction={() => history.push('/authors')} />
         ) : (
-          <div className="page-shell app-shell-stack authors-shell">
-            <section className="author-hero">
-              <div className="author-card-icon large">
-                <IonIcon icon={personOutline} />
-              </div>
-              <div className="author-hero-copy">
-                <p className="hero-eyebrow">{t('authors.author')}</p>
-                <h1 className="hero-title">{author.name}</h1>
-                <div className="author-stats-row">
-                  <span className="meta-pill">{author.books.length} {t('common.books')}</span>
+          <>
+            <BottomDock active="library" />
+            <div className="page-shell app-shell-stack authors-shell">
+              <section className="author-hero">
+                <div className="author-card-icon large">
+                  <IonIcon icon={personOutline} />
                 </div>
-              </div>
-            </section>
+                <div className="author-hero-copy">
+                  <p className="hero-eyebrow">{t('authors.author')}</p>
+                  <h1 className="hero-title">{author.name}</h1>
+                  <div className="author-stats-row">
+                    <span className="meta-pill">{author.books.length} {t('common.books')}</span>
+                  </div>
+                </div>
+              </section>
 
-            <section>
-              <div className="section-header compact-header">
-                <h2 className="section-title">{t('authors.booksBy', { name: author.name })}</h2>
-                <span className="section-caption">{author.books.length} {t('authors.titles')}</span>
-              </div>
-              <div className="author-books-grid">
-                {author.books.map((book) => (
-                  <BookCard key={book.id} book={book} />
-                ))}
-              </div>
-            </section>
-
-            <BottomDock active="browse" />
-          </div>
+              <section>
+                <div className="section-header compact-header">
+                  <h2 className="section-title">{t('authors.booksBy', { name: author.name })}</h2>
+                  <span className="section-caption">{author.books.length} {t('authors.titles')}</span>
+                </div>
+                <div className="author-books-grid">
+                  {author.books.map((book) => (
+                    <BookCard key={book.id} book={book} />
+                  ))}
+                </div>
+              </section>
+            </div>
+          </>
         )}
       </IonContent>
     </IonPage>

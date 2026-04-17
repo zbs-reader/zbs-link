@@ -1,4 +1,4 @@
-﻿import type { BookSummary, Catalog, ChapterMeta, ContentSourceConfig } from '../types/content';
+import type { BookSummary, Catalog, ChapterMeta, CollectionBanner, ContentSourceConfig } from '../types/content';
 
 const APP_BASE = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 
@@ -13,7 +13,8 @@ export class GitHubService {
 
     const catalog = await response.json() as Catalog;
     return {
-      books: catalog.books.map((book) => this.normalizeBookPaths(book))
+      books: catalog.books.map((book) => this.normalizeBookPaths(book)),
+      banners: (catalog.banners ?? []).map((banner) => this.normalizeBannerPaths(banner))
     };
   }
 
@@ -39,6 +40,13 @@ export class GitHubService {
     return {
       ...chapter,
       contentPath: chapter.contentPath ? this.resolveLocalUrl(chapter.contentPath) : ''
+    };
+  }
+
+  private normalizeBannerPaths(banner: CollectionBanner): CollectionBanner {
+    return {
+      ...banner,
+      backgroundUrl: banner.backgroundUrl ? this.normalizeAssetUrl(banner.backgroundUrl) : undefined
     };
   }
 

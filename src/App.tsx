@@ -8,6 +8,9 @@ import { AuthorsPage } from './pages/AuthorsPage';
 import { AuthorPage } from './pages/AuthorPage';
 import { BookDetailsPage } from './pages/BookDetailsPage';
 import { BoostyLevelsPage } from './pages/BoostyLevelsPage';
+import { CollectionDetailsPage } from './pages/CollectionDetailsPage';
+import { CollectionsPage } from './pages/CollectionsPage';
+import { LibraryPage } from './pages/LibraryPage';
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
           <IonReactHashRouter>
             <IonRouterOutlet>
               <Route exact path="/" component={HomePage} />
+              <Route exact path="/library" component={LibraryPage} />
+              <Route exact path="/collections" component={CollectionsPage} />
+              <Route exact path="/collections/:collectionId" component={CollectionDetailsPage} />
               <Route exact path="/authors" component={AuthorsPage} />
               <Route exact path="/levels" component={BoostyLevelsPage} />
               <Route exact path="/author/:authorId" component={AuthorPage} />

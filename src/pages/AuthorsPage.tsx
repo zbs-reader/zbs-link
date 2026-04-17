@@ -24,29 +24,30 @@ export function AuthorsPage() {
         ) : error ? (
           <StateView title={t('authors.unavailableTitle')} message={error} actionLabel={t('common.tryAgain')} onAction={() => history.go(0)} />
         ) : (
-          <div className="page-shell app-shell-stack authors-shell">
-            <section className="favorites-hero compact">
-              <p className="hero-eyebrow">{t('authors.explore')}</p>
-              <h1 className="hero-title">{t('authors.allAuthors')}</h1>
-              <p className="hero-subtitle">{t('authors.allAuthorsSubtitle')}</p>
-            </section>
+          <>
+            <BottomDock active="library" />
+            <div className="page-shell app-shell-stack authors-shell">
+              <section className="favorites-hero compact">
+                <p className="hero-eyebrow">{t('authors.explore')}</p>
+                <h1 className="hero-title">{t('authors.allAuthors')}</h1>
+                <p className="hero-subtitle">{t('authors.allAuthorsSubtitle')}</p>
+              </section>
 
-            <section className="authors-list">
-              {authors.map((author) => (
-                <button key={author.id} type="button" className="author-card" onClick={() => history.push(getAuthorRoute(author.name))}>
-                  <div className="author-card-icon">
-                    <IonIcon icon={personOutline} />
-                  </div>
-                  <div className="author-card-copy">
-                    <p className="author-card-title">{author.name}</p>
-                    <p className="author-card-subtitle">{author.books.length} {t('common.books')}</p>
-                  </div>
-                </button>
-              ))}
-            </section>
-
-            <BottomDock active="browse" />
-          </div>
+              <section className="authors-list">
+                {authors.map((author) => (
+                  <button key={author.id} type="button" className="author-card" onClick={() => history.push(getAuthorRoute(author.name))}>
+                    <div className="author-card-icon">
+                      <IonIcon icon={personOutline} />
+                    </div>
+                    <div className="author-card-copy">
+                      <p className="author-card-title">{author.name}</p>
+                      <p className="author-card-subtitle">{author.books.length} {t('common.books')}</p>
+                    </div>
+                  </button>
+                ))}
+              </section>
+            </div>
+          </>
         )}
       </IonContent>
     </IonPage>

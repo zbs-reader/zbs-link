@@ -25,58 +25,31 @@
             ],
             "accessTiers": [
                 {
-                    "id": "free-1-315",
+                    "id": "free-1-100",
                     "title": "FREE",
                     "price": "0 ₽",
-                    "description": "Главы 1-315",
-                    "chaptersLabel": "1-315",
+                    "description": "Главы 1-100",
+                    "chaptersLabel": "1-100",
                     "linkUrl": "https://boosty.to/langllax/posts/03995bd1-13ca-400d-888b-ad2374671edc?share=post_link",
                     "linkLabel": "Открыть на Boosty",
                     "isFree": true
                 },
                 {
-                    "id": "part-316-474",
-                    "title": "Часть 316-474",
-                    "price": "Boosty",
-                    "description": "Главы 316-474",
-                    "chaptersLabel": "316-474",
-                    "linkUrl": "https://boosty.to/langllax/posts/a01f1b36-70c0-4138-a92c-e6b0e6d56f7c",
+                    "id": "condensation-qi",
+                    "title": "Конденсация Ци",
+                    "price": "350 ₽ per month",
+                    "description": "Главы 1-500",
+                    "chaptersLabel": "1-500",
+                    "linkUrl": "https://boosty.to/langllax/posts/a01f1b36-70c0-4138-a92c-e6b0e6d56f7c?share=post_link",
                     "linkLabel": "Открыть на Boosty"
                 },
                 {
-                    "id": "part-475-674",
-                    "title": "Часть 475-674",
-                    "price": "Boosty",
-                    "description": "Главы 475-674",
-                    "chaptersLabel": "475-674",
-                    "linkUrl": "https://boosty.to/langllax/posts/079be268-9fbc-44fe-ba54-b8832ee56f78",
-                    "linkLabel": "Открыть на Boosty"
-                },
-                {
-                    "id": "part-675-873",
-                    "title": "Часть 675-873",
-                    "price": "Boosty",
-                    "description": "Главы 675-873",
-                    "chaptersLabel": "675-873",
-                    "linkUrl": "https://boosty.to/langllax/posts/ee5efaa1-b844-4ca0-b33a-3ac457a8b286",
-                    "linkLabel": "Открыть на Boosty"
-                },
-                {
-                    "id": "part-874-1112",
-                    "title": "Часть 874-1112",
-                    "price": "Boosty",
-                    "description": "Главы 874-1112",
-                    "chaptersLabel": "874-1112",
-                    "linkUrl": "https://boosty.to/langllax/posts/ce99fb81-9468-4703-adad-8a6bc021dc00",
-                    "linkLabel": "Открыть на Boosty"
-                },
-                {
-                    "id": "full-1-1112",
-                    "title": "Полная версия",
-                    "price": "Boosty",
-                    "description": "Главы 1-1112",
+                    "id": "core-formation",
+                    "title": "Формирование Ядра",
+                    "price": "500 ₽ per month",
+                    "description": "Завершено",
                     "chaptersLabel": "1-1112",
-                    "linkUrl": "https://boosty.to/langllax/posts/0375e081-1fb6-401d-b5d1-02f534cbf486",
+                    "linkUrl": "https://boosty.to/langllax/posts/0375e081-1fb6-401d-b5d1-02f534cbf486?share=post_link",
                     "linkLabel": "Открыть на Boosty"
                 }
             ],
@@ -108,49 +81,22 @@
             ],
             "accessTiers": [
                 {
-                    "id": "free-1-122",
+                    "id": "free-1-100",
                     "title": "FREE",
                     "price": "0 ₽",
-                    "description": "Главы 1-122",
-                    "chaptersLabel": "1-122",
+                    "description": "Главы 1-100",
+                    "chaptersLabel": "1-100",
                     "linkUrl": "https://boosty.to/langllax/posts/b9301fff-69f3-4829-928a-9a08dcb6c16a",
                     "linkLabel": "Открыть на Boosty",
                     "isFree": true
                 },
                 {
-                    "id": "part-123-199",
-                    "title": "Часть 123-199",
-                    "price": "Boosty",
-                    "description": "Главы 123-199",
-                    "chaptersLabel": "123-199",
-                    "linkUrl": "https://boosty.to/langllax/posts/c0727dba-a46e-4f5e-9acf-ba8006cc811c?share=post_link",
-                    "linkLabel": "Открыть на Boosty"
-                },
-                {
-                    "id": "part-200-299",
-                    "title": "Часть 200-299",
-                    "price": "Boosty",
-                    "description": "Главы 200-299",
-                    "chaptersLabel": "200-299",
+                    "id": "condensation-qi",
+                    "title": "Конденсация Ци",
+                    "price": "350 ₽ per month",
+                    "description": "Завершено",
+                    "chaptersLabel": "1-351",
                     "linkUrl": "https://boosty.to/langllax/posts/ad844816-2b1e-4553-801b-330c95be6dda",
-                    "linkLabel": "Открыть на Boosty"
-                },
-                {
-                    "id": "part-300-351",
-                    "title": "Часть 300-351",
-                    "price": "Boosty",
-                    "description": "Главы 300-351",
-                    "chaptersLabel": "300-351",
-                    "linkUrl": "https://boosty.to/langllax/posts/3599313f-a792-4fe5-a61c-c2d3449ce161",
-                    "linkLabel": "Открыть на Boosty"
-                },
-                {
-                    "id": "full",
-                    "title": "Полная версия",
-                    "price": "Boosty",
-                    "description": "Полный файл",
-                    "chaptersLabel": "полностью",
-                    "linkUrl": "https://boosty.to/langllax/posts/b37e1ccc-c610-48fb-82e7-d2d473b07b43",
                     "linkLabel": "Открыть на Boosty"
                 }
             ],
@@ -392,6 +338,97 @@
                 }
             ],
             "isCompleted": false
+        },
+        {
+            "id": "великий-демон-шерлок",
+            "title": "Великий Демон, Шерлок",
+            "author": "Mo Gua",
+            "description": "Бог создаёт легенду!\n\nНам нужна капля веры, чтобы дать людям стержень, затем добавить людоедствующих демонов, чтобы всех взволновать! Добавим немного любви... и щепотку ненависти... бунтарства и импульсивности.\n\nНаконец, добавим знакомого главного героя с несколько тёмной личностью, иначе будет неинтересно. Ой... кажется, я немного переборщил!\n\nИ вот, в маленьком переулке на улицах Лондона, Шерлок медленно появляется из тени, держа в руке голову. Кровь капает с его позвоночника: кап-кап, кап-кап. Отлично, с убийцей покончено. Следующая задача — доказать, что убийца и есть убийца.",
+            "coverUrl": "https://tl.rulate.ru/i/book/25/12/27738.jpg",
+            "chapters": [],
+            "tags": [
+                "мистика",
+                "британия",
+                "альтернативная история"
+            ],
+            "externalLinks": [
+                {
+                    "id": "rulate",
+                    "label": "Rulate",
+                    "url": "https://tl.rulate.ru/book/147891"
+                },
+                {
+                    "id": "ranobelib",
+                    "label": "RanobeLIB",
+                    "url": "https://ranobelib.me/ru/book/250782--da-emo-fuermosi"
+                }
+            ],
+            "accessTiers": [
+                {
+                    "id": "free",
+                    "title": "FREE",
+                    "price": "0 ₽",
+                    "description": "Открытые главы без подписки.",
+                    "chaptersLabel": "1-100",
+                    "linkUrl": "https://boosty.to/langllax/posts/56cd1314-5ddc-40f9-aea3-df8e617d7cea?share=post_link",
+                    "linkLabel": "Открыть на Boosty",
+                    "isFree": true
+                }
+            ],
+            "isCompleted": true,
+            "team": "Zabaichen Bank Selector"
+        }
+    ],
+    "banners": [
+        {
+            "id": "mystic-collection",
+            "title": "Коллекция мистики",
+            "subtitle": "Мрачные города, древние ритуалы и герои, которым приходится держаться за здравый смысл.",
+            "description": "Вся мистика из каталога в одной баннерной подборке.",
+            "label": "Мистика",
+            "backgroundUrl": "/banners/mystic-collection.jpg",
+            "bookIds": [
+                "gentleman-at-the-abyss",
+                "я-боюсь-святого",
+                "будучи-бессмертным-остаётся-лишь-притворяться-вампиром",
+                "грань-апокалипсиса"
+            ]
+        },
+        {
+            "id": "strange-worlds",
+            "title": "Странные миры",
+            "subtitle": "Параллельные миры, системы, импланты и истории, где реальность ведёт себя не по правилам.",
+            "description": "Коллекция необычных сеттингов и системных новелл.",
+            "label": "Миры и системы",
+            "bookIds": [
+                "plants-and-zombies-stronger",
+                "the-abnormal-supernatural-world",
+                "я-боюсь-святого",
+                "будучи-бессмертным-остаётся-лишь-притворяться-вампиром"
+            ]
+        },
+        {
+            "id": "zombie-collection",
+            "title": "Коллекция зомби",
+            "subtitle": "Апокалипсис, осада мира и герои, которым приходится выживать среди мертвецов.",
+            "description": "Все зомби-релизы из нашего каталога в одной подборке.",
+            "label": "Зомби",
+            "backgroundUrl": "/banners/zombie-collection.png",
+            "bookIds": [
+                "plants-and-zombies-stronger",
+                "грань-апокалипсиса"
+            ]
+        },
+        {
+            "id": "team-selection",
+            "title": "Выбор команды",
+            "subtitle": "Те самые книги, с которых удобно начинать знакомство с ZBS Link.",
+            "description": "Стартовая подборка завершённых и активных релизов команды.",
+            "label": "ZBS Link",
+            "bookIds": [
+                "gentleman-at-the-abyss",
+                "path-of-cultivation-skin-creation"
+            ]
         }
     ]
 }

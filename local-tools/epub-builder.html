@@ -129,6 +129,20 @@
       font-family: Consolas, monospace;
       color: #ffe0a6;
     }
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--panel-strong);
+    }
+    .checkbox-row input {
+      width: auto;
+      margin: 0;
+      accent-color: var(--accent);
+    }
     @media (max-width: 900px) {
       .grid.two, .grid.three { grid-template-columns: 1fr; }
       body { padding: 14px; }
@@ -211,6 +225,53 @@
       </label>
     </section>
 
+    <section class="panel grid">
+      <h2>Защитные вкрапления</h2>
+      <p class="muted">Инструмент может добавлять в текст вариативные упоминания команды и Boosty. Они будут разного вида: отдельные абзацы, блоки и встроенные подписи, чтобы их было сложнее вычистить одной заменой.</p>
+      <div class="grid two">
+        <label class="checkbox-row">
+          <input id="watermarkEnabled" type="checkbox" checked />
+          <span>Добавлять вариативные вкрапления в текст</span>
+        </label>
+        <label>
+          <span>Название команды для вкраплений</span>
+          <input id="watermarkTeamName" placeholder="Zabaichen Bank Selector" />
+        </label>
+      </div>
+      <div class="grid three">
+        <label>
+          <span>Ссылка Boosty для вкраплений</span>
+          <input id="watermarkBoostyUrl" placeholder="https://boosty.to/langllax" />
+        </label>
+        <label>
+          <span>Режим вкраплений</span>
+          <select id="watermarkMode">
+            <option value="soft">Мягкий</option>
+            <option value="balanced" selected>Сбалансированный</option>
+            <option value="strict">Плотный</option>
+          </select>
+        </label>
+        <label>
+          <span>Минимум абзацев между вкраплениями</span>
+          <input id="watermarkMinGap" type="number" min="2" max="400" value="60" />
+        </label>
+        <label>
+          <span>Максимум абзацев между вкраплениями</span>
+          <input id="watermarkMaxGap" type="number" min="3" max="500" value="180" />
+        </label>
+      </div>
+      <div class="grid two">
+        <label>
+          <span>Подпись / фраза 1</span>
+          <input id="watermarkPhraseA" placeholder="Перевод команды Zabaichen Bank Selector" />
+        </label>
+        <label>
+          <span>Подпись / фраза 2</span>
+          <input id="watermarkPhraseB" placeholder="Поддержать релизы можно на Boosty" />
+        </label>
+      </div>
+    </section>
+
     <section class="panel grid two">
       <div class="grid">
         <h2>Обложка</h2>
@@ -251,6 +312,14 @@
       team: document.getElementById('team'),
       boostyBundleUrl: document.getElementById('boostyBundleUrl'),
       boostyBundleTitle: document.getElementById('boostyBundleTitle'),
+      watermarkEnabled: document.getElementById('watermarkEnabled'),
+      watermarkTeamName: document.getElementById('watermarkTeamName'),
+      watermarkBoostyUrl: document.getElementById('watermarkBoostyUrl'),
+      watermarkMode: document.getElementById('watermarkMode'),
+      watermarkMinGap: document.getElementById('watermarkMinGap'),
+      watermarkMaxGap: document.getElementById('watermarkMaxGap'),
+      watermarkPhraseA: document.getElementById('watermarkPhraseA'),
+      watermarkPhraseB: document.getElementById('watermarkPhraseB'),
       coverPreview: document.getElementById('coverPreview'),
       status: document.getElementById('status'),
       previewCoverButton: document.getElementById('previewCoverButton'),
@@ -271,6 +340,23 @@
       start: 'META_DATA_START',
       end: 'META_DATA_END'
     };
+
+    function hashString(value = '') {
+      let hash = 2166136261;
+      for (let index = 0; index < value.length; index += 1) {
+        hash ^= value.charCodeAt(index);
+        hash = Math.imul(hash, 16777619);
+      }
+      return hash >>> 0;
+    }
+
+    function createSeededRandom(seed) {
+      let value = seed || 1;
+      return () => {
+        value = (value * 1664525 + 1013904223) >>> 0;
+        return value / 4294967296;
+      };
+    }
 
     function slugify(value) {
       return value
@@ -320,6 +406,28 @@
         ...lines,
         `<!-- ${metaMarkers.end} -->`
       ].join('\n');
+    }
+
+    function getWatermarkConfig() {
+      const enabled = els.watermarkEnabled.checked;
+      const team = (els.watermarkTeamName.value.trim() || els.team.value.trim()).trim();
+      const boostyUrl = (els.watermarkBoostyUrl.value.trim() || els.boostyBundleUrl.value.trim()).trim();
+      const phraseA = els.watermarkPhraseA.value.trim() || `Перевод команды ${team || 'Zabaichen Bank Selector'}`;
+      const phraseB = els.watermarkPhraseB.value.trim() || 'Поддержать релизы можно на Boosty';
+      const mode = els.watermarkMode.value || 'soft';
+      const minGap = Math.max(2, Number.parseInt(els.watermarkMinGap.value, 10) || 7);
+      const maxGap = Math.max(minGap, Number.parseInt(els.watermarkMaxGap.value, 10) || 15);
+
+      return {
+        enabled,
+        team,
+        boostyUrl,
+        mode,
+        phraseA,
+        phraseB,
+        minGap,
+        maxGap
+      };
     }
 
     function updatePreviews() {
@@ -471,6 +579,113 @@
         .replace(/<img([^>]*?)(?<!\/)>(?!<\/img>)/g, '<img$1 />');
     }
 
+    function createWatermarkTemplates(context) {
+      const plainUrl = context.boostyUrl || 'boosty.to/langllax';
+      const linkedUrl = context.boostyUrl
+        ? `<a href="${context.boostyUrl}">${context.boostyUrl}</a>`
+        : 'Boosty';
+
+      const templates = [
+        {
+          type: 'paragraph',
+          weight: 'balanced',
+          html: `<p class="zbs-mark zbs-mark-paragraph">${context.phraseA}. ${context.phraseB}: ${linkedUrl}. ${context.team ? `Команда: ${context.team}.` : ''}</p>`
+        },
+        {
+          type: 'paragraph',
+          weight: 'soft',
+          html: `<p class="zbs-mark zbs-mark-separator">Актуальная выкладка: ${linkedUrl}. ${context.team ? `Перевод: ${context.team}.` : context.phraseA}</p>`
+        },
+        {
+          type: 'quote',
+          weight: 'strict',
+          html: `<blockquote class="zbs-mark zbs-mark-quote"><p>${context.phraseA}. Актуальная площадка публикации: ${linkedUrl}. ${context.boostyUrl ? `Текстовый адрес: ${plainUrl}.` : ''}</p></blockquote>`
+        },
+        {
+          type: 'inline',
+          weight: 'soft',
+          html: `<span class="zbs-inline-mark">${context.team ? `${context.team}. ` : ''}${plainUrl}</span>`
+        },
+        {
+          type: 'inline',
+          weight: 'balanced',
+          html: `<span class="zbs-inline-mark">Выпуск: ${context.team || context.phraseA}. ${plainUrl}</span>`
+        },
+        {
+          type: 'paragraph',
+          weight: 'soft',
+          html: `<p class="zbs-mark zbs-mark-footnote">Материал подготовлен ${context.team || context.phraseA}. Поддержка и актуальные версии: ${linkedUrl}.</p>`
+        }
+      ];
+
+      if (context.mode === 'soft') {
+        return templates.filter((template) => template.weight !== 'strict');
+      }
+
+      if (context.mode === 'balanced') {
+        return templates;
+      }
+
+      return templates;
+    }
+
+    function injectWatermarksIntoHtml(html, context) {
+      if (!context.enabled || (!context.team && !context.boostyUrl && !context.phraseA && !context.phraseB)) {
+        return html;
+      }
+
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(`<body>${html}</body>`, 'text/html');
+      const body = doc.body;
+      const blockSelector = 'p, li, blockquote, h2, h3';
+      const blocks = Array.from(body.querySelectorAll(blockSelector))
+        .filter((node) => !node.closest('.zbs-mark'))
+        .filter((node) => node.textContent.trim().length > 80);
+
+      if (!blocks.length) {
+        return html;
+      }
+
+      const templates = createWatermarkTemplates(context);
+      const random = createSeededRandom(hashString(`${els.title.value}|${els.author.value}|${state.sourceLabel}|${context.boostyUrl}|${context.team}`));
+      let nextInsertAfter = context.minGap + Math.floor(random() * Math.max(1, context.maxGap - context.minGap + 1));
+      let templateOffset = 0;
+      const maxInsertions =
+        context.mode === 'soft'
+          ? Math.max(2, Math.floor(blocks.length / 14))
+          : context.mode === 'balanced'
+            ? Math.max(3, Math.floor(blocks.length / 10))
+            : Math.max(4, Math.floor(blocks.length / 7));
+      let insertions = 0;
+
+      for (let index = 0; index < blocks.length; index += 1) {
+        const block = blocks[index];
+        const distance = index + 1;
+
+        if (insertions >= maxInsertions) {
+          break;
+        }
+
+        if (distance < nextInsertAfter) {
+          continue;
+        }
+
+        const template = templates[(templateOffset + Math.floor(random() * templates.length)) % templates.length];
+        templateOffset += 1;
+
+        if (template.type === 'inline' && (block.tagName === 'P' || block.tagName === 'LI')) {
+          block.insertAdjacentHTML('beforeend', ` ${template.html}`);
+        } else {
+          block.insertAdjacentHTML('afterend', template.html);
+        }
+
+        insertions += 1;
+        nextInsertAfter = distance + context.minGap + Math.floor(random() * Math.max(1, context.maxGap - context.minGap + 1));
+      }
+
+      return body.innerHTML;
+    }
+
     function buildFullMarkdown() {
       const parts = [];
       if (els.description.value.trim()) {
@@ -509,6 +724,44 @@
       }
       ul, ol, blockquote {
         margin: 0.75em 0;
+      }
+      .zbs-mark {
+        text-indent: 0;
+        margin: 0.95em 0;
+        padding: 0.55em 0.75em;
+        border-radius: 0.75em;
+        background: rgba(0, 0, 0, 0.022);
+        border-left: 0.18em solid rgba(110, 74, 20, 0.26);
+        font-size: 0.84em;
+        line-height: 1.46;
+        opacity: 0.78;
+      }
+      .zbs-mark-separator {
+        border-left-style: dashed;
+        letter-spacing: 0.01em;
+      }
+      .zbs-mark-footnote {
+        background: transparent;
+        border-left-width: 0.14em;
+        font-size: 0.8em;
+        opacity: 0.72;
+      }
+      .zbs-mark-quote {
+        padding: 0;
+        background: transparent;
+        border-left-width: 0.16em;
+      }
+      .zbs-inline-mark {
+        display: inline;
+        font-size: 0.78em;
+        opacity: 0.62;
+        font-style: italic;
+        white-space: nowrap;
+      }
+      .zbs-mark a,
+      .zbs-inline-mark a {
+        color: inherit;
+        text-decoration: underline;
       }
       img { max-width: 100%; }
       pre { white-space: pre-wrap; }
@@ -605,7 +858,8 @@
 
       const author = els.author.value.trim() || 'Неизвестный автор';
       const fullMarkdown = buildFullMarkdown();
-      const bodyHtml = sanitizeHtml(marked.parse(fullMarkdown));
+      const watermarks = getWatermarkConfig();
+      const bodyHtml = injectWatermarksIntoHtml(sanitizeHtml(marked.parse(fullMarkdown)), watermarks);
       const zip = new JSZip();
       const uuid = crypto.randomUUID();
       const fileName = (els.fileName.value.trim() || `${slugify(title)}.epub`).replace(/\.epub$/i, '') + '.epub';
@@ -659,8 +913,17 @@
       els.description,
       els.team,
       els.boostyBundleUrl,
-      els.boostyBundleTitle
+      els.boostyBundleTitle,
+      els.watermarkTeamName,
+      els.watermarkBoostyUrl,
+      els.watermarkMode,
+      els.watermarkMinGap,
+      els.watermarkMaxGap,
+      els.watermarkPhraseA,
+      els.watermarkPhraseB
     ].forEach((input) => input.addEventListener('input', updatePreviews));
+
+    els.watermarkEnabled.addEventListener('change', updatePreviews);
 
     els.coverFile.addEventListener('change', async () => {
       if (!els.coverFile.files?.[0]) return;

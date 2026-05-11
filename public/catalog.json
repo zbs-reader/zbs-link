@@ -192,9 +192,20 @@
           "linkUrl": "https://boosty.to/langllax/posts/02113061-b557-41e9-9468-dd2c34d0ba2f",
           "linkLabel": "Открыть на Boosty",
           "isFree": false
+        },
+        {
+          "id": "core-formation",
+          "title": "Формирование Ядра",
+          "price": "500 ₽ per month",
+          "description": "Завершено",
+          "chaptersLabel": "1-604",
+          "linkUrl": "https://boosty.to/langllax/posts/b5cb68b7-1242-4788-9845-f198e492bd79",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": false
         }
       ],
-      "chapters": []
+      "chapters": [],
+      "isCompleted": true
     },
     {
       "id": "я-боюсь-святого",

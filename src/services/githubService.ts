@@ -6,7 +6,7 @@ export class GitHubService {
   constructor(private readonly config: ContentSourceConfig) {}
 
   async getCatalog(): Promise<Catalog> {
-    const response = await fetch(this.resolveLocalUrl('/catalog.json'), { cache: 'no-store' });
+    const response = await fetch(this.resolveCatalogUrl(), { cache: 'no-store' });
     if (!response.ok) {
       throw new Error('Unable to load catalog.');
     }
@@ -70,6 +70,12 @@ export class GitHubService {
     }
 
     return `${APP_BASE}${normalized}`;
+  }
+
+  private resolveCatalogUrl() {
+    const baseUrl = this.resolveLocalUrl('/catalog.json');
+    const separator = baseUrl.includes('?') ? '&' : '?';
+    return `${baseUrl}${separator}ts=${Date.now()}`;
   }
 }
 

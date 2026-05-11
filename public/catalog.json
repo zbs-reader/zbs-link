@@ -369,10 +369,19 @@
           "title": "FREE",
           "price": "0 ₽",
           "description": "Открытые главы без подписки.",
-          "chaptersLabel": "1-100",
+          "chaptersLabel": "1-150",
           "linkUrl": "https://boosty.to/langllax/posts/56cd1314-5ddc-40f9-aea3-df8e617d7cea?share=post_link",
           "linkLabel": "Открыть на Boosty",
           "isFree": true
+        },
+        {
+          "id": "core-formation",
+          "title": "Формирование Ядра",
+          "price": "500 ₽ per month",
+          "description": "Завершено",
+          "chaptersLabel": "1-542",
+          "linkUrl": "https://boosty.to/langllax/posts/59c1c8d9-7f27-4d1d-b861-1afdea00d552",
+          "linkLabel": "Открыть на Boosty"
         }
       ],
       "isCompleted": true,

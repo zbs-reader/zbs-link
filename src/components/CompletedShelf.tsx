@@ -9,10 +9,20 @@ import type { BookSummary } from '../types/content';
 
 interface CompletedShelfProps {
   books: BookSummary[];
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  badgeLabel?: string;
+  viewAllTo?: string;
+  viewAllLabel?: string;
 }
 
-export function CompletedShelf({ books }: CompletedShelfProps) {
+export function CompletedShelf({ books, eyebrow, title, subtitle, badgeLabel, viewAllTo, viewAllLabel }: CompletedShelfProps) {
   const { t } = useLanguage();
+  const shelfTitle = title ?? t('home.completedShelfTitle');
+  const shelfEyebrow = eyebrow ?? t('home.completedShelfEyebrow');
+  const shelfSubtitle = subtitle ?? t('home.completedShelfSubtitle');
+  const shelfBadge = badgeLabel ?? t('common.completed');
   const [viewportRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
@@ -50,16 +60,22 @@ export function CompletedShelf({ books }: CompletedShelfProps) {
   }
 
   return (
-    <section className="completed-shelf sleek-card" aria-label={t('home.completedShelfTitle')}>
+    <section className="completed-shelf sleek-card" aria-label={shelfTitle}>
       <div className="completed-shelf-header">
         <div className="completed-shelf-copy">
-          <p className="hero-eyebrow">{t('home.completedShelfEyebrow')}</p>
-          <h2 className="section-title">{t('home.completedShelfTitle')}</h2>
-          <p className="section-caption completed-shelf-caption">{t('home.completedShelfSubtitle')}</p>
+          <p className="hero-eyebrow">{shelfEyebrow}</p>
+          <h2 className="section-title">{shelfTitle}</h2>
+          <p className="section-caption completed-shelf-caption">{shelfSubtitle}</p>
         </div>
 
-        {books.length > 1 ? (
-          <div className="completed-shelf-nav" aria-label={t('home.completedShelfTitle')}>
+        <div className="completed-shelf-actions">
+          {viewAllTo ? (
+            <Link to={viewAllTo} className="section-link-button completed-shelf-view-all">
+              {viewAllLabel ?? t('collections.viewAll')}
+            </Link>
+          ) : null}
+          {books.length > 1 ? (
+          <div className="completed-shelf-nav" aria-label={shelfTitle}>
             <button
               type="button"
               className="shelf-nav-button"
@@ -79,7 +95,8 @@ export function CompletedShelf({ books }: CompletedShelfProps) {
               <IonIcon icon={arrowForwardOutline} />
             </button>
           </div>
-        ) : null}
+          ) : null}
+        </div>
       </div>
 
       <div className="completed-shelf-viewport" ref={viewportRef}>
@@ -95,7 +112,7 @@ export function CompletedShelf({ books }: CompletedShelfProps) {
                 >
                   <div className="completed-book-cover-wrap">
                     <img className="completed-book-cover" src={book.coverUrl} alt={t('bookCard.coverAlt', { title: book.title })} />
-                    <span className="comparison-badge full completed-book-status">{t('common.completed')}</span>
+                    <span className="comparison-badge full completed-book-status">{shelfBadge}</span>
                   </div>
 
                   <div className="completed-book-copy">

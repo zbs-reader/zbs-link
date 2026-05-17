@@ -270,6 +270,34 @@ ion-button {
   padding: 18px 16px 120px;
 }
 
+.book-page-layout {
+  position: relative;
+  z-index: 1;
+}
+
+.book-page-backdrop,
+.book-page-backdrop-fade {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.book-page-backdrop {
+  z-index: 0;
+  background-position: center top;
+  background-size: cover;
+  opacity: 0.3;
+  transform: scale(1.08);
+}
+
+.book-page-backdrop-fade {
+  z-index: 0;
+  background:
+    radial-gradient(circle at 18% 14%, rgba(var(--accent-rgb), 0.18), transparent 24%),
+    radial-gradient(circle at 82% 10%, rgba(var(--app-secondary-rgb), 0.14), transparent 20%),
+    linear-gradient(180deg, rgba(var(--app-overlay-rgb), 0.24) 0%, rgba(var(--app-overlay-rgb), 0.52) 32%, rgb(9 10 8 / 0%) 100%);
+}
+
 .app-shell-stack {
   display: flex;
   flex-direction: column;
@@ -2698,6 +2726,33 @@ body {
   gap: 8px;
 }
 
+.completed-shelf-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.completed-shelf-view-all,
+.level-card-inline-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--app-card-strong);
+  border: 1px solid var(--app-border);
+  color: var(--app-text-main);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.level-card-inline-link {
+  width: fit-content;
+  padding-inline: 18px;
+}
+
 .shelf-nav-button {
   display: inline-grid;
   place-items: center;
@@ -2982,9 +3037,31 @@ body {
 }
 
 .book-hero-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
   gap: 18px;
+}
+
+.book-hero-panel {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.book-hero-panel.with-cover-backdrop {
+  background:
+    linear-gradient(180deg, rgba(var(--app-hero-copy-rgb), 0.02), transparent),
+    var(--app-card-bg);
+}
+
+.book-hero-backdrop,
+.book-hero-backdrop-fade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
 }
 
 .book-hero-cover-panel {
@@ -3826,6 +3903,10 @@ body {
   .completed-shelf-header {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .completed-shelf-actions {
+    justify-content: space-between;
   }
 
   .completed-shelf-nav {

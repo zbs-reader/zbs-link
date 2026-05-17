@@ -12,6 +12,19 @@ interface BookRouteParams {
   bookId: string;
 }
 
+function isFullTier(title: string, chaptersLabel?: string) {
+  const normalizedTitle = title.toLowerCase();
+  const normalizedChaptersLabel = chaptersLabel?.toLowerCase() ?? '';
+
+  return (
+    normalizedTitle.includes('полная') ||
+    normalizedTitle.includes('полный') ||
+    normalizedTitle.includes('завершено') ||
+    normalizedTitle.includes('завершён') ||
+    normalizedChaptersLabel.includes('полностью')
+  );
+}
+
 export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>) {
   const { bookId } = match.params;
   const { book, loading, error } = useBook(bookId);
@@ -39,11 +52,7 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
     const links = [...(book.externalLinks ?? [])];
     if (
       book.boostyBundleUrl &&
-      !links.some(
-        (platform) =>
-          platform.url === book.boostyBundleUrl ||
-          platform.id === 'boosty-bundle'
-      )
+      !links.some((platform) => platform.url === book.boostyBundleUrl || platform.id === 'boosty-bundle')
     ) {
       links.unshift({
         id: 'boosty-bundle',
@@ -71,7 +80,12 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
       <IonPage>
         <AppHeader title={t('book.bookLabel')} />
         <IonContent fullscreen>
-          <StateView title={t('book.unavailableTitle')} message={error ?? t('book.unavailableMessage')} actionLabel={t('book.backHome')} onAction={() => history.push('/')} />
+          <StateView
+            title={t('book.unavailableTitle')}
+            message={error ?? t('book.unavailableMessage')}
+            actionLabel={t('book.backHome')}
+            onAction={() => history.push('/')}
+          />
         </IonContent>
       </IonPage>
     );
@@ -86,13 +100,17 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
     <IonPage>
       <AppHeader title={book.title} subtitle={book.author} />
       <IonContent fullscreen>
-        <div className="page-shell app-shell-stack detail-layout">
+        <div className="book-page-backdrop" aria-hidden="true" style={{ backgroundImage: `url(${book.coverUrl})` }} />
+        <div className="book-page-backdrop-fade" aria-hidden="true" />
+        <div className="page-shell app-shell-stack detail-layout book-page-layout">
           <motion.section
-            className="book-hero-panel sleek-card"
+            className="book-hero-panel sleek-card with-cover-backdrop"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.34 }}
           >
+            <div className="book-hero-backdrop" aria-hidden="true" style={{ backgroundImage: `url(${book.coverUrl})` }} />
+            <div className="book-hero-backdrop-fade" aria-hidden="true" />
             <div className="book-hero-grid">
               <div className="book-hero-cover-panel">
                 <img className="detail-cover-large product" src={book.coverUrl} alt={`${book.title} cover`} />
@@ -101,7 +119,7 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
                   {(book.tags ?? []).slice(0, 2).map((tag) => (
                     <span key={tag} className="book-hero-surface-pill">{tag}</span>
                   ))}
-                  {book.isCompleted ? <span className="status-badge completed">Завершена</span> : null}
+                  {book.isCompleted ? <span className="status-badge completed">{t('common.completed')}</span> : null}
                 </div>
               </div>
 
@@ -117,7 +135,7 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
                   </div>
                   <div className="book-hero-metric">
                     <span className="book-hero-metric-value">{paidTierCount}</span>
-                    <span className="book-hero-metric-label">Paid tiers</span>
+                    <span className="book-hero-metric-label">{t('book.paidTiersLabel')}</span>
                   </div>
                   <div className="book-hero-metric">
                     <span className="book-hero-metric-value">{platformLinks.length}</span>
@@ -172,7 +190,7 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
                   <a key={platform.id} className="platform-link-card compact" href={platform.url} target="_blank" rel="noreferrer">
                     <div>
                       <span className="platform-link-label">{platform.label}</span>
-                      <p className="section-caption">{platform.id === 'boosty-bundle' ? 'Open bundle' : 'Open profile'}</p>
+                      <p className="section-caption">{platform.id === 'boosty-bundle' ? t('book.openBundle') : t('book.openProfile')}</p>
                     </div>
                     <IonIcon icon={openOutline} />
                   </a>
@@ -192,13 +210,14 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
               <div className="section-header compact-header">
                 <div>
                   <h2 className="section-title">{t('book.boosty')}</h2>
-                  <p className="section-caption">Уровни доступа и диапазоны глав</p>
+                  <p className="section-caption">{language === 'ru' ? 'Уровни доступа и диапазоны глав' : 'Access tiers and chapter ranges'}</p>
                 </div>
                 <span className="section-caption">{book.accessTiers.length} {t('common.levels')}</span>
               </div>
               <div className="tiers-compare-list">
                 {book.accessTiers.map((tier, index) => {
-                  const isFull = tier.title.toLowerCase().includes('полная') || tier.chaptersLabel?.toLowerCase().includes('полностью');
+                  const isFull = isFullTier(tier.title, tier.chaptersLabel);
+
                   return (
                     <motion.article
                       key={tier.id}
@@ -209,17 +228,19 @@ export function BookDetailsPage({ match }: RouteComponentProps<BookRouteParams>)
                       transition={{ duration: 0.25, delay: index * 0.04 }}
                     >
                       <div className="tier-compare-side">
-                        <span className={`tier-badge${tier.isFree ? ' tier-badge-free' : ''}`}>{tier.isFree ? 'FREE' : isFull ? 'FULL' : 'LEVEL'}</span>
+                        <span className={`tier-badge${tier.isFree ? ' tier-badge-free' : ''}`}>
+                          {tier.isFree ? 'FREE' : isFull ? t('book.tierBadgeFull') : t('book.tierBadgeLevel')}
+                        </span>
                         <h3 className="tier-title">{tier.title}</h3>
                         <p className="tier-description">{tier.description}</p>
                       </div>
                       <div className="tier-compare-meta">
                         <div>
-                          <p className="tier-compare-label">Цена</p>
+                          <p className="tier-compare-label">{t('book.tierPriceLabel')}</p>
                           <p className="tier-compare-value">{tier.price}</p>
                         </div>
                         <div>
-                          <p className="tier-compare-label">Главы</p>
+                          <p className="tier-compare-label">{t('book.tierChaptersLabel')}</p>
                           <p className="tier-compare-value">{tier.chaptersLabel ?? t('common.soon')}</p>
                         </div>
                       </div>

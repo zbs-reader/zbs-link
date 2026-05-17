@@ -1,112 +1,728 @@
 {
   "books": [
     {
-      "id": "waste-land-border-inspector",
-      "title": "Waste Land Border Inspector",
-      "author": "斤斤斤, Jin Jin Jin",
-      "description": "2025 • Продолжается • 436 глав.",
-      "coverUrl": "https://cdn.jsdelivr.net/gh/zbs-reader/translate-catalog-free@main/covers/waste-land-border-inspector.jpg",
-      "tags": ["боевик", "мистика", "постапокалиптика"],
+      "id": "gentleman-at-the-abyss",
+      "title": "Джентльмен у бездны",
+      "author": "Команда ZBS Link",
+      "description": "Главный герой — И Чэнь, аспирант, замученный бесконечной правкой диплома и бессонными ночами в лаборатории. Его прежняя жизнь обрывается не героической смертью, а банальным переутомлением. Но вместо вечного покоя он получает второй шанс в мрачном и враждебном мире, до жути напоминающем викторианскую эпоху, пораженную чумой, где сама реальность стала болезнью.",
+      "coverUrl": "https://tl.rulate.ru/i/book/26/3/10580.jpg",
+      "tags": [
+        "мистика",
+        "ужасы",
+        "викторианская эпоха"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/140365?Chapter_page=12"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/03995bd1-13ca-400d-888b-ad2374671edc?share=post_link"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free-1-100",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Главы 1-100",
+          "chaptersLabel": "1-100",
+          "linkUrl": "https://boosty.to/langllax/posts/03995bd1-13ca-400d-888b-ad2374671edc?share=post_link",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
+        },
+        {
+          "id": "condensation-qi",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Главы 1-500",
+          "chaptersLabel": "1-500",
+          "linkUrl": "https://boosty.to/langllax/posts/a01f1b36-70c0-4138-a92c-e6b0e6d56f7c?share=post_link",
+          "linkLabel": "Открыть на Boosty"
+        },
+        {
+          "id": "core-formation",
+          "title": "Формирование Ядра",
+          "price": "500 ₽ per month",
+          "description": "Завершено",
+          "chaptersLabel": "1-1112",
+          "linkUrl": "https://boosty.to/langllax/posts/0375e081-1fb6-401d-b5d1-02f534cbf486?share=post_link",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "isCompleted": true
+    },
+    {
+      "id": "path-of-cultivation-skin-creation",
+      "title": "Путь Культивации. Создание кожи",
+      "author": "Команда ZBS Link",
+      "description": "Переродившись в мире бессмертных и демонов, Сун Янь оказывается похищен Демонической Сектой Марионеток, где его назначают слугой, создающим кожу. Во время работы в нём пробуждается система, позволяющая увеличивать продолжительность жизни и понимание, пока он занимается созданием кожи.",
+      "coverUrl": "https://tl.rulate.ru/i/book/25/12/11456.jpg",
+      "tags": [
+        "сянся",
+        "сюаньхуань",
+        "культивация"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/145072?Chapter_page=4"
+        },
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/255320--zhi-pi-bainian-wo-cheng-le-mogmen-jiutou"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free-1-100",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Главы 1-100",
+          "chaptersLabel": "1-100",
+          "linkUrl": "https://boosty.to/langllax/posts/b9301fff-69f3-4829-928a-9a08dcb6c16a",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
+        },
+        {
+          "id": "condensation-qi",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Завершено",
+          "chaptersLabel": "1-351",
+          "linkUrl": "https://boosty.to/langllax/posts/ad844816-2b1e-4553-801b-330c95be6dda",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "isCompleted": true
+    },
+    {
+      "id": "plants-and-zombies-stronger",
+      "title": "Ну и что, что мои растения и зомби чуточку сильнее?",
+      "author": "Команда ZBS Link",
+      "description": "Линь Юй случайно попадает в параллельный мир, кишащий зомби. Уничтожить их могут только те, кто стал Мастером Растений. Он пробуждает талант ранга SSS — Глаз Прозрения, который показывает скрытые награды, опасности и вероятность успеха любого события.",
+      "coverUrl": "https://tl.rulate.ru/i/book/26/1/4191.jpg",
+      "tags": [
+        "зомби",
+        "фанфик",
+        "параллельный мир"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/166048?Chapter_page=4"
+        },
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/255823--wo-de-zhiwu-he-jiangshi-qiang-yi-dian-zenme-le?section=info&ui=1954317"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free-1-220",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Главы 1-220",
+          "chaptersLabel": "1-220",
+          "linkUrl": "https://boosty.to/langllax/posts/60c071f6-2ac7-4e49-9ad8-720a981cd459",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
+        },
+        {
+          "id": "part-220-400",
+          "title": "Часть 220-400",
+          "price": "Boosty",
+          "description": "Главы 220-400",
+          "chaptersLabel": "220-400",
+          "linkUrl": "https://boosty.to/langllax/posts/1e2eca73-e808-4ebb-9414-cbc4fbf9dab3",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": []
+    },
+    {
+      "id": "the-abnormal-supernatural-world",
+      "title": "Ненормальный сверхъестественный мир",
+      "author": "Команда ZBS Link",
+      "description": "Переместившись в фэнтезийный мир, Бай Ло с ужасом обнаружил свою первую проблему — у него нет удостоверения личности! Здесь царит полное безумие: великий маг заработал грыжу позвоночника из-за слишком долгих медитаций, некромант одержим нарисованными 2D-девушками, экзорцист сходит с ума из-за линяющего кота, а вампир уже год не выходит из онлайн-игры. Пока сверхъестественные существа погрязли в интернет-зависимости, Бай Ло, вооружившись фантастическими технологиями, становится Железным Человеком этого иного мира. Так начинается эта легкая и веселая история.",
+      "coverUrl": "https://tl.rulate.ru/i/book/26/1/822.jpg",
+      "tags": [
+        "комедия",
+        "сверхъестественное",
+        "фэнтези"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/156900"
+        },
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/256413--bu-zheng-chang-de-chao-fan-shi-jie"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free-1-225",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Открытые главы без подписки.",
+          "chaptersLabel": "1-225",
+          "linkUrl": "https://boosty.to/langllax/posts/8f19e06f-c09e-46fc-a591-1aa94b603b1a?share=post_link",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
+        },
+        {
+          "id": "qi-condensation-225-400",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Главы 225-400.",
+          "chaptersLabel": "225-400",
+          "linkUrl": "https://boosty.to/langllax/posts/02113061-b557-41e9-9468-dd2c34d0ba2f",
+          "linkLabel": "Открыть на Boosty"
+        },
+        {
+          "id": "core-formation",
+          "title": "Формирование Ядра",
+          "price": "500 ₽ per month",
+          "description": "Завершённый перевод.",
+          "chaptersLabel": "1-604",
+          "linkUrl": "https://boosty.to/langllax/posts/b5cb68b7-1242-4788-9845-f198e492bd79",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "isCompleted": true
+    },
+    {
+      "id": "я-боюсь-святого",
+      "title": "Я боюсь святого",
+      "author": "Команда ZBS Link",
+      "description": "Когда просыпаешься и обнаруживаешь себя в сыром, тёмном, грязном окопе в окружении дрожащих и молящихся солдат, сжимающих кресты.\n— «Вторая битва при Ипре? Не проблема, просто надень противогаз, и ты выживешь!»\n— «Битва на Сомме? Остаётся лишь вверить свою судьбу Богу».\n— «Верденская мясорубка? Что ж, теперь Бог бесполезен, а смерть — это лишь новое начало».\n— «Постойте-ка, что значит „герцог Константин повёл последних рыцарей Новой Антиохии, чтобы отразить атаку демонической армии из ада“? В какую, чёрт возьми, временную линию меня занесло?»\n...В 1099 году крестоносцы завоевали Иерусалим, непреднамеренно открыв врата ада. С того момента временная линия изменилась, и человеческая цивилизация вступила в тысячелетнюю тёмную эпоху борьбы с демонической армией преисподней. А Листон, попавший в эту временную линию, был всего лишь доктором, спасающим жизни, но...\nПлатформы:",
+      "coverUrl": "https://tl.rulate.ru/i/book/26/2/6496.jpg",
+      "chapters": [],
+      "tags": [
+        "мистика"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/158951"
+        },
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/256428--zai-xia-kong-sheng-ren"
+        }
+      ],
       "accessTiers": [
         {
           "id": "free",
           "title": "FREE",
           "price": "0 ₽",
-          "description": "Базовый доступ к книге и открытым главам.",
+          "description": "Открытые главы без подписки.",
+          "chaptersLabel": "1-120",
+          "linkUrl": "https://boosty.to/langllax/posts/4b94ff0b-ea35-418c-9bca-e5dfefe9fde2",
+          "linkLabel": "Открыть на Boosty",
           "isFree": true
         },
         {
-          "id": "qi-condensation",
+          "id": "tier-2",
           "title": "Конденсация Ци",
-          "price": "400 ₽ per month",
-          "description": "Доступ к 25% глав с ранним доступом."
+          "price": "300 ₽ per month",
+          "description": "",
+          "chaptersLabel": "1-150",
+          "linkUrl": "https://boosty.to/langllax/posts/7cd3e653-3c3a-4b8f-b662-8f856a5bc7dd?share=post_link",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": false
+        }
+      ],
+      "isCompleted": false
+    },
+    {
+      "id": "твои-импланты-вообще-легальны",
+      "title": "Твои импланты вообще легальны?",
+      "author": "Zhai Nan",
+      "description": "Я уже стал попаданцем, а за использование кибер-имплантов Великой Янь с меня всё ещё дерут пошлину в две тысячи процентов?!\nА если я использую импланты Колумбийского Союза, то лишаюсь медицинской страховки?!\nЗа беспроводной интернет тоже, мать его, нужно платить патентный сбор?!\nПолучается, я так и останусь нищим, просящим милостыню на коленях?\nСпрашиваете, легальны ли они? Я скрафтил их своим собственным читом! Какое вам вообще дело?!",
+      "coverUrl": "https://tl.rulate.ru/i/book/26/3/379.jpg",
+      "chapters": [],
+      "tags": [
+        "научная фантастика"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/173563"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Открытые главы без подписки.",
+          "chaptersLabel": "1-100",
+          "linkUrl": "https://boosty.to/langllax/posts/0ad714a7-0efb-4aa5-80f7-00d77b02348a?share=post_link",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
+        }
+      ],
+      "isCompleted": false
+    },
+    {
+      "id": "будучи-бессмертным-остаётся-лишь-притворяться-вампиром",
+      "title": "Будучи бессмертным, остаётся лишь притворяться вампиром",
+      "author": "Команда ZBS Link",
+      "description": "Фан Чэну отрубили голову.\nЕму пронзили сердце.\nЕму набили полный рот чеснока.\nЕго вытащили под палящее солнце.\nРазъяренные враги разорвали его на тысячи кусков.\nФан Чэн воскрес, развел руками перед своими врагами и произнес:\n— Раскрою вам карты: на самом деле я не вампир!\nТолпа в ярости взревела:",
+      "coverUrl": "https://tl.rulate.ru/i/book/26/3/19428.jpg",
+      "chapters": [],
+      "tags": [
+        "мистика",
+        "вампиры",
+        "токио"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/173271"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Открытые главы без подписки.",
+          "chaptersLabel": "1-100",
+          "linkUrl": "https://boosty.to/langllax/posts/7d3c0bd9-1f28-4441-8d81-32f21fb4101d?",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
+        }
+      ],
+      "isCompleted": false
+    },
+    {
+      "id": "грань-апокалипсиса",
+      "title": "Грань апокалипсиса",
+      "author": "Команда ZBS Link",
+      "description": "«Меня зовут Юй Дун, я — перерожденец. После каждой своей смерти я возвращаюсь в тот день, что был за 7 дней до начала апокалипсиса».\n\n«В прошлой жизни я встретил девушку по имени Лю Еэ. Мы поддерживали друг друга во время конца света, прожили вместе долгое время, и у нас даже появился очаровательный малыш. К сожалению, в итоге вся наша семья погибла под волной зомби...»\n\n«Поэтому, переродившись в этой жизни, я сразу разыскал мать моего ребенка. Чтобы доказать ей правду, я назвал её домашний адрес, планировку её спальни, материал шкафа, на ощупь описал каждую её пару чулок и узор на каждых её трусиках...»\n\nДядя-полицейский, остановивший Юй Дуна на обочине, с пониманием кивнул.\n\n«Хорошо, господин Юй. Что касается заявления госпожи Лю Еэ о том, что вы её преследовали и подглядывали за ней — с этим мы уже более-менее разобрались. Пожалуйста, пройдемте с нами».\n\nЮй Дун посмотрел на полного энергии и энтузиазма офицера Вана и тяжело вздохнул.\n\n«Старина Ван, она мне не верит... но неужели и ты мне не веришь?»\n\n«А с чего бы мне тебе верить? Погоди-ка... Откуда ты знаешь, что моя фамилия Ван?»\n\n«Я не только знаю, что твоя фамилия Ван. Я ещё знаю твой домашний адрес, планировку твоей спальни, материал твоего шкафа, на ощупь знаю каждые твои носки и цвет каждых твоих трусов...»\n\nОфицер Ван: «???»\n\nПлохо дело, так он по мою душу пришёл!",
+      "coverUrl": "https://tl.rulate.ru/i/book/26/3/13543.jpg",
+      "chapters": [],
+      "tags": [
+        "зомби",
+        "мистика",
+        "путешествия во времени"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/45056"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Открытые главы без подписки.",
+          "chaptersLabel": "1-50",
+          "linkUrl": "https://boosty.to/langllax/posts/eb0fc4df-0719-4075-be99-64d88dc82208",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
+        }
+      ],
+      "isCompleted": false
+    },
+    {
+      "id": "великий-демон-шерлок",
+      "title": "Великий Демон, Шерлок",
+      "author": "Mo Gua",
+      "description": "Бог создаёт легенду!\n\nНам нужна капля веры, чтобы дать людям стержень, затем добавить людоедствующих демонов, чтобы всех взволновать! Добавим немного любви... и щепотку ненависти... бунтарства и импульсивности.\n\nНаконец, добавим знакомого главного героя с несколько тёмной личностью, иначе будет неинтересно. Ой... кажется, я немного переборщил!\n\nИ вот, в маленьком переулке на улицах Лондона, Шерлок медленно появляется из тени, держа в руке голову. Кровь капает с его позвоночника: кап-кап, кап-кап. Отлично, с убийцей покончено. Следующая задача — доказать, что убийца и есть убийца.",
+      "coverUrl": "https://tl.rulate.ru/i/book/25/12/27738.jpg",
+      "chapters": [],
+      "tags": [
+        "мистика",
+        "британия",
+        "альтернативная история"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/147891"
         },
         {
-          "id": "foundation-establishment",
-          "title": "Заложение Основ",
-          "price": "700 ₽ per month",
-          "description": "Доступ к 50% глав с ранним доступом."
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/250782--da-emo-fuermosi"
+        },
+        {
+          "id": "telegram",
+          "label": "Telegram",
+          "url": "https://t.me/zbs_topics/10"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/bundle/dd0cb64a-3261-4be7-b1af-470c6aa9419e"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free-1-150",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Открытые главы без подписки.",
+          "chaptersLabel": "1-150",
+          "linkUrl": "https://boosty.to/langllax/posts/56cd1314-5ddc-40f9-aea3-df8e617d7cea?share=post_link",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
         },
         {
           "id": "core-formation",
           "title": "Формирование Ядра",
-          "price": "1 000 ₽ per month",
-          "description": "Доступ к 75% глав с ранним доступом. Если завершённая книга содержит меньше 500 глав, открывается полный доступ."
-        },
-        {
-          "id": "nascent-soul",
-          "title": "Зарождающаяся Душа",
-          "price": "2 000 ₽ per month",
-          "description": "Доступ к 100% глав с ранним доступом и к файлам со всеми главами."
+          "price": "500 ₽ per month",
+          "description": "Завершённый перевод.",
+          "chaptersLabel": "1-542",
+          "linkUrl": "https://boosty.to/langllax/posts/59c1c8d9-7f27-4d1d-b861-1afdea00d552",
+          "linkLabel": "Открыть на Boosty"
         }
       ],
-      "chapters": [
-        {
-          "id": "chapter-1",
-          "title": "Глава 1. Город Счастья — ваше лучшее убежище в пустоши! (1)",
-          "order": 1,
-          "contentPath": "/books/waste-land-border-inspector/chapter-1.md",
-          "excerpt": "Стоял душный июль..."
-        }
-      ]
+      "isCompleted": true,
+      "team": "Zabaichen Bank Selector"
     },
     {
-      "id": "gentleman-at-the-abyss",
-      "title": "Джентльмен у бездны",
-      "author": "Не указан",
-      "description": "Главный герой — И Чэнь, аспирант, замученный бесконечной правкой диплома и бессонными ночами в лаборатории. Его прежняя жизнь обрывается не героической смертью, а банальным переутомлением. Но вместо вечного покоя он получает второй шанс в мрачном и враждебном мире, до жути напоминающем викторианскую эпоху, пораженную чумой... только эта чума — не болезнь, а сама реальность. Этот мир болен. Неизвестная «Патология» искажает всё живое и неживое, порождая кошмарных существ и аномальные зоны, где не действуют привычные законы физики. Выживание здесь подчинено странным и неумолимым «Правилам». Несоблюдение даже одного пункта из старого руководства смотрителя кладбища, найденного в запертой хижине, грозит последствиями страшнее смерти. Единственный оплот порядка в этом хаосе — таинственная организация Д&Д (Джентльмен и Доктор). Чтобы выжить и найти ответы, И Чэню предстоит стать одним из её агентов — «Джентльменом». Путь к этому лежит через смертельно опасные испытания, где его единственными союзниками поначалу будут лишь посеребренный топорик, старая керосиновая лампа и собственный острый ум, привыкший к анализу и решению нетривиальных задач.",
-      "coverUrl": "https://tl.rulate.ru/i/book/26/3/10580.jpg",
-      "tags": ["мистика", "ужасы", "викторианская эпоха"],
-      "bundledChaptersPath": "/books/gentleman-at-the-abyss/entleman-at-the-abyss-1-315.md",
+      "id": "маг-у-меня-есть-игровая-панель",
+      "title": "Маг. У меня есть игровая панель",
+      "author": "Команда ZBS Link",
+      "description": "Су Чэнь открыл глаза и обнаружил, что попал в эпоху предыстории игры из своей прошлой жизни «Сияние Истины» — в эпоху Великого развития магов, став юношей по имени Лоэр.\n\nСейчас маги только-только одолели богов и всецело поглощены исследованиями и развитием различных сфер. По сравнению с тем, что будет дальше, обстановку можно с натяжкой назвать спокойной.\n\nМаги стихий изучают и преобразуют природу. Это древнее и всеобъемлющее направление, сочетающее в себе как атаку, так и защиту, но сейчас оно постепенно теряет свою силу.\n\nМаги родословной изучают различных магических существ и пересаживают их родословные, славясь своей запутанностью.\n\nМаги веры, будучи достаточно могущественными, отделились от магов родословной; это система, извлеченная из тел самих божеств.",
+      "coverUrl": "https://tl.rulate.ru/i/book/26/4/18912.jpg",
+      "chapters": [],
+      "tags": [
+        "магия",
+        "игровой мир",
+        "реинкарнация"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/179257"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/53804e0a-df32-4791-8116-c78b23ba833b"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free-1-70",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Открытые главы без подписки.",
+          "chaptersLabel": "1-70",
+          "linkUrl": "https://boosty.to/langllax/posts/8180f152-6148-4619-9061-ba602d9472b8",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
+        },
+        {
+          "id": "condensation-qi-1-300",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Главы 1-300.",
+          "chaptersLabel": "1-300",
+          "linkUrl": "https://boosty.to/langllax/posts/53804e0a-df32-4791-8116-c78b23ba833b",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "isCompleted": false,
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "церковь-вечернего-колокола",
+      "title": "Церковь Вечернего Колокола",
+      "author": "Команда ZBS Link",
+      "description": "Грозовое копьё рассекает небеса, а за ним следуют нежить и волчьи стаи.\n\nДалёкий звон колоколов и леденящая смерть преследуют его, словно тень.\n\nСлышишь этот вечерний звон? Он возвещает о твоей смерти.",
+      "coverUrl": "https://tl.rulate.ru/i/book/25/12/7758.jpg",
+      "chapters": [],
+      "tags": [
+        "мистика",
+        "лавкрафт",
+        "тёмное фэнтези"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/140645"
+        },
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/256411--wanzhong-jiaohui"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/44d3bcc3-f535-4048-a0ac-456910659494"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free-1-100",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Открытые главы без подписки.",
+          "chaptersLabel": "1-100",
+          "linkUrl": "https://boosty.to/langllax/posts/cd3dc86f-890e-45b8-ae0b-714b11d05800",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
+        },
+        {
+          "id": "condensation-qi-1-500",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Главы 1-500.",
+          "chaptersLabel": "1-500",
+          "linkUrl": "https://boosty.to/langllax/posts/14309cb7-92c0-48ba-b1ad-89bc92a8a784",
+          "linkLabel": "Открыть на Boosty"
+        },
+        {
+          "id": "core-formation",
+          "title": "Формирование Ядра",
+          "price": "500 ₽ per month",
+          "description": "Завершённый перевод.",
+          "chaptersLabel": "1-675",
+          "linkUrl": "https://boosty.to/langllax/posts/44d3bcc3-f535-4048-a0ac-456910659494",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "isCompleted": true,
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "extraordinary-journey",
+      "title": "Необычайное путешествие",
+      "author": "Команда ZBS Link",
+      "description": "Безразличные боги холодно взирают на мир смертных с высоты облаков. Паровой двигатель едва разжёг свет цивилизации, но здесь уже скрещивают клинки магия и сталь, алхимические ружья и галеоны исполняют гимны погибели, тайные общества и Церковь Праведного Бога ведут извечную игру. Проснувшись в тихом приморском городке, Элвин оказывается в центре вихря событий и начинает путь к вершинам Необычайного.",
+      "coverUrl": "/zbs-reader-logo.svg",
+      "tags": [
+        "морские путешествия",
+        "мистика",
+        "RanobeLIB"
+      ],
       "externalLinks": [
         {
           "id": "ranobelib",
           "label": "RanobeLIB",
-          "url": "https://ranobelib.me/ru/book/228236--the-last-gentleman"
+          "url": "https://ranobelib.me/ru/book/242003--chaofan-da-hanghai"
         },
         {
-          "id": "rulate",
-          "label": "Rulate",
-          "url": "https://tl.rulate.ru/book/140365"
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/14c44860-3146-47b1-9393-b911fb2832c8"
         }
       ],
       "accessTiers": [
         {
-          "id": "free",
+          "id": "condensation-qi",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Полный доступ к переводу на RanobeLIB.",
+          "chaptersLabel": "1-283",
+          "linkUrl": "https://boosty.to/langllax/posts/14c44860-3146-47b1-9393-b911fb2832c8",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "isCompleted": true,
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "path-in-strange-instances-with-cheats",
+      "title": "Путь в странных инстансах с помощью читов",
+      "author": "Команда ZBS Link",
+      "description": "Для Му Жуфэна всё началось с зонта, которого никто, кроме него, не мог видеть. Коснувшись его, он провалился в искажённую реальность, где обычный склад стал ареной чудовищных аномалий, а правила выживания пишутся кровью. Система предлагает выбрать один из трёх читов, но сила в этом мире всегда приходит со своей ценой.",
+      "coverUrl": "/zbs-reader-logo.svg",
+      "tags": [
+        "мистика",
+        "завершено",
+        "RanobeLIB"
+      ],
+      "externalLinks": [
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/241622--wo-yong-wo-de-pianzi-zai-dilong-li-tusha-le-shijie"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/0870d71e-b6f8-4889-b3de-4c459fbe01db"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "condensation-qi",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Полный доступ к завершённому переводу на RanobeLIB.",
+          "chaptersLabel": "1-561",
+          "linkUrl": "https://boosty.to/langllax/posts/0870d71e-b6f8-4889-b3de-4c459fbe01db",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "isCompleted": true,
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "wizard-path-of-biotransformation",
+      "title": "Маг. Путь биотрансформации",
+      "author": "Команда ZBS Link",
+      "description": "Линч попал в мир магов и стал учеником, чья стихия не огонь или лёд, а сама жизнь. В его руках система уровней мастерства и необычный дар: биотрансформация. Его опыты соединяют магию и плоть, от странных гибридов до созданий, способных изменить само представление о живом.",
+      "coverUrl": "https://images.boosty.to/image/075cf957-29af-4037-8250-a2ce0c5b43a6?change_time=1778585478&mw=575",
+      "tags": [
+        "магия",
+        "биотрансформация",
+        "завершено"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/138261"
+        },
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/239723--wizard-start-with-biological-transformation-to-grind-experience"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/ce41bcd7-8bcc-4328-8296-c90d5f213bc6"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free-1-160",
           "title": "FREE",
           "price": "0 ₽",
-          "description": "Базовый доступ к книге и открытым главам.",
-          "chaptersLabel": "Доступно 1-315 глав",
-          "linkUrl": "https://boosty.to/langllax/posts/03995bd1-13ca-400d-888b-ad2374671edc?share=post_link",
-          "linkLabel": "Открыть FREE уровень",
+          "description": "Открытые главы без подписки.",
+          "chaptersLabel": "1-160",
+          "linkUrl": "https://boosty.to/langllax/posts/3eade728-c3c0-4862-9dbc-8758c14a381d",
+          "linkLabel": "Открыть на Boosty",
           "isFree": true
-        },
-        {
-          "id": "qi-condensation",
-          "title": "Конденсация Ци",
-          "price": "400 ₽ per month",
-          "description": "Доступ к 25% глав с ранним доступом."
-        },
-        {
-          "id": "foundation-establishment",
-          "title": "Заложение Основ",
-          "price": "700 ₽ per month",
-          "description": "Доступ к 50% глав с ранним доступом."
         },
         {
           "id": "core-formation",
           "title": "Формирование Ядра",
-          "price": "1 000 ₽ per month",
-          "description": "Доступ к 75% глав с ранним доступом. Если завершённая книга содержит меньше 500 глав, открывается полный доступ."
-        },
-        {
-          "id": "nascent-soul",
-          "title": "Зарождающаяся Душа",
-          "price": "2 000 ₽ per month",
-          "description": "Доступ к 100% глав с ранним доступом и к файлам со всеми главами."
+          "price": "500 ₽ per month",
+          "description": "Завершённый перевод.",
+          "chaptersLabel": "1-855",
+          "linkUrl": "https://boosty.to/langllax/posts/ce41bcd7-8bcc-4328-8296-c90d5f213bc6",
+          "linkLabel": "Открыть на Boosty"
         }
       ],
-      "chapters": []
+      "chapters": [],
+      "isCompleted": true,
+      "team": "Zabaichen Bank Selector"
+    }
+  ],
+  "banners": [
+    {
+      "id": "ranobelib-full-access",
+      "title": "RanobeLIB: полный доступ",
+      "subtitle": "Тайтлы, которые переводятся только для RanobeLIB и полностью открываются на уровне Конденсация Ци.",
+      "description": "Отдельный список книг с полным доступом для уровня Конденсация Ци.",
+      "label": "RanobeLIB",
+      "bookIds": [
+        "extraordinary-journey",
+        "path-in-strange-instances-with-cheats"
+      ]
+    },
+    {
+      "id": "mystic-collection",
+      "title": "Коллекция мистики",
+      "subtitle": "Мрачные города, древние ритуалы и герои, которым приходится держаться за здравый смысл.",
+      "description": "Вся мистика из каталога в одной баннерной подборке.",
+      "label": "Мистика",
+      "backgroundUrl": "/banners/mystic-collection.jpg",
+      "bookIds": [
+        "gentleman-at-the-abyss",
+        "я-боюсь-святого",
+        "будучи-бессмертным-остаётся-лишь-притворяться-вампиром",
+        "грань-апокалипсиса",
+        "церковь-вечернего-колокола"
+      ]
+    },
+    {
+      "id": "strange-worlds",
+      "title": "Странные миры",
+      "subtitle": "Параллельные миры, системы, импланты и истории, где реальность ведёт себя не по правилам.",
+      "description": "Коллекция необычных сеттингов и системных новелл.",
+      "label": "Миры и системы",
+      "bookIds": [
+        "plants-and-zombies-stronger",
+        "the-abnormal-supernatural-world",
+        "я-боюсь-святого",
+        "будучи-бессмертным-остаётся-лишь-притворяться-вампиром",
+        "маг-у-меня-есть-игровая-панель"
+      ]
+    },
+    {
+      "id": "zombie-collection",
+      "title": "Коллекция зомби",
+      "subtitle": "Апокалипсис, осада мира и герои, которым приходится выживать среди мертвецов.",
+      "description": "Все зомби-релизы из нашего каталога в одной подборке.",
+      "label": "Зомби",
+      "backgroundUrl": "/banners/zombie-collection.png",
+      "bookIds": [
+        "plants-and-zombies-stronger",
+        "грань-апокалипсиса"
+      ]
+    },
+    {
+      "id": "team-selection",
+      "title": "Выбор команды",
+      "subtitle": "Те самые книги, с которых удобно начинать знакомство с ZBS Link.",
+      "description": "Стартовая подборка завершённых и активных релизов команды.",
+      "label": "ZBS Link",
+      "bookIds": [
+        "extraordinary-journey",
+        "path-in-strange-instances-with-cheats",
+        "wizard-path-of-biotransformation",
+        "the-abnormal-supernatural-world",
+        "великий-демон-шерлок",
+        "церковь-вечернего-колокола"
+      ]
+    },
+    {
+      "id": "magic-collection",
+      "title": "Маги и магия",
+      "subtitle": "Арканные системы, развитие силы, магические школы и герои, которые меняют правила мира.",
+      "description": "Подборка историй, где магия стоит в центре сюжета.",
+      "label": "Магия",
+      "bookIds": [
+        "маг-у-меня-есть-игровая-панель"
+      ]
     }
   ]
 }

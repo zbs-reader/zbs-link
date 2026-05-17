@@ -26,6 +26,11 @@ const TEAM_LINKS = [
   }
 ] as const;
 
+const RANOBELIB_FULL_ACCESS_BOOK_IDS = new Set([
+  'extraordinary-journey',
+  'path-in-strange-instances-with-cheats'
+]);
+
 export function HomePage() {
   const { catalog, loading, error } = useCatalog();
   const history = useHistory();
@@ -35,6 +40,7 @@ export function HomePage() {
   const books = catalog?.books ?? [];
   const banners = catalog?.banners ?? [];
   const completedBooks = books.filter((book) => book.isCompleted);
+  const ranobelibFullAccessBooks = books.filter((book) => RANOBELIB_FULL_ACCESS_BOOK_IDS.has(book.id));
   const featuredBanner = banners[activeBannerIndex] ?? banners[0];
   const authorCount = new Set(books.map((book) => book.author)).size;
   const genreCount = new Set(books.flatMap((book) => book.tags ?? [])).size;
@@ -185,6 +191,16 @@ export function HomePage() {
                   </a>
                 ))}
               </section>
+
+              <CompletedShelf
+                books={ranobelibFullAccessBooks}
+                eyebrow="RanobeLIB"
+                title="Полный доступ на Конденсации Ци"
+                subtitle="Переводы, которые полностью доступны на RanobeLIB уже с уровня Конденсации Ци."
+                badgeLabel="RanobeLIB"
+                viewAllTo="/collections/ranobelib-full-access"
+                viewAllLabel="Просмотреть все"
+              />
 
               <CompletedShelf books={completedBooks} />
             </div>

@@ -37,7 +37,7 @@
         {
           "id": "condensation-qi",
           "title": "Конденсация Ци",
-          "price": "350 ₽ per month",
+          "price": "300 ₽ per month",
           "description": "Главы 1-500",
           "chaptersLabel": "1-500",
           "linkUrl": "https://boosty.to/langllax/posts/a01f1b36-70c0-4138-a92c-e6b0e6d56f7c?share=post_link",
@@ -93,7 +93,7 @@
         {
           "id": "condensation-qi",
           "title": "Конденсация Ци",
-          "price": "350 ₽ per month",
+          "price": "300 ₽ per month",
           "description": "Завершено",
           "chaptersLabel": "1-351",
           "linkUrl": "https://boosty.to/langllax/posts/ad844816-2b1e-4553-801b-330c95be6dda",
@@ -177,7 +177,7 @@
           "id": "free-1-225",
           "title": "FREE",
           "price": "0 ₽",
-          "description": "Главы 1-225",
+          "description": "Открытые главы без подписки.",
           "chaptersLabel": "1-225",
           "linkUrl": "https://boosty.to/langllax/posts/8f19e06f-c09e-46fc-a591-1aa94b603b1a?share=post_link",
           "linkLabel": "Открыть на Boosty",
@@ -186,22 +186,20 @@
         {
           "id": "qi-condensation-225-400",
           "title": "Конденсация Ци",
-          "price": "Boosty",
-          "description": "Главы 225-400",
+          "price": "300 ₽ per month",
+          "description": "Главы 225-400.",
           "chaptersLabel": "225-400",
           "linkUrl": "https://boosty.to/langllax/posts/02113061-b557-41e9-9468-dd2c34d0ba2f",
-          "linkLabel": "Открыть на Boosty",
-          "isFree": false
+          "linkLabel": "Открыть на Boosty"
         },
         {
           "id": "core-formation",
           "title": "Формирование Ядра",
           "price": "500 ₽ per month",
-          "description": "Завершено",
+          "description": "Завершённый перевод.",
           "chaptersLabel": "1-604",
           "linkUrl": "https://boosty.to/langllax/posts/b5cb68b7-1242-4788-9845-f198e492bd79",
-          "linkLabel": "Открыть на Boosty",
-          "isFree": false
+          "linkLabel": "Открыть на Boosty"
         }
       ],
       "chapters": [],
@@ -243,7 +241,7 @@
         {
           "id": "tier-2",
           "title": "Конденсация Ци",
-          "price": "300",
+          "price": "300 ₽ per month",
           "description": "",
           "chaptersLabel": "1-150",
           "linkUrl": "https://boosty.to/langllax/posts/7cd3e653-3c3a-4b8f-b662-8f856a5bc7dd?share=post_link",
@@ -372,11 +370,21 @@
           "id": "ranobelib",
           "label": "RanobeLIB",
           "url": "https://ranobelib.me/ru/book/250782--da-emo-fuermosi"
+        },
+        {
+          "id": "telegram",
+          "label": "Telegram",
+          "url": "https://t.me/zbs_topics/10"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/bundle/dd0cb64a-3261-4be7-b1af-470c6aa9419e"
         }
       ],
       "accessTiers": [
         {
-          "id": "free",
+          "id": "free-1-150",
           "title": "FREE",
           "price": "0 ₽",
           "description": "Открытые главы без подписки.",
@@ -389,7 +397,7 @@
           "id": "core-formation",
           "title": "Формирование Ядра",
           "price": "500 ₽ per month",
-          "description": "Завершено",
+          "description": "Завершённый перевод.",
           "chaptersLabel": "1-542",
           "linkUrl": "https://boosty.to/langllax/posts/59c1c8d9-7f27-4d1d-b861-1afdea00d552",
           "linkLabel": "Открыть на Boosty"
@@ -400,7 +408,7 @@
     },
     {
       "id": "маг-у-меня-есть-игровая-панель",
-      "title": "Маг: У меня есть игровая панель",
+      "title": "Маг. У меня есть игровая панель",
       "author": "Команда ZBS Link",
       "description": "Су Чэнь открыл глаза и обнаружил, что попал в эпоху предыстории игры из своей прошлой жизни «Сияние Истины» — в эпоху Великого развития магов, став юношей по имени Лоэр.\n\nСейчас маги только-только одолели богов и всецело поглощены исследованиями и развитием различных сфер. По сравнению с тем, что будет дальше, обстановку можно с натяжкой назвать спокойной.\n\nМаги стихий изучают и преобразуют природу. Это древнее и всеобъемлющее направление, сочетающее в себе как атаку, так и защиту, но сейчас оно постепенно теряет свою силу.\n\nМаги родословной изучают различных магических существ и пересаживают их родословные, славясь своей запутанностью.\n\nМаги веры, будучи достаточно могущественными, отделились от магов родословной; это система, извлеченная из тел самих божеств.",
       "coverUrl": "https://tl.rulate.ru/i/book/26/4/18912.jpg",
@@ -412,14 +420,19 @@
       ],
       "externalLinks": [
         {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/179257"
+        },
+        {
           "id": "boosty",
           "label": "Boosty",
-          "url": "https://boosty.to/langllax/posts/8180f152-6148-4619-9061-ba602d9472b8"
+          "url": "https://boosty.to/langllax/posts/53804e0a-df32-4791-8116-c78b23ba833b"
         }
       ],
       "accessTiers": [
         {
-          "id": "free",
+          "id": "free-1-70",
           "title": "FREE",
           "price": "0 ₽",
           "description": "Открытые главы без подписки.",
@@ -427,6 +440,15 @@
           "linkUrl": "https://boosty.to/langllax/posts/8180f152-6148-4619-9061-ba602d9472b8",
           "linkLabel": "Открыть на Boosty",
           "isFree": true
+        },
+        {
+          "id": "condensation-qi-1-300",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Главы 1-300.",
+          "chaptersLabel": "1-300",
+          "linkUrl": "https://boosty.to/langllax/posts/53804e0a-df32-4791-8116-c78b23ba833b",
+          "linkLabel": "Открыть на Boosty"
         }
       ],
       "isCompleted": false,
@@ -451,14 +473,19 @@
           "url": "https://tl.rulate.ru/book/140645"
         },
         {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/256411--wanzhong-jiaohui"
+        },
+        {
           "id": "boosty",
           "label": "Boosty",
-          "url": "https://boosty.to/langllax/posts/cd3dc86f-890e-45b8-ae0b-714b11d05800"
+          "url": "https://boosty.to/langllax/posts/44d3bcc3-f535-4048-a0ac-456910659494"
         }
       ],
       "accessTiers": [
         {
-          "id": "free",
+          "id": "free-1-100",
           "title": "FREE",
           "price": "0 ₽",
           "description": "Открытые главы без подписки.",
@@ -466,13 +493,171 @@
           "linkUrl": "https://boosty.to/langllax/posts/cd3dc86f-890e-45b8-ae0b-714b11d05800",
           "linkLabel": "Открыть на Boosty",
           "isFree": true
+        },
+        {
+          "id": "condensation-qi-1-500",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Главы 1-500.",
+          "chaptersLabel": "1-500",
+          "linkUrl": "https://boosty.to/langllax/posts/14309cb7-92c0-48ba-b1ad-89bc92a8a784",
+          "linkLabel": "Открыть на Boosty"
+        },
+        {
+          "id": "core-formation",
+          "title": "Формирование Ядра",
+          "price": "500 ₽ per month",
+          "description": "Завершённый перевод.",
+          "chaptersLabel": "1-675",
+          "linkUrl": "https://boosty.to/langllax/posts/44d3bcc3-f535-4048-a0ac-456910659494",
+          "linkLabel": "Открыть на Boosty"
         }
       ],
-      "isCompleted": false,
+      "isCompleted": true,
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "extraordinary-journey",
+      "title": "Необычайное путешествие",
+      "author": "Команда ZBS Link",
+      "description": "Безразличные боги холодно взирают на мир смертных с высоты облаков. Паровой двигатель едва разжёг свет цивилизации, но здесь уже скрещивают клинки магия и сталь, алхимические ружья и галеоны исполняют гимны погибели, тайные общества и Церковь Праведного Бога ведут извечную игру. Проснувшись в тихом приморском городке, Элвин оказывается в центре вихря событий и начинает путь к вершинам Необычайного.",
+      "coverUrl": "/zbs-reader-logo.svg",
+      "tags": [
+        "морские путешествия",
+        "мистика",
+        "RanobeLIB"
+      ],
+      "externalLinks": [
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/242003--chaofan-da-hanghai"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/14c44860-3146-47b1-9393-b911fb2832c8"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "condensation-qi",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Полный доступ к переводу на RanobeLIB.",
+          "chaptersLabel": "1-283",
+          "linkUrl": "https://boosty.to/langllax/posts/14c44860-3146-47b1-9393-b911fb2832c8",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "isCompleted": true,
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "path-in-strange-instances-with-cheats",
+      "title": "Путь в странных инстансах с помощью читов",
+      "author": "Команда ZBS Link",
+      "description": "Для Му Жуфэна всё началось с зонта, которого никто, кроме него, не мог видеть. Коснувшись его, он провалился в искажённую реальность, где обычный склад стал ареной чудовищных аномалий, а правила выживания пишутся кровью. Система предлагает выбрать один из трёх читов, но сила в этом мире всегда приходит со своей ценой.",
+      "coverUrl": "/zbs-reader-logo.svg",
+      "tags": [
+        "мистика",
+        "завершено",
+        "RanobeLIB"
+      ],
+      "externalLinks": [
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/241622--wo-yong-wo-de-pianzi-zai-dilong-li-tusha-le-shijie"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/0870d71e-b6f8-4889-b3de-4c459fbe01db"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "condensation-qi",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Полный доступ к завершённому переводу на RanobeLIB.",
+          "chaptersLabel": "1-561",
+          "linkUrl": "https://boosty.to/langllax/posts/0870d71e-b6f8-4889-b3de-4c459fbe01db",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "isCompleted": true,
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "wizard-path-of-biotransformation",
+      "title": "Маг. Путь биотрансформации",
+      "author": "Команда ZBS Link",
+      "description": "Линч попал в мир магов и стал учеником, чья стихия не огонь или лёд, а сама жизнь. В его руках система уровней мастерства и необычный дар: биотрансформация. Его опыты соединяют магию и плоть, от странных гибридов до созданий, способных изменить само представление о живом.",
+      "coverUrl": "https://images.boosty.to/image/075cf957-29af-4037-8250-a2ce0c5b43a6?change_time=1778585478&mw=575",
+      "tags": [
+        "магия",
+        "биотрансформация",
+        "завершено"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/138261"
+        },
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/239723--wizard-start-with-biological-transformation-to-grind-experience"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/ce41bcd7-8bcc-4328-8296-c90d5f213bc6"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free-1-160",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Открытые главы без подписки.",
+          "chaptersLabel": "1-160",
+          "linkUrl": "https://boosty.to/langllax/posts/3eade728-c3c0-4862-9dbc-8758c14a381d",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
+        },
+        {
+          "id": "core-formation",
+          "title": "Формирование Ядра",
+          "price": "500 ₽ per month",
+          "description": "Завершённый перевод.",
+          "chaptersLabel": "1-855",
+          "linkUrl": "https://boosty.to/langllax/posts/ce41bcd7-8bcc-4328-8296-c90d5f213bc6",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "isCompleted": true,
       "team": "Zabaichen Bank Selector"
     }
   ],
   "banners": [
+    {
+      "id": "ranobelib-full-access",
+      "title": "RanobeLIB: полный доступ",
+      "subtitle": "Тайтлы, которые переводятся только для RanobeLIB и полностью открываются на уровне Конденсация Ци.",
+      "description": "Отдельный список книг с полным доступом для уровня Конденсация Ци.",
+      "label": "RanobeLIB",
+      "bookIds": [
+        "extraordinary-journey",
+        "path-in-strange-instances-with-cheats"
+      ]
+    },
     {
       "id": "mystic-collection",
       "title": "Коллекция мистики",
@@ -521,8 +706,12 @@
       "description": "Стартовая подборка завершённых и активных релизов команды.",
       "label": "ZBS Link",
       "bookIds": [
-        "gentleman-at-the-abyss",
-        "path-of-cultivation-skin-creation"
+        "extraordinary-journey",
+        "path-in-strange-instances-with-cheats",
+        "wizard-path-of-biotransformation",
+        "the-abnormal-supernatural-world",
+        "великий-демон-шерлок",
+        "церковь-вечернего-колокола"
       ]
     },
     {

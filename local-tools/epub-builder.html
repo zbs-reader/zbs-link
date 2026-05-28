@@ -332,6 +332,7 @@
       markdownText: '',
       sourceLabel: '',
       sourceKind: '',
+      detectedMarkdownChapterCount: 0,
       coverBlob: null,
       coverMime: '',
       coverExt: 'jpg'
@@ -516,6 +517,7 @@
       state.markdownText = source.text;
       state.sourceLabel = source.name;
       state.sourceKind = source.kind;
+      state.detectedMarkdownChapterCount = countMarkdownChapterTitles(source.text);
 
       if (!els.title.value.trim()) {
         const fileStem = source.name.replace(/\.(md|markdown|docx|zip)$/i, '').split('/').pop().trim();
@@ -525,12 +527,16 @@
         els.fileName.value = `${slugify(els.title.value || source.name.replace(/\.(md|markdown|docx|zip)$/i, '').split('/').pop())}.epub`;
       }
       updatePreviews();
+      const chapterHint = state.detectedMarkdownChapterCount
+        ? ` Найдено глав в исходнике: ${state.detectedMarkdownChapterCount}.`
+        : '';
+
       if (isZip) {
-        setStatus(`ZIP обработан. Использован файл: ${source.name}`, 'good');
+        setStatus(`ZIP обработан. Использован файл: ${source.name}.${chapterHint}`, 'good');
       } else if (source.kind === 'docx') {
-        setStatus('DOCX загружен и преобразован.', 'good');
+        setStatus(`DOCX загружен и преобразован.${chapterHint}`, 'good');
       } else {
-        setStatus('Markdown загружен.', 'good');
+        setStatus(`Markdown загружен.${chapterHint}`, 'good');
       }
     }
 
@@ -717,6 +723,13 @@
 
     function isChapterTitleText(value) {
       return /^(?:глава|chapter|chap\.?)\s*(?:№\s*)?(?:\d+|[ivxlcdm]+)(?:$|[\s.)\-–—:：].*)$/iu.test(String(value || '').trim());
+    }
+
+    function countMarkdownChapterTitles(markdown) {
+      return String(markdown || '')
+        .replace(/\r\n/g, '\n')
+        .split('\n')
+        .reduce((count, line) => count + (isChapterTitleText(line.trim()) ? 1 : 0), 0);
     }
 
     function normalizeMarkdownChapterHeadings(markdown) {
@@ -1172,10 +1185,16 @@ ${chapterPoints}
 
       const author = els.author.value.trim() || 'Неизвестный автор';
       const watermarks = getWatermarkConfig();
-      const sections = state.sourceKind === 'markdown'
+      const sourceChapterCount = countMarkdownChapterTitles(state.markdownText);
+      const shouldSplitMarkdown = sourceChapterCount > 1 || state.sourceKind === 'markdown';
+      const sections = shouldSplitMarkdown
         ? buildSectionsFromMarkdown(title, buildIntroMarkdown(), state.markdownText.trim(), watermarks)
         : buildReadingSections(title, markdownToXhtmlBody(buildFullMarkdown(), watermarks));
       const chapterCount = countChapterSections(sections);
+
+      if (sourceChapterCount > 1 && chapterCount < sourceChapterCount) {
+        throw new Error(`Главы найдены в исходнике (${sourceChapterCount}), но в EPUB попало только ${chapterCount}. Сборка остановлена, чтобы не создать битый EPUB.`);
+      }
       const zip = new JSZip();
       const uuid = crypto.randomUUID();
       const fileName = (els.fileName.value.trim() || `${slugify(title)}.epub`).replace(/\.epub$/i, '') + '.epub';

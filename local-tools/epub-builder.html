@@ -331,6 +331,7 @@
     const state = {
       markdownText: '',
       sourceLabel: '',
+      sourceKind: '',
       coverBlob: null,
       coverMime: '',
       coverExt: 'jpg'
@@ -514,6 +515,7 @@
 
       state.markdownText = source.text;
       state.sourceLabel = source.name;
+      state.sourceKind = source.kind;
 
       if (!els.title.value.trim()) {
         const fileStem = source.name.replace(/\.(md|markdown|docx|zip)$/i, '').split('/').pop().trim();
@@ -701,6 +703,18 @@
       return parts.join('\n\n');
     }
 
+    function buildIntroMarkdown() {
+      const parts = [];
+      if (els.description.value.trim()) {
+        parts.push(els.description.value.trim());
+      }
+      const metaBlock = buildMetaBlock();
+      if (metaBlock) {
+        parts.push(metaBlock);
+      }
+      return parts.join('\n\n');
+    }
+
     function isChapterTitleText(value) {
       return /^(?:глава|chapter|chap\.?)\s*(?:№\s*)?(?:\d+|[ivxlcdm]+)(?:$|[\s.)\-–—:：].*)$/iu.test(String(value || '').trim());
     }
@@ -731,6 +745,89 @@
       }
 
       return normalized.join('\n').replace(/\n{4,}/g, '\n\n\n').trim();
+    }
+
+    function markdownToXhtmlBody(markdown, watermarks) {
+      const html = normalizeHtmlChapterHeadings(sanitizeHtml(marked.parse(markdown || '')));
+      return injectWatermarksIntoHtml(html, watermarks);
+    }
+
+    function buildSectionsFromMarkdown(bookTitle, introMarkdown, sourceMarkdown, watermarks) {
+      const sections = [];
+      const introHtml = markdownToXhtmlBody(introMarkdown, { ...watermarks, enabled: false }).trim();
+
+      if (introHtml) {
+        sections.push({
+          id: 'intro',
+          fileName: 'intro.xhtml',
+          title: 'Описание',
+          bodyHtml: introHtml
+        });
+      }
+
+      const lines = String(sourceMarkdown || '').replace(/\r\n/g, '\n').split('\n');
+      const chapters = [];
+      let current = null;
+      let preface = [];
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (isChapterTitleText(trimmed)) {
+          if (current) {
+            chapters.push(current);
+          } else if (preface.some((item) => item.trim())) {
+            const prefaceHtml = markdownToXhtmlBody(preface.join('\n').trim(), { ...watermarks, enabled: false }).trim();
+            if (prefaceHtml) {
+              sections.push({
+                id: 'preface',
+                fileName: 'preface.xhtml',
+                title: 'Предисловие',
+                bodyHtml: prefaceHtml
+              });
+            }
+          }
+
+          current = {
+            title: trimmed,
+            lines: [`# ${trimmed}`]
+          };
+          preface = [];
+          continue;
+        }
+
+        if (current) {
+          current.lines.push(line);
+        } else {
+          preface.push(line);
+        }
+      }
+
+      if (current) {
+        chapters.push(current);
+      }
+
+      if (!chapters.length) {
+        const fallbackMarkdown = [introMarkdown, sourceMarkdown].filter(Boolean).join('\n\n');
+        const bodyHtml = markdownToXhtmlBody(fallbackMarkdown, watermarks).trim();
+        return [{
+          id: 'content',
+          fileName: 'content.xhtml',
+          title: bookTitle,
+          bodyHtml
+        }];
+      }
+
+      chapters.forEach((chapter, index) => {
+        const padded = String(index + 1).padStart(4, '0');
+        sections.push({
+          id: `chapter-${padded}`,
+          fileName: `chapters/chapter-${padded}.xhtml`,
+          title: chapter.title,
+          bodyHtml: markdownToXhtmlBody(chapter.lines.join('\n').trim(), watermarks)
+        });
+      });
+
+      return sections;
     }
 
     function normalizeHtmlChapterHeadings(html) {
@@ -887,7 +984,7 @@
     }
 
     function countChapterSections(sections) {
-      return sections.filter((section) => section.id !== 'intro' && section.id !== 'content').length;
+      return sections.filter((section) => section.id.startsWith('chapter-')).length;
     }
 
     function buildXhtmlDocument(title, bodyHtml, sectionId = 'content') {
@@ -1074,11 +1171,10 @@ ${chapterPoints}
       }
 
       const author = els.author.value.trim() || 'Неизвестный автор';
-      const fullMarkdown = buildFullMarkdown();
       const watermarks = getWatermarkConfig();
-      const preparedHtml = normalizeHtmlChapterHeadings(sanitizeHtml(marked.parse(fullMarkdown)));
-      const bodyHtml = injectWatermarksIntoHtml(preparedHtml, watermarks);
-      const sections = buildReadingSections(title, bodyHtml);
+      const sections = state.sourceKind === 'markdown'
+        ? buildSectionsFromMarkdown(title, buildIntroMarkdown(), state.markdownText.trim(), watermarks)
+        : buildReadingSections(title, markdownToXhtmlBody(buildFullMarkdown(), watermarks));
       const chapterCount = countChapterSections(sections);
       const zip = new JSZip();
       const uuid = crypto.randomUUID();

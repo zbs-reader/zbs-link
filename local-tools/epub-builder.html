@@ -701,6 +701,101 @@
       return parts.join('\n\n');
     }
 
+    function isChapterHeading(node) {
+      if (!node || node.nodeType !== Node.ELEMENT_NODE) {
+        return false;
+      }
+
+      if (!/^H[1-6]$/i.test(node.tagName) && node.tagName !== 'P') {
+        return false;
+      }
+
+      return /^(?:глава|chapter)\s+[\divxlcdm]+(?:[\s.\-:：].*)?$/iu.test(node.textContent.trim());
+    }
+
+    function normalizeChapterHeadingNode(node) {
+      if (/^H[1-6]$/i.test(node.tagName)) {
+        return node;
+      }
+
+      const heading = node.ownerDocument.createElement('h1');
+      heading.textContent = node.textContent.trim();
+      return heading;
+    }
+
+    function nodeListToHtml(nodes) {
+      return nodes.map((node) => node.outerHTML || node.textContent || '').join('\n').trim();
+    }
+
+    function buildReadingSections(bookTitle, bodyHtml) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(`<body>${bodyHtml}</body>`, 'text/html');
+      const nodes = Array.from(doc.body.childNodes).filter((node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          return node.textContent.trim();
+        }
+        return true;
+      });
+      const sections = [];
+      let current = null;
+      let introNodes = [];
+
+      for (const node of nodes) {
+        if (isChapterHeading(node)) {
+          if (current) {
+            current.bodyHtml = nodeListToHtml(current.nodes);
+            sections.push(current);
+          } else if (introNodes.length) {
+            const introHtml = nodeListToHtml(introNodes);
+            if (introHtml) {
+              sections.push({
+                id: 'intro',
+                fileName: 'intro.xhtml',
+                title: 'Описание',
+                bodyHtml: introHtml
+              });
+            }
+          }
+
+          current = {
+            id: `chapter-${sections.length + 1}`,
+            fileName: '',
+            title: node.textContent.trim() || `Глава ${sections.length + 1}`,
+            nodes: [normalizeChapterHeadingNode(node)]
+          };
+          introNodes = [];
+          continue;
+        }
+
+        if (current) {
+          current.nodes.push(node);
+        } else {
+          introNodes.push(node);
+        }
+      }
+
+      if (current) {
+        current.bodyHtml = nodeListToHtml(current.nodes);
+        sections.push(current);
+      } else if (introNodes.length) {
+        const introHtml = nodeListToHtml(introNodes);
+        if (introHtml) {
+          sections.push({
+            id: 'content',
+            fileName: 'content.xhtml',
+            title: bookTitle,
+            bodyHtml: introHtml
+          });
+        }
+      }
+
+      return sections.map((section, index) => ({
+        ...section,
+        id: section.id === 'intro' ? 'intro' : `chapter-${String(index + 1).padStart(4, '0')}`,
+        fileName: section.fileName || `chapters/chapter-${String(index + 1).padStart(4, '0')}.xhtml`
+      }));
+    }
+
     function buildXhtmlDocument(title, bodyHtml) {
       return `<?xml version="1.0" encoding="utf-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
@@ -773,26 +868,55 @@
 </html>`;
     }
 
-    function buildOpf(meta) {
+    function buildNav(meta, sections) {
+      const items = sections.map((section) =>
+        `      <li><a href="${section.fileName}">${escapeXml(section.title)}</a></li>`
+      ).join('\n');
+
       return `<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="BookId">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="ru" lang="ru">
+  <head>
+    <title>${escapeXml(meta.title)} - Оглавление</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+  <body>
+    <nav epub:type="toc" id="toc">
+      <h1>Оглавление</h1>
+      <ol>
+${items}
+      </ol>
+    </nav>
+  </body>
+</html>`;
+    }
+
+    function buildOpf(meta, sections) {
+      const manifestSections = sections.map((section) =>
+        `    <item id="${section.id}" href="${section.fileName}" media-type="application/xhtml+xml" />`
+      ).join('\n');
+      const spineSections = sections.map((section) => `    <itemref idref="${section.id}" />`).join('\n');
+
+      return `<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="BookId">
   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
     <dc:title>${escapeXml(meta.title)}</dc:title>
     <dc:creator>${escapeXml(meta.author)}</dc:creator>
     <dc:language>ru</dc:language>
     <dc:identifier id="BookId">urn:uuid:${escapeXml(meta.uuid)}</dc:identifier>
     <dc:description>${escapeXml(meta.description)}</dc:description>
+    <meta property="dcterms:modified">${new Date().toISOString().replace(/\.\d{3}Z$/, 'Z')}</meta>
     <meta name="cover" content="cover-image" />
   </metadata>
   <manifest>
     <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
-    <item id="content" href="content.xhtml" media-type="application/xhtml+xml" />
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav" />
     <item id="cover" href="cover.xhtml" media-type="application/xhtml+xml" />
     <item id="cover-image" href="images/cover.${meta.coverExt}" media-type="${meta.coverMime}" />
+${manifestSections}
   </manifest>
   <spine toc="ncx">
     <itemref idref="cover" />
-    <itemref idref="content" />
+${spineSections}
   </spine>
   <guide>
     <reference type="cover" title="Cover" href="cover.xhtml" />
@@ -800,7 +924,12 @@
 </package>`;
     }
 
-    function buildToc(meta) {
+    function buildToc(meta, sections) {
+      const chapterPoints = sections.map((section, index) => `    <navPoint id="${section.id}" playOrder="${index + 2}">
+      <navLabel><text>${escapeXml(section.title)}</text></navLabel>
+      <content src="${section.fileName}" />
+    </navPoint>`).join('\n');
+
       return `<?xml version="1.0" encoding="UTF-8"?>
 <ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
   <head>
@@ -817,10 +946,7 @@
       <navLabel><text>Обложка</text></navLabel>
       <content src="cover.xhtml" />
     </navPoint>
-    <navPoint id="content" playOrder="2">
-      <navLabel><text>${escapeXml(meta.title)}</text></navLabel>
-      <content src="content.xhtml" />
-    </navPoint>
+${chapterPoints}
   </navMap>
 </ncx>`;
     }
@@ -860,6 +986,7 @@
       const fullMarkdown = buildFullMarkdown();
       const watermarks = getWatermarkConfig();
       const bodyHtml = injectWatermarksIntoHtml(sanitizeHtml(marked.parse(fullMarkdown)), watermarks);
+      const sections = buildReadingSections(title, bodyHtml);
       const zip = new JSZip();
       const uuid = crypto.randomUUID();
       const fileName = (els.fileName.value.trim() || `${slugify(title)}.epub`).replace(/\.epub$/i, '') + '.epub';
@@ -881,10 +1008,13 @@
 </container>`);
 
       const oebps = zip.folder('OEBPS');
-      oebps.file('content.opf', buildOpf(meta));
-      oebps.file('toc.ncx', buildToc(meta));
+      oebps.file('content.opf', buildOpf(meta, sections));
+      oebps.file('toc.ncx', buildToc(meta, sections));
+      oebps.file('nav.xhtml', buildNav(meta, sections));
       oebps.file('cover.xhtml', buildCoverPage(meta));
-      oebps.file('content.xhtml', buildXhtmlDocument(title, bodyHtml));
+      for (const section of sections) {
+        oebps.file(section.fileName, buildXhtmlDocument(section.title, section.bodyHtml));
+      }
       oebps.folder('images').file(`cover.${meta.coverExt}`, state.coverBlob);
 
       const blob = await zip.generateAsync({ type: 'blob', mimeType: 'application/epub+zip' });

@@ -230,7 +230,7 @@
       <p class="muted">Инструмент может добавлять в текст вариативные упоминания команды и Boosty. Они будут разного вида: отдельные абзацы, блоки и встроенные подписи, чтобы их было сложнее вычистить одной заменой.</p>
       <div class="grid two">
         <label class="checkbox-row">
-          <input id="watermarkEnabled" type="checkbox" checked />
+          <input id="watermarkEnabled" type="checkbox" />
           <span>Добавлять вариативные вкрапления в текст</span>
         </label>
         <label>
@@ -702,7 +702,7 @@
     }
 
     function isChapterTitleText(value) {
-      return /^(?:глава|chapter)\s+[\divxlcdm]+(?:$|[\s.\-:：].*)$/iu.test(String(value || '').trim());
+      return /^(?:глава|chapter|chap\.?)\s*(?:№\s*)?(?:\d+|[ivxlcdm]+)(?:$|[\s.)\-–—:：].*)$/iu.test(String(value || '').trim());
     }
 
     function normalizeMarkdownChapterHeadings(markdown) {
@@ -731,6 +731,37 @@
       }
 
       return normalized.join('\n').replace(/\n{4,}/g, '\n\n\n').trim();
+    }
+
+    function normalizeHtmlChapterHeadings(html) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(`<body>${html}</body>`, 'text/html');
+      const paragraphs = Array.from(doc.body.querySelectorAll('p'));
+
+      for (const paragraph of paragraphs) {
+        if (paragraph.closest('.zbs-mark')) {
+          continue;
+        }
+
+        const lines = paragraph.textContent
+          .split(/\r?\n/)
+          .map((line) => line.trim())
+          .filter(Boolean);
+
+        if (lines.length < 2 || !lines.some(isChapterTitleText)) {
+          continue;
+        }
+
+        const fragment = doc.createDocumentFragment();
+        for (const line of lines) {
+          const element = doc.createElement(isChapterTitleText(line) ? 'h1' : 'p');
+          element.textContent = line;
+          fragment.appendChild(element);
+        }
+        paragraph.replaceWith(fragment);
+      }
+
+      return doc.body.innerHTML;
     }
 
     function isChapterHeading(node) {
@@ -826,6 +857,10 @@
         id: section.id === 'intro' ? 'intro' : `chapter-${String(index + 1).padStart(4, '0')}`,
         fileName: section.fileName || `chapters/chapter-${String(index + 1).padStart(4, '0')}.xhtml`
       }));
+    }
+
+    function countChapterSections(sections) {
+      return sections.filter((section) => section.id !== 'intro' && section.id !== 'content').length;
     }
 
     function buildXhtmlDocument(title, bodyHtml, sectionId = 'content') {
@@ -1014,8 +1049,10 @@ ${chapterPoints}
       const author = els.author.value.trim() || 'Неизвестный автор';
       const fullMarkdown = buildFullMarkdown();
       const watermarks = getWatermarkConfig();
-      const bodyHtml = injectWatermarksIntoHtml(sanitizeHtml(marked.parse(fullMarkdown)), watermarks);
+      const preparedHtml = normalizeHtmlChapterHeadings(sanitizeHtml(marked.parse(fullMarkdown)));
+      const bodyHtml = injectWatermarksIntoHtml(preparedHtml, watermarks);
       const sections = buildReadingSections(title, bodyHtml);
+      const chapterCount = countChapterSections(sections);
       const zip = new JSZip();
       const uuid = crypto.randomUUID();
       const fileName = (els.fileName.value.trim() || `${slugify(title)}.epub`).replace(/\.epub$/i, '') + '.epub';
@@ -1053,7 +1090,7 @@ ${chapterPoints}
       link.download = fileName;
       link.click();
       URL.revokeObjectURL(url);
-      setStatus(`EPUB собран: ${fileName}`, 'good');
+      setStatus(`EPUB собран: ${fileName}. Глав в оглавлении: ${chapterCount}.`, chapterCount ? 'good' : 'bad');
     }
 
     els.markdownFile.addEventListener('change', async () => {

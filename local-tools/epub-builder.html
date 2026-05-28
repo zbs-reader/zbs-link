@@ -696,9 +696,41 @@
         parts.push(metaBlock);
       }
       if (state.markdownText.trim()) {
-        parts.push(state.markdownText.trim());
+        parts.push(normalizeMarkdownChapterHeadings(state.markdownText.trim()));
       }
       return parts.join('\n\n');
+    }
+
+    function isChapterTitleText(value) {
+      return /^(?:глава|chapter)\s+[\divxlcdm]+(?:$|[\s.\-:：].*)$/iu.test(String(value || '').trim());
+    }
+
+    function normalizeMarkdownChapterHeadings(markdown) {
+      const lines = String(markdown || '').split(/\r?\n/);
+      const normalized = [];
+      let inFence = false;
+
+      for (const line of lines) {
+        if (/^\s*```/.test(line)) {
+          inFence = !inFence;
+          normalized.push(line);
+          continue;
+        }
+
+        const trimmed = line.trim();
+        if (!inFence && isChapterTitleText(trimmed) && !/^#{1,6}\s+/.test(trimmed)) {
+          if (normalized.length && normalized[normalized.length - 1].trim()) {
+            normalized.push('');
+          }
+          normalized.push(`## ${trimmed}`);
+          normalized.push('');
+          continue;
+        }
+
+        normalized.push(line);
+      }
+
+      return normalized.join('\n').replace(/\n{4,}/g, '\n\n\n').trim();
     }
 
     function isChapterHeading(node) {
@@ -710,7 +742,7 @@
         return false;
       }
 
-      return /^(?:глава|chapter)\s+[\divxlcdm]+(?:[\s.\-:：].*)?$/iu.test(node.textContent.trim());
+      return isChapterTitleText(node.textContent);
     }
 
     function normalizeChapterHeadingNode(node) {
@@ -796,14 +828,15 @@
       }));
     }
 
-    function buildXhtmlDocument(title, bodyHtml) {
+    function buildXhtmlDocument(title, bodyHtml, sectionId = 'content') {
       return `<?xml version="1.0" encoding="utf-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
   <head>
     <title>${escapeXml(title)}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
-      body { font-family: serif; line-height: 1.6; padding: 0 1rem; margin: 0; }
+      html, body { background: transparent !important; }
+      body { font-family: serif; line-height: 1.6; padding: 0 1rem; margin: 0; color: inherit; }
       p {
         margin: 0;
         white-space: pre-wrap;
@@ -823,28 +856,22 @@
       .zbs-mark {
         text-indent: 0;
         margin: 0.95em 0;
-        padding: 0.55em 0.75em;
-        border-radius: 0.75em;
-        background: rgba(0, 0, 0, 0.022);
-        border-left: 0.18em solid rgba(110, 74, 20, 0.26);
+        padding: 0.35em 0;
+        background: transparent !important;
+        border: 0 !important;
         font-size: 0.84em;
         line-height: 1.46;
-        opacity: 0.78;
+        opacity: 0.58;
       }
       .zbs-mark-separator {
-        border-left-style: dashed;
         letter-spacing: 0.01em;
       }
       .zbs-mark-footnote {
-        background: transparent;
-        border-left-width: 0.14em;
         font-size: 0.8em;
-        opacity: 0.72;
+        opacity: 0.56;
       }
       .zbs-mark-quote {
         padding: 0;
-        background: transparent;
-        border-left-width: 0.16em;
       }
       .zbs-inline-mark {
         display: inline;
@@ -863,14 +890,16 @@
     </style>
   </head>
   <body>
-    ${bodyHtml}
+    <section id="${escapeXml(sectionId)}">
+      ${bodyHtml}
+    </section>
   </body>
 </html>`;
     }
 
     function buildNav(meta, sections) {
       const items = sections.map((section) =>
-        `      <li><a href="${section.fileName}">${escapeXml(section.title)}</a></li>`
+        `      <li><a href="${section.fileName}#${section.id}">${escapeXml(section.title)}</a></li>`
       ).join('\n');
 
       return `<?xml version="1.0" encoding="utf-8"?>
@@ -927,7 +956,7 @@ ${spineSections}
     function buildToc(meta, sections) {
       const chapterPoints = sections.map((section, index) => `    <navPoint id="${section.id}" playOrder="${index + 2}">
       <navLabel><text>${escapeXml(section.title)}</text></navLabel>
-      <content src="${section.fileName}" />
+      <content src="${section.fileName}#${section.id}" />
     </navPoint>`).join('\n');
 
       return `<?xml version="1.0" encoding="UTF-8"?>
@@ -1013,7 +1042,7 @@ ${chapterPoints}
       oebps.file('nav.xhtml', buildNav(meta, sections));
       oebps.file('cover.xhtml', buildCoverPage(meta));
       for (const section of sections) {
-        oebps.file(section.fileName, buildXhtmlDocument(section.title, section.bodyHtml));
+        oebps.file(section.fileName, buildXhtmlDocument(section.title, section.bodyHtml, section.id));
       }
       oebps.folder('images').file(`cover.${meta.coverExt}`, state.coverBlob);
 

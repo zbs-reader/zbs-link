@@ -644,6 +644,337 @@
       "chapters": [],
       "isCompleted": true,
       "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "vtorzhenie-igrokov-npc",
+      "title": "Вторжение игроков? Выходит, я и правда NPC?",
+      "author": "Команда ZBS Link",
+      "description": "Ли Сы, верховный вождь закованного в сталь орочьего племени, всегда считал, что от его «Системы Супер-NPC» нет никакого толка. За восемьдесят лет в этом суровом мире он выковал из дикарей элитную тяжелую кавалерию, обзавелся аномальной харизмой (благодаря которой выглядит как идеальный человек) и... так ни разу и не встретил ни единого игрока. Впрочем, спустя столько лет Ли Сы давно смирился. Система не делала его богом, но помогала выживать, и на том спасибо. Так продолжалось до тех пор, пока старый друг не при...",
+      "coverUrl": "https://images.boosty.to/image/57d3725e-0659-46f2-95a9-7d90691c0f89?change_time=1779017754&mw=575",
+      "tags": [
+        "магия",
+        "игровой мир",
+        "реинкарнация"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/190540"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/6aff5a58-93cd-4a4d-a44e-8c31ba960656"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "qi-condensation-1-100",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Доступ по подписке Boosty.",
+          "chaptersLabel": "1-100",
+          "linkUrl": "https://boosty.to/langllax/posts/6aff5a58-93cd-4a4d-a44e-8c31ba960656",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "glubiny-zhivykh",
+      "title": "Глубины Живых",
+      "author": "Команда ZBS Link",
+      "description": "【Уведомление об Иммиграции】 Дата: ████-██-██ Локация: «██» Требования к кандидатам: Примите самое важное решение в своей жизни: Станьте новым иммигрантом Объединённых Наций и впишите своё имя в монумент человеческой истории. Благодарим за сотрудничество. Синопсис от переводчика (для 1-2 томов): Главный герой — Ло Ди, выходец из семьи иммигрантов, живущий в новом государстве, созданном на территории особой зоны, где \"Углы\" представляют смертельную угрозу. Люди вынуждены существовать в условиях строгих мер безопас...",
+      "coverUrl": "https://images.boosty.to/image/73a3cd1d-6077-4cd2-91a5-0ac9e4a927eb?change_time=1779347243&mw=575",
+      "tags": [
+        "мистика",
+        "альтернативная история",
+        "завершено"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/141566"
+        },
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/242666--huoren-shenchu"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/c486af3c-c3a2-4bad-8f94-b0a368d02de3"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "qi-condensation-1-500",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Доступ по подписке Boosty.",
+          "chaptersLabel": "1-500",
+          "linkUrl": "https://boosty.to/langllax/posts/c486af3c-c3a2-4bad-8f94-b0a368d02de3",
+          "linkLabel": "Открыть на Boosty"
+        },
+        {
+          "id": "core-formation-500-976",
+          "title": "Формирование Ядра",
+          "price": "500 ₽ per month",
+          "description": "Доступ по подписке Boosty.",
+          "chaptersLabel": "500-976",
+          "linkUrl": "https://boosty.to/langllax/posts/774cc875-2ba3-4734-b1da-2379bdf563de",
+          "linkLabel": "Открыть на Boosty"
+        },
+        {
+          "id": "core-formation-1-976",
+          "title": "Формирование Ядра",
+          "price": "500 ₽ per month",
+          "description": "Завершённый перевод.",
+          "chaptersLabel": "1-976",
+          "linkUrl": "https://boosty.to/langllax/posts/b745038d-85b8-4f4f-8202-1ffe64a3f08a",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "isCompleted": true,
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "cultivation-300-years-bell",
+      "title": "Культивация: 300 лет бью в колокол",
+      "author": "Команда ZBS Link",
+      "description": "В то время как ученики секты Божественного Меча изо всех сил проливали пот, постигая боевые искусства, Ли Цянь уже вовсю жил расслабленной жизнью разнорабочего по принципу «один день — один удар в колокол», плывя по течению. На самом деле ему очень хотелось всем сказать, что работа звонаря — дело весьма перспективное. Позвонив в колокол три года, он успешно стал учеником внутренней секты. Позвонив в колокол тридцать лет, люди секты Божественного Меча неожиданно стали почитать его как Патриарха секты. А прозвонив...",
+      "coverUrl": "https://images.boosty.to/image/3cdcc72c-4278-47f1-b9b1-946e1f5e8d40?change_time=1779012592&mw=575",
+      "tags": [
+        "культивация",
+        "секта",
+        "прогрессия"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/184052"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/5eaebdb0-ac19-4020-8575-5a6e7b3b69f6"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "qi-condensation-1-100",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Доступ по подписке Boosty.",
+          "chaptersLabel": "1-100",
+          "linkUrl": "https://boosty.to/langllax/posts/5eaebdb0-ac19-4020-8575-5a6e7b3b69f6",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "mage-starting-with-potion-making",
+      "title": "Маг Начиная с зельеварения",
+      "author": "Команда ZBS Link",
+      "description": "Знание — это источник силы любого мага. Переместившись в мир магов, Рон полагается на свою уникальную «Панель титулов», чтобы непрерывно получать скрытые знания и продвигаться по путям, ведущим к абсолютной истине. От [Ученика зельевара] ➡ к [Мастеру зелий] От [Алхимика] ➡ к [Владыке созидания] От [Создателя карт] ➡ к [Карточному Императору] От [Творца чудесов] ➡ к [Королю конца Древних] «Мне плевать, наступит ли завтра конец света или будут открыты новые измерения. Как маг, я забочусь лишь об одном — о знаниях».",
+      "coverUrl": "https://images.boosty.to/image/94e11a8b-cec4-4f29-823b-4d4f4cb482d2?change_time=1779017408&mw=575",
+      "tags": [
+        "магия",
+        "зельеварение",
+        "прогрессия"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/189093"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/2b886c50-af5c-455d-8dfd-d9bc246d40ee"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "qi-condensation-1-100",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Доступ по подписке Boosty.",
+          "chaptersLabel": "1-100",
+          "linkUrl": "https://boosty.to/langllax/posts/2b886c50-af5c-455d-8dfd-d9bc246d40ee",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "mage-frostpunk-era",
+      "title": "Маг: Эпоха Фростпанка",
+      "author": "Команда ZBS Link",
+      "description": "Цивилизация, которой так гордились маги, достигла своего шестого тысячелетия. Но пришло бедствие и уничтожило всё. Былая слава и магия сгинули в тишине и леденящем холоде. Когда Фенн открыл глаза, колесо времени уже давно перенеслось в эпоху льда и пара: Магические тепловые башни, циркулирующие магические сети, неугасающие поезда... Огненные звездные карты, зелья кипящей крови, магия тепла... Высокая башня Изумрудного двора, Гнездо Черного Шипа, Бухта Галки... К счастью, у него есть пергаментная страница, способ...",
+      "coverUrl": "https://images.boosty.to/image/43010e3b-02e2-412d-964b-1778a054a9c5?change_time=1779017077&mw=575",
+      "tags": [
+        "магия",
+        "стимпанк",
+        "постапокалипсис"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/189018"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/2d068017-837f-4fe5-ad0b-195e53801c83"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "qi-condensation-1-100",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Доступ по подписке Boosty.",
+          "chaptersLabel": "1-100",
+          "linkUrl": "https://boosty.to/langllax/posts/2d068017-837f-4fe5-ad0b-195e53801c83",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "reverend-mushroom",
+      "title": "Преподобный Гриб",
+      "author": "Команда ZBS Link",
+      "description": "На смену мастерам-гу пришли мастера-грибы. Грибы — истинная эссенция Неба и Земли, а человек — венец всего сущего. У Лян отведал порцию сырых маринованных синеющих грибов, дрыгнул ногами и сыграл в ящик! Но стоило ему вновь открыть глаза, как перед ним предстал новый, бескрайний мир. Здесь нет магии и нет боевой ци. Зато здесь есть всемогущие грибы, буйно произрастающие между небом и землей! Бесчисленные культиваторы этого мира сажают грибы, взращивают их и используют! Гриб Беременности, дарующий дитя... Гриб До...",
+      "coverUrl": "https://images.boosty.to/image/0b5e6d16-7dc2-43e9-a06e-7e2bbf86f8de?change_time=1779526217&mw=575",
+      "tags": [
+        "культивация",
+        "неклассическая культивация",
+        "грибы"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/173312"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/33055c35-cef4-455a-a490-aec700205066"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "qi-condensation-1-200",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Доступ по подписке Boosty.",
+          "chaptersLabel": "1-200",
+          "linkUrl": "https://boosty.to/langllax/posts/33055c35-cef4-455a-a490-aec700205066",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "compute-fate-touch-empress",
+      "title": "Сказали вычислить судьбу, а ты полез щупать Императрицу",
+      "author": "Команда ZBS Link",
+      "description": "Попав в адские стартовые условия, Су Мин пробудил «Записи Небесных Тайн». Вот только он обнаружил, что способ «зарядки» этого Золотого пальца не совсем приличный: чем сильнее женщина, с которой он контактирует, и чем выше её статус, тем быстрее идёт предсказание Небесных тайн и тем более невероятные возможности он получает! Столкнувшись с прекрасной, но впавшей в искажение Ци Великой Старейшиной Демонической секты, Су Мин не стал убегать, а встретил удар грудью... то есть лицом к лицу! После одной ночи «лечения»...",
+      "coverUrl": "https://images.boosty.to/image/7dffe14f-4228-48c6-ba5a-fa7e875be6f2?change_time=1779262368&mw=575",
+      "tags": [
+        "культивация",
+        "система",
+        "комедия"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/166242"
+        },
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/256414--rang-ni-tui-yan-tian-ji-ni-shang-shou-mo-nu-di-yao"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/dd2c867a-96ae-4676-916a-3e4d677bb932"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "free-1-100",
+          "title": "FREE",
+          "price": "0 ₽",
+          "description": "Открытые главы без подписки.",
+          "chaptersLabel": "1-100",
+          "linkUrl": "https://boosty.to/langllax/posts/dd2c867a-96ae-4676-916a-3e4d677bb932",
+          "linkLabel": "Открыть на Boosty",
+          "isFree": true
+        }
+      ],
+      "chapters": [],
+      "team": "Zabaichen Bank Selector"
+    },
+    {
+      "id": "kill-god-for-eternal-life",
+      "title": "Убить Бога ради Вечной Жизни",
+      "author": "Команда ZBS Link",
+      "description": "Возродившись из пепла, отгонять призраков и соблазнять девушек, убивать богов, чтобы доказать свою истину! В самом престижном учебном заведении Китая доступны множественные пути: от постижения просветления до инопланетных технологий, генетического сращивания и даже договоров с демонами. Окутанный тайной мир включает в себя библиотеку странников, корпус содержания под управлением SCP, подводный мегаполис, и административный центр с властью, равной целой стране. Идущий по краю смерти, держащий в руках силу жизни и...",
+      "coverUrl": "https://images.boosty.to/image/d18f0f8e-7dd5-4d40-896c-1b13fcfa4530?change_time=1779016490&mw=575",
+      "tags": [
+        "мистика",
+        "культивация",
+        "сверхъестественное"
+      ],
+      "externalLinks": [
+        {
+          "id": "rulate",
+          "label": "Rulate",
+          "url": "https://tl.rulate.ru/book/148216?Chapter_page=5"
+        },
+        {
+          "id": "ranobelib",
+          "label": "RanobeLIB",
+          "url": "https://ranobelib.me/ru/book/262343--shashen-yongsheng"
+        },
+        {
+          "id": "boosty",
+          "label": "Boosty",
+          "url": "https://boosty.to/langllax/posts/395abbef-732f-48a4-80ef-4eda20c0e69a"
+        }
+      ],
+      "accessTiers": [
+        {
+          "id": "qi-condensation-1-500",
+          "title": "Конденсация Ци",
+          "price": "300 ₽ per month",
+          "description": "Доступ по подписке Boosty.",
+          "chaptersLabel": "1-500",
+          "linkUrl": "https://boosty.to/langllax/posts/395abbef-732f-48a4-80ef-4eda20c0e69a",
+          "linkLabel": "Открыть на Boosty"
+        }
+      ],
+      "chapters": [],
+      "team": "Zabaichen Bank Selector"
     }
   ],
   "banners": [
@@ -670,7 +1001,9 @@
         "я-боюсь-святого",
         "будучи-бессмертным-остаётся-лишь-притворяться-вампиром",
         "грань-апокалипсиса",
-        "церковь-вечернего-колокола"
+        "церковь-вечернего-колокола",
+        "glubiny-zhivykh",
+        "kill-god-for-eternal-life"
       ]
     },
     {
@@ -684,7 +1017,10 @@
         "the-abnormal-supernatural-world",
         "я-боюсь-святого",
         "будучи-бессмертным-остаётся-лишь-притворяться-вампиром",
-        "маг-у-меня-есть-игровая-панель"
+        "маг-у-меня-есть-игровая-панель",
+        "vtorzhenie-igrokov-npc",
+        "mage-frostpunk-era",
+        "compute-fate-touch-empress"
       ]
     },
     {
@@ -711,7 +1047,8 @@
         "wizard-path-of-biotransformation",
         "the-abnormal-supernatural-world",
         "великий-демон-шерлок",
-        "церковь-вечернего-колокола"
+        "церковь-вечернего-колокола",
+        "glubiny-zhivykh"
       ]
     },
     {
@@ -721,7 +1058,24 @@
       "description": "Подборка историй, где магия стоит в центре сюжета.",
       "label": "Магия",
       "bookIds": [
-        "маг-у-меня-есть-игровая-панель"
+        "маг-у-меня-есть-игровая-панель",
+        "vtorzhenie-igrokov-npc",
+        "mage-starting-with-potion-making",
+        "mage-frostpunk-era"
+      ]
+    },
+    {
+      "id": "cultivation-collection",
+      "title": "Культивация",
+      "subtitle": "Секты, странные пути силы и герои, которые растут через дисциплину, удачу и очень сомнительные методы.",
+      "description": "Все культивационные релизы каталога в одной подборке.",
+      "label": "Культивация",
+      "bookIds": [
+        "path-of-cultivation-skin-creation",
+        "cultivation-300-years-bell",
+        "reverend-mushroom",
+        "compute-fate-touch-empress",
+        "kill-god-for-eternal-life"
       ]
     }
   ]

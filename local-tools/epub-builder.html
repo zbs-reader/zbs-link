@@ -790,15 +790,33 @@
       return nodes.map((node) => node.outerHTML || node.textContent || '').join('\n').trim();
     }
 
+    function collectReadingBlocks(doc) {
+      const selector = 'h1, h2, h3, h4, h5, h6, p, li, pre, figure, img';
+      return Array.from(doc.body.querySelectorAll(selector))
+        .filter((node) => !node.closest('nav'))
+        .filter((node) => {
+          const parentBlock = node.parentElement?.closest(selector);
+          if (!parentBlock) {
+            return true;
+          }
+
+          return false;
+        })
+        .map((node) => {
+          const clone = node.cloneNode(true);
+          if (clone.nodeType === Node.ELEMENT_NODE && clone.tagName === 'LI') {
+            const paragraph = doc.createElement('p');
+            paragraph.innerHTML = clone.innerHTML;
+            return paragraph;
+          }
+          return clone;
+        });
+    }
+
     function buildReadingSections(bookTitle, bodyHtml) {
       const parser = new DOMParser();
       const doc = parser.parseFromString(`<body>${bodyHtml}</body>`, 'text/html');
-      const nodes = Array.from(doc.body.childNodes).filter((node) => {
-        if (node.nodeType === Node.TEXT_NODE) {
-          return node.textContent.trim();
-        }
-        return true;
-      });
+      const nodes = collectReadingBlocks(doc);
       const sections = [];
       let current = null;
       let introNodes = [];
@@ -852,11 +870,20 @@
         }
       }
 
-      return sections.map((section, index) => ({
-        ...section,
-        id: section.id === 'intro' ? 'intro' : `chapter-${String(index + 1).padStart(4, '0')}`,
-        fileName: section.fileName || `chapters/chapter-${String(index + 1).padStart(4, '0')}.xhtml`
-      }));
+      let chapterNumber = 0;
+      return sections.map((section) => {
+        if (section.id === 'intro' || section.id === 'content') {
+          return section;
+        }
+
+        chapterNumber += 1;
+        const padded = String(chapterNumber).padStart(4, '0');
+        return {
+          ...section,
+          id: `chapter-${padded}`,
+          fileName: section.fileName || `chapters/chapter-${padded}.xhtml`
+        };
+      });
     }
 
     function countChapterSections(sections) {

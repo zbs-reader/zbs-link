@@ -143,8 +143,34 @@
       margin: 0;
       accent-color: var(--accent);
     }
+    .range-tools {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+    }
+    .range-tools[hidden] { display: none; }
+    .range-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .range-chip {
+      min-height: 38px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+    .range-inputs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
     @media (max-width: 900px) {
       .grid.two, .grid.three { grid-template-columns: 1fr; }
+      .range-inputs { grid-template-columns: 1fr; }
       body { padding: 14px; }
       .preview-cover { width: 100%; max-width: 240px; }
     }
@@ -153,7 +179,7 @@
 <body>
   <div class="shell">
     <section class="panel hero">
-      <p class="eyebrow">Local only · EPUB Builder build 2026-05-28.4</p>
+      <p class="eyebrow">Local only · EPUB Builder build 2026-06-02.1</p>
       <h1>EPUB из контента книги</h1>
       <p class="muted">Локальный инструмент для сборки <code>.epub</code> из <code>.md</code>, <code>.docx</code> или <code>.zip</code> с обложкой, метаданными книги и общим блоком <code>META_DATA</code> для вашей читалки.</p>
       <div class="nav">
@@ -278,10 +304,29 @@
         <div class="row">
           <img id="coverPreview" class="preview-cover" alt="Предпросмотр обложки" />
         </div>
-        <p id="status" class="muted">EPUB Builder build 2026-05-28.4 загружен. Выберите markdown-файл.</p>
+        <p id="status" class="muted">EPUB Builder build 2026-06-02.1 загружен. Выберите markdown-файл.</p>
         <div class="row">
           <button id="previewCoverButton" type="button">Подгрузить обложку</button>
           <button id="buildButton" type="button">Собрать EPUB</button>
+        </div>
+        <div id="rangeControls" class="range-tools" hidden>
+          <strong>Собрать EPUB по диапазону глав</strong>
+          <div id="rangeButtons" class="range-buttons"></div>
+          <div class="range-inputs">
+            <label>
+              <span>С главы</span>
+              <input id="rangeStart" type="number" min="1" step="1" placeholder="1" />
+            </label>
+            <label>
+              <span>По главу</span>
+              <input id="rangeEnd" type="number" min="1" step="1" placeholder="200" />
+            </label>
+            <label>
+              <span>&nbsp;</span>
+              <button id="buildRangeButton" type="button">Собрать диапазон</button>
+            </label>
+          </div>
+          <p id="rangeHint" class="muted"></p>
         </div>
       </div>
       <div class="grid">
@@ -324,6 +369,12 @@
       status: document.getElementById('status'),
       previewCoverButton: document.getElementById('previewCoverButton'),
       buildButton: document.getElementById('buildButton'),
+      rangeControls: document.getElementById('rangeControls'),
+      rangeButtons: document.getElementById('rangeButtons'),
+      rangeStart: document.getElementById('rangeStart'),
+      rangeEnd: document.getElementById('rangeEnd'),
+      buildRangeButton: document.getElementById('buildRangeButton'),
+      rangeHint: document.getElementById('rangeHint'),
       bundlePreview: document.getElementById('bundlePreview'),
       specPreview: document.getElementById('specPreview')
     };
@@ -448,6 +499,89 @@
       els.status.textContent = message;
     }
 
+    function normalizeChapterRange(range, totalChapters = state.detectedMarkdownChapterCount) {
+      if (!range) {
+        return null;
+      }
+
+      const total = Math.max(0, Number.parseInt(totalChapters, 10) || 0);
+      const start = Math.max(1, Number.parseInt(range.start, 10) || 1);
+      const fallbackEnd = total || start;
+      const end = Math.max(start, Number.parseInt(range.end, 10) || fallbackEnd);
+      const cappedEnd = total ? Math.min(end, total) : end;
+
+      return {
+        start,
+        end: cappedEnd,
+        label: `${start}-${cappedEnd}`
+      };
+    }
+
+    function getChapterRangePresets(totalChapters) {
+      const total = Math.max(0, Number.parseInt(totalChapters, 10) || 0);
+      if (total < 2) {
+        return [];
+      }
+
+      const baseRanges = [
+        [1, 200],
+        [200, 700],
+        [700, 2000],
+        [1, 2000]
+      ];
+      const ranges = [];
+      const seen = new Set();
+
+      for (const [start, end] of baseRanges) {
+        if (start > total) {
+          continue;
+        }
+        const normalized = normalizeChapterRange({ start, end }, total);
+        const key = normalized.label;
+        if (!seen.has(key)) {
+          seen.add(key);
+          ranges.push(normalized);
+        }
+      }
+
+      const full = normalizeChapterRange({ start: 1, end: total }, total);
+      if (!seen.has(full.label)) {
+        ranges.push(full);
+      }
+
+      return ranges;
+    }
+
+    function renderRangeControls() {
+      const total = state.detectedMarkdownChapterCount;
+      const presets = getChapterRangePresets(total);
+      els.rangeButtons.innerHTML = '';
+
+      if (!presets.length) {
+        els.rangeControls.hidden = true;
+        els.rangeHint.textContent = '';
+        return;
+      }
+
+      els.rangeControls.hidden = false;
+      els.rangeStart.max = String(total);
+      els.rangeEnd.max = String(total);
+      els.rangeStart.value = presets[0].start;
+      els.rangeEnd.value = presets[0].end;
+      els.rangeHint.textContent = `Всего найдено глав: ${total}. Диапазоны включают обе границы.`;
+
+      for (const preset of presets) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'range-chip';
+        button.textContent = preset.label;
+        button.addEventListener('click', async () => {
+          await runBuild({ start: preset.start, end: preset.end });
+        });
+        els.rangeButtons.appendChild(button);
+      }
+    }
+
     async function extractSourceFromDocxFile(file) {
       const arrayBuffer = await file.arrayBuffer();
       const result = await mammoth.convertToHtml({ arrayBuffer });
@@ -518,6 +652,7 @@
       state.sourceLabel = source.name;
       state.sourceKind = source.kind;
       state.detectedMarkdownChapterCount = countMarkdownChapterTitles(source.text);
+      renderRangeControls();
 
       if (!els.title.value.trim()) {
         const fileStem = source.name.replace(/\.(md|markdown|docx|zip)$/i, '').split('/').pop().trim();
@@ -765,7 +900,7 @@
       return injectWatermarksIntoHtml(html, watermarks);
     }
 
-    function buildSectionsFromMarkdown(bookTitle, introMarkdown, sourceMarkdown, watermarks) {
+    function buildSectionsFromMarkdown(bookTitle, introMarkdown, sourceMarkdown, watermarks, range = null) {
       const sections = [];
       const introHtml = markdownToXhtmlBody(introMarkdown, { ...watermarks, enabled: false }).trim();
 
@@ -830,7 +965,12 @@
         }];
       }
 
-      chapters.forEach((chapter, index) => {
+      const normalizedRange = normalizeChapterRange(range, chapters.length);
+      const selectedChapters = normalizedRange
+        ? chapters.slice(normalizedRange.start - 1, normalizedRange.end)
+        : chapters;
+
+      selectedChapters.forEach((chapter, index) => {
         const padded = String(index + 1).padStart(4, '0');
         sections.push({
           id: `chapter-${padded}`,
@@ -1169,7 +1309,15 @@ ${chapterPoints}
 </html>`;
     }
 
-    async function buildEpub() {
+    function buildFileNameWithRange(fileName, range) {
+      if (!range) {
+        return fileName;
+      }
+
+      return fileName.replace(/\.epub$/i, '') + `-${range.label}.epub`;
+    }
+
+    async function buildEpub(range = null) {
       if (!state.markdownText.trim()) {
         throw new Error('Сначала загрузите .md, .docx или .zip файл.');
       }
@@ -1186,20 +1334,26 @@ ${chapterPoints}
       const author = els.author.value.trim() || 'Неизвестный автор';
       const watermarks = getWatermarkConfig();
       const sourceChapterCount = countMarkdownChapterTitles(state.markdownText);
+      const normalizedRange = normalizeChapterRange(range, sourceChapterCount);
       const shouldSplitMarkdown = sourceChapterCount > 1 || state.sourceKind === 'markdown';
       const sections = shouldSplitMarkdown
-        ? buildSectionsFromMarkdown(title, buildIntroMarkdown(), state.markdownText.trim(), watermarks)
+        ? buildSectionsFromMarkdown(title, buildIntroMarkdown(), state.markdownText.trim(), watermarks, normalizedRange)
         : buildReadingSections(title, markdownToXhtmlBody(buildFullMarkdown(), watermarks));
       const chapterCount = countChapterSections(sections);
 
-      if (sourceChapterCount > 1 && chapterCount < sourceChapterCount) {
+      if (normalizedRange && chapterCount < 1) {
+        throw new Error(`В диапазоне ${normalizedRange.label} не найдено глав.`);
+      }
+
+      if (!normalizedRange && sourceChapterCount > 1 && chapterCount < sourceChapterCount) {
         throw new Error(`Главы найдены в исходнике (${sourceChapterCount}), но в EPUB попало только ${chapterCount}. Сборка остановлена, чтобы не создать битый EPUB.`);
       }
       const zip = new JSZip();
       const uuid = crypto.randomUUID();
-      const fileName = (els.fileName.value.trim() || `${slugify(title)}.epub`).replace(/\.epub$/i, '') + '.epub';
+      const baseFileName = (els.fileName.value.trim() || `${slugify(title)}.epub`).replace(/\.epub$/i, '') + '.epub';
+      const fileName = buildFileNameWithRange(baseFileName, normalizedRange);
       const meta = {
-        title,
+        title: normalizedRange ? `${title} (${normalizedRange.label})` : title,
         author,
         description: els.description.value.trim() || title,
         uuid,
@@ -1232,7 +1386,27 @@ ${chapterPoints}
       link.download = fileName;
       link.click();
       URL.revokeObjectURL(url);
-      setStatus(`EPUB собран: ${fileName}. Глав в оглавлении: ${chapterCount}.`, chapterCount ? 'good' : 'bad');
+      const rangeText = normalizedRange ? ` Диапазон: ${normalizedRange.label}.` : '';
+      setStatus(`EPUB собран: ${fileName}. Глав в оглавлении: ${chapterCount}.${rangeText}`, chapterCount ? 'good' : 'bad');
+    }
+
+    async function runBuild(range = null) {
+      els.buildButton.disabled = true;
+      els.buildRangeButton.disabled = true;
+      Array.from(els.rangeButtons.querySelectorAll('button')).forEach((button) => {
+        button.disabled = true;
+      });
+      try {
+        await buildEpub(range);
+      } catch (error) {
+        setStatus(error.message, 'bad');
+      } finally {
+        els.buildButton.disabled = false;
+        els.buildRangeButton.disabled = false;
+        Array.from(els.rangeButtons.querySelectorAll('button')).forEach((button) => {
+          button.disabled = false;
+        });
+      }
     }
 
     els.markdownFile.addEventListener('change', async () => {
@@ -1283,17 +1457,19 @@ ${chapterPoints}
     });
 
     els.buildButton.addEventListener('click', async () => {
-      els.buildButton.disabled = true;
-      try {
-        await buildEpub();
-      } catch (error) {
-        setStatus(error.message, 'bad');
-      } finally {
-        els.buildButton.disabled = false;
-      }
+      await runBuild();
+    });
+
+    els.buildRangeButton.addEventListener('click', async () => {
+      await runBuild({
+        start: els.rangeStart.value,
+        end: els.rangeEnd.value
+      });
     });
 
     updatePreviews();
+    renderRangeControls();
   </script>
 </body>
 </html>
+
